@@ -27,10 +27,10 @@ import { catFactsAxiosInstance, apiFootballInstance } from "./loaders/axios.js";
              console.log(response);
             data = response.data;
             this.cache.set(routerConfig.cacheKey, data, this.cacheStdTTL )
-            res.json(data);
-          }).catch((err)=>(res.json(err)));
+            res.status(200).json(data);
+          }).catch((err)=>(res.status(204).json(err)));
         }else{
-          res.json(data);
+          res.status(200).json(data);
         }  
       });
   }

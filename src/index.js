@@ -16,6 +16,16 @@ server.get('/env', function(req, res) {
     res.json( process.env );
 });
 
+    /**
+   * Health Check endpoints
+   */
+  server.get('/ping', (req, res) => {
+    res.status(200).end('pong');
+  });
+  server.head('/status', (req, res) => {
+    res.status(200).end();
+  });
+
 server.use('/api/v3', router);
 server.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
