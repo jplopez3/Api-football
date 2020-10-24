@@ -21,7 +21,7 @@ function onInterceptRequestSuccess( config ){
 	// Do something before request is sent
 	config.metadata = { startTime: new Date() };
 	console.time( 'call duration: ' );
-	//console.info(config.baseURL, config)
+	console.info('Requesting data From',config.baseURL, config.params, config.headers['X-RapidAPI-Key'])
 	return config;
 }
 function onInterceptRequestErrors( error ){
