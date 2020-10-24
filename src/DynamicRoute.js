@@ -1,3 +1,4 @@
+import process from 'process';
 import NodeCache  from 'node-cache';
 import { defaultCacheConfig } from './config/index.js';
 // eslint-disable-next-line no-unused-vars
@@ -13,13 +14,23 @@ export default class endPoint {
 		this.cache = new NodeCache( defaultCacheConfig.stdTTL = cacheStdTTL );
 
 		this.createNewRoute();
+		this.measureServerResponseTime = this.measureExecutionTime();
+		this.measureAPICallResponseTime = this.measureExecutionTime();
 	}
 
 	createNewRoute() {
-		this.router.get( this.url, ( req, res ) => { 
-			this.routerConfig = this.getRouteConfig( req );
-			this.res = res;
+		this.router.get( `${this.url}/:clearCache?`, ( req, res ) => { 
+			this.measureServerResponseTime.start();
 			console.time( this.url );
+			this.res = res;
+			if( req.params.clearCache ) {
+				this.cache.flushAll();
+				this.responseSuccess( { result: 'CLEAR CACHE SUCCESS' } );
+				console.info( 'CLEAR CACHE SUCCESS' );
+				return;
+			}
+			
+			this.routerConfig = this.getRouteConfig( req );
 			console.log( 'router.get', this.url, this.routerConfig ); 
 
 			this.isDataInCache()
@@ -40,13 +51,17 @@ export default class endPoint {
 	}
 
 	fetchFromApi () {
+		this.measureAPICallResponseTime.start();
 		console.log( 'fetchFromApi', this.url, this.routerConfig.queryParams );
 		this.axios.get( this.url, this.routerConfig.queryParams )
-			.then( ( response )=>{
-				console.info( 'fetchFromApi response', this.url, response.status );
-				const data = response.data;
-				this.cache.set( this.routerConfig.cacheKey, data, this.cacheStdTTL );
-				this.responseSuccess( data );
+			.then( ( response ) => {
+				console.log( 'fetchFromApi Took: ' + this.measureAPICallResponseTime.stop() );
+				response.data.cacheDate = new Date().getTime();
+				console.info( 'fetchFromApi response', this.url, response.status, response.data );
+				this.cache.set( this.routerConfig.cacheKey, response.data, this.cacheStdTTL );
+				
+				this.responseSuccess( response.data );
+				
 			} )
 			.catch( ( err )=>( this.res.status( 204 ).json( err ) ) );
 	}
@@ -60,10 +75,42 @@ export default class endPoint {
 			cacheKey: req.url
 		};
 	}
+	measureExecutionTime(){
+		const NS_PER_SEC = 1e9;
+		const NS_PER_MSEC = 1e6;
+		let hrstart;
+		const history = [];
+		const start = () => {
+			hrstart = process.hrtime();
+		};
+		const stop = () => {
+			const hrend = process.hrtime( hrstart ); // hrend[0] is in seconds, hrend[1] is in nanoseconds
+			const timeInNanoSeconds = ( hrend[0] * NS_PER_SEC + hrend[1] ); // convert first to ns 
+			const timeInMs = timeInNanoSeconds / NS_PER_MSEC;// then to ms
+			addToHistory( timeInMs );
+			return timeInMs;
+		};
 
+		const addToHistory = time => {
+			history.unshift( time );
+			if( history.length > 50 ) history.length = 50;
+		};
+
+		const average = ( array ) => {if ( array.length === 0 ) return 0; return array.reduce( ( a, b ) => a + b ) / array.length;};
+		const getHistoricAverage = () => average( history );
+		const getHistory = () => history.join( ' -- ' );
+
+		return{
+			start,
+			stop,
+			getHistoricAverage,
+			getHistory
+		};
+	}
 	responseSuccess( data ){
 		console.timeEnd( this.url );
-		this.res.status( 200 ).json( data );
-      
+		this.measureServerResponseTime.stop();
+		return this.res.status( 200 ).json( data );
+		
 	}
 }
