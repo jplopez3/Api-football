@@ -19,17 +19,10 @@ export default class endPoint {
 	}
 
 	createNewRoute() {
-		this.router.get( `${this.url}/:clearCache?`, ( req, res ) => { 
+		this.router.get( `${this.url}`, ( req, res ) => { 
 			this.measureServerResponseTime.start();
 			console.time( this.url );
 			this.res = res;
-			if( req.params.clearCache ) {
-				this.cache.flushAll();
-				this.responseSuccess( { result: 'CLEAR CACHE SUCCESS' } );
-				console.info( 'CLEAR CACHE SUCCESS' );
-				return;
-			}
-			
 			this.routerConfig = this.getRouteConfig( req );
 			console.log( 'router.get', this.url, this.routerConfig ); 
 
@@ -57,7 +50,7 @@ export default class endPoint {
 			.then( ( response ) => {
 				console.log( 'fetchFromApi Took: ' + this.measureAPICallResponseTime.stop() );
 				response.data.cacheDate = new Date().getTime();
-				console.info( 'fetchFromApi response', this.url, response.status, response.data );
+				console.info( 'fetchFromApi response', this.url, response.status );
 				this.cache.set( this.routerConfig.cacheKey, response.data, this.cacheStdTTL );
 				
 				this.responseSuccess( response.data );
@@ -67,7 +60,14 @@ export default class endPoint {
 	}
 
 	getRouteConfig( req ) {
+		if(req.query['clearCache']){
+			this.cache.flushAll();
+			this.responseSuccess( { result: 'CLEAR CACHE SUCCESS' } );
+			console.info( 'CLEAR CACHE SUCCESS' );
+			return;
+		}
 		const queryParams = {};
+		console.log('getRouteConfig',req.query)
 		queryParams['params'] = req.query ? req.query : {};
 
 		return{
