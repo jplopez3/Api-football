@@ -8,19 +8,19 @@ export default class Outscore {
 			url: '/facts/random',
 			axios: catFactsAxiosInstance, 
 			router: router,
-			cacheStdTTL: '10',
+			cacheStdTTL: '120',
 		}; 
 		const apiFootballEndPoint = { 
 			url: '/fixtures',
 			router: router,
-			cacheStdTTL: '60',
+			cacheStdTTL: '3600',
 		};
 		const apiFootballStatisticsEndPoint = {
 			url: '/fixtures/statistics',
 			router: router,
-			cacheStdTTL: '60',
+			cacheStdTTL: '3600',
 		};
-		this._endPoints = [ apiFootballEndPoint, catFactsEndPoint, apiFootballStatisticsEndPoint ];
+		this._endPoints = [ apiFootballEndPoint, apiFootballStatisticsEndPoint, catFactsEndPoint ];
 		this._activeEndPoints = [];
 
 		this.createEndpoints();
@@ -34,16 +34,19 @@ export default class Outscore {
 		this._endPoints.push( endpoint );
 	}
 	get endPoints() {
-		return this._activeEndPoints.map( ( { cache, url } ) => ( {
+		return this._activeEndPoints.map( ( { cache, url, measureAPICallResponseTime, measureServerResponseTime } ) => ( {
 			url: url,
 			keys: cache.keys(),
 			stats: cache.getStats(),
 			ttl: cache.keys().map( ( key ) => { 
 				const myObj = {};
 				myObj[key] = new Date( cache.getTtl( key ) );
-				return myObj;
+				return `${key} Expires in: ${new Date( cache.getTtl( key ) ).toLocaleTimeString( 'pt-PT' )}`;
 			} ),
-            
+			responseTimes: {
+				measureServerResponseTime,
+				measureAPICallResponseTime
+			}
 		} ) );
 	}
 }

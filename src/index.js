@@ -10,13 +10,21 @@ router.get( '/', ( req, res ) => {
 
 server.get( '/', function( req, res ) {
 	let text='';
-	OutscoreServer.endPoints.forEach( ( { stats, url, keys } )=>{
+	OutscoreServer.endPoints.forEach( ( { stats, url, keys, responseTimes, ttl } )=>{
 		let hits = stats.hits;
 		let misses = stats.misses;
-		text += `<h2>${url}</h2>
-    <h3>Calls made to Football API ${misses}</h3> 
-    <h3>Number of cache hits ${hits}</h3>
-    <h3>Cached params ${keys}</h3>
+		text += `<h1>${url}</h1>
+    <h3>Calls made to Football API: ${misses}</h3> 
+    <h3>Number of cache hits: ${hits}</h3>
+    <h3>Cached params: ${keys}</h3>
+    <h3>Cached params Time to live in Milliseconds: ${ttl.toString()}</h3>
+	<h2>Server Response Times</h2>
+	<h3>Last 50 calls: ${responseTimes.measureServerResponseTime.getHistory()}</h3>
+	<h3>Average: ${responseTimes.measureServerResponseTime.getHistoricAverage()}</h3>
+	<h2>Football API Response Times</h2>
+	<h3>Last 50 calls: ${responseTimes.measureAPICallResponseTime.getHistory()}</h3>
+	<h3>Average: ${responseTimes.measureAPICallResponseTime.getHistoricAverage()}</h3>
+	<br>
     `;
 	} );
 	res.send( text );
