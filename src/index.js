@@ -4,7 +4,7 @@ const compression = require("compression");
 const OutscoreServer = new Outscore(router);
 const PORT = process.env.PORT || 5000;
 
-server.use(compression());
+// server.use(compression());
 router.get("/", (req, res) => {
 	res.json(OutscoreServer.endPoints);
 });
