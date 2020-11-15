@@ -4,23 +4,15 @@ import { defaultCacheConfig } from './config/index.js';
 // eslint-disable-next-line no-unused-vars
 import { catFactsAxiosInstance, apiFootballInstance } from './loaders/axios.js';
 
-export default class endPoint {
-	constructor( { router, url, cacheStdTTL, axios = apiFootballInstance } ){
-		console.info( 'new endPoint', url );
-		this.url = url;
+class DynamicRoute {
+	constructor({ router, url, cache, axios } ){
+
 		this.router = router;
+		this.url = url;
+		this.cache = cache;
 		this.axios = axios;
-		this.cacheStdTTL = cacheStdTTL;
-		this.cache = new NodeCache( defaultCacheConfig.stdTTL = cacheStdTTL );
-
-		this.createNewRoute();
-		this.measureServerResponseTime = this.measureExecutionTime();
-		this.measureAPICallResponseTime = this.measureExecutionTime();
-	}
-
-	createNewRoute() {
 		this.router.get( `${this.url}`, ( req, res ) => { 
-			this.measureServerResponseTime.start();
+			//this.measureServerResponseTime.start();
 			console.time( this.url );
 			this.res = res;
 			this.routerConfig = this.getRouteConfig( req );
@@ -31,6 +23,7 @@ export default class endPoint {
 				.catch( () => {this.fetchFromApi();} );
 		} );
 	}
+
 	async isDataInCache(){
 		let data = this.cache.get( this.routerConfig.cacheKey );
 		let isDataUndefined = data == undefined;
@@ -42,13 +35,12 @@ export default class endPoint {
 		}
 		return Promise.resolve( data );
 	}
-
 	fetchFromApi () {
-		this.measureAPICallResponseTime.start();
+		//this.measureAPICallResponseTime.start();
 		console.log( 'fetchFromApi', this.url, this.routerConfig.queryParams );
 		this.axios.get( this.url, this.routerConfig.queryParams )
 			.then( ( response ) => {
-				console.log( 'fetchFromApi Took: ' + this.measureAPICallResponseTime.stop() );
+				
 				response.data.cacheDate = new Date().getTime();
 				console.info( 'fetchFromApi response', this.url, response.status );
 				this.cache.set( this.routerConfig.cacheKey, response.data, this.cacheStdTTL );
@@ -56,7 +48,7 @@ export default class endPoint {
 				this.responseSuccess( response.data );
 				
 			} )
-			.catch( ( err )=>( this.res.status( 204 ).json( err ) ) );
+			.catch( ( err )=> {console.log('fetchFromApi catch'); this.res.json( err ) } );
 	}
 
 	getRouteConfig( req ) {
@@ -67,7 +59,7 @@ export default class endPoint {
 			return;
 		}
 		const queryParams = {};
-		console.log('getRouteConfig',req.query)
+		console.log('getRouteConfig',req.query);
 		queryParams['params'] = req.query ? req.query : {};
 
 		return{
@@ -75,15 +67,45 @@ export default class endPoint {
 			cacheKey: req.url
 		};
 	}
-	measureExecutionTime(){
+}
+export default class endPoint extends DynamicRoute {
+	constructor( { router, url, cacheStdTTL, axios = apiFootballInstance } ){
+		super(  {router, url, cacheStdTTL, axios} );
+		console.info(this );
+		this.url = url;
+		this.router = router;
+		this.axios = axios;
+		this.cacheStdTTL = cacheStdTTL;
+		this.cache = new NodeCache( defaultCacheConfig.stdTTL = cacheStdTTL );
+
+		//this.createNewRoute();
+		// this.measureServerResponseTime = this.measureExecutionTime();
+		// this.measureAPICallResponseTime = this.measureExecutionTime();
+	}
+
+	responseSuccess( data ){
+		console.timeEnd( this.url );
+		//this.measureServerResponseTime.stop();
+		return this.res.status( 200 ).json( data );
+		
+	}
+}
+
+
+
+
+class MeasureExecutionTime {
+	constructor(){
 		const NS_PER_SEC = 1e9;
 		const NS_PER_MSEC = 1e6;
 		let hrstart;
 		const history = [];
-		const start = () => {
+	}
+
+		 start(){
 			hrstart = process.hrtime();
 		};
-		const stop = () => {
+		 stop (){
 			const hrend = process.hrtime( hrstart ); // hrend[0] is in seconds, hrend[1] is in nanoseconds
 			const timeInNanoSeconds = ( hrend[0] * NS_PER_SEC + hrend[1] ); // convert first to ns 
 			const timeInMs = timeInNanoSeconds / NS_PER_MSEC;// then to ms
@@ -91,26 +113,12 @@ export default class endPoint {
 			return timeInMs;
 		};
 
-		const addToHistory = time => {
+		 addToHistory = time => {
 			history.unshift( time );
 			if( history.length > 50 ) history.length = 50;
 		};
 
-		const average = ( array ) => {if ( array.length === 0 ) return 0; return array.reduce( ( a, b ) => a + b ) / array.length;};
-		const getHistoricAverage = () => average( history );
-		const getHistory = () => history.join( ' -- ' );
-
-		return{
-			start,
-			stop,
-			getHistoricAverage,
-			getHistory
-		};
-	}
-	responseSuccess( data ){
-		console.timeEnd( this.url );
-		this.measureServerResponseTime.stop();
-		return this.res.status( 200 ).json( data );
-		
-	}
+		 average = ( array ) => {if ( array.length === 0 ) return 0; return array.reduce( ( a, b ) => a + b ) / array.length;};
+	 getHistoricAverage = () => average( history );
+		 getHistory = () => history.join( ' -- ' );
 }

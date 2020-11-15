@@ -21,12 +21,15 @@ export default class Outscore {
 			cacheStdTTL: '3600',
 		};
 		this._endPoints = [ apiFootballEndPoint, apiFootballStatisticsEndPoint, catFactsEndPoint ];
+		
 		this._activeEndPoints = [];
 
 		this.createEndpoints();
 	}
 
 	createEndpoints() {
+		//console.log(this._endPoints)
+		//this._endPoints.map(( endPointConfig )=>(console.log(endPointConfig)) );
 		this._activeEndPoints = this._endPoints.map( ( endPointConfig )=>( new EndPoint( endPointConfig ) ) );
 
 	}
