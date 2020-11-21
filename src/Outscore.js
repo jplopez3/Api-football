@@ -3,13 +3,6 @@ import { catFactsAxiosInstance } from './loaders/axios.js';
 
 export default class Outscore {
 	constructor( router ){
-        
-		const catFactsEndPoint = {
-			url: '/facts/random',
-			axios: catFactsAxiosInstance, 
-			router: router,
-			cacheStdTTL: '120',
-		}; 
 		const apiFootballEndPoint = { 
 			url: '/fixtures',
 			router: router,
@@ -20,7 +13,17 @@ export default class Outscore {
 			router: router,
 			cacheStdTTL: '3600',
 		};
-		this._endPoints = [ apiFootballEndPoint, apiFootballStatisticsEndPoint, catFactsEndPoint ];
+		const apiFootballStandingsEndPoint = {
+			url: '/standings',
+			router: router,
+			cacheStdTTL: '3600',
+		};
+		const apiFootballHeadtoheadEndPoint = {
+			url: '/fixtures/headtohead',
+			router: router,
+			cacheStdTTL: '3600',
+		};
+		this._endPoints = [ apiFootballEndPoint, apiFootballStatisticsEndPoint, apiFootballStandingsEndPoint, apiFootballHeadtoheadEndPoint ];
 		
 		this._activeEndPoints = [];
 
