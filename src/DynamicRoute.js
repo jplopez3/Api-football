@@ -1,8 +1,8 @@
 import process from 'process';
 import NodeCache  from 'node-cache';
 import { defaultCacheConfig } from './config/index.js';
-// eslint-disable-next-line no-unused-vars
-import { catFactsAxiosInstance, apiFootballInstance } from './loaders/axios.js';
+import zlib from 'zlib';
+import { apiFootballInstance } from './loaders/axios.js';
 
 class DynamicRoute {
 	constructor({ router, url, cache, axios } ){
@@ -84,9 +84,27 @@ export default class endPoint extends DynamicRoute {
 	}
 
 	responseSuccess( data ){
+		try {
+			const jsonStr  = JSON.stringify(data),
+          bData    = Buffer.from(jsonStr, 'utf-8');
+		
 		console.timeEnd( this.url );
+		console.log("BROTLI RES");
+        zlib.brotliCompress(bData, (err, result) => {
+            console.log(result);
+			this.res.writeHead(200, {
+                'Content-Type':     'application/json',
+                'Content-Encoding': 'br',
+                'Content-Length':   bData.length
+            });
+		
+            !err ? this.res.end(result) : console.warn(err);
+		});
+	} catch (error) {
+		console.warn(error);
+	}
 		//this.measureServerResponseTime.stop();
-		return this.res.status( 200 ).json( data );
+		//return this.res.status( 200 ).json( data );
 		
 	}
 }
