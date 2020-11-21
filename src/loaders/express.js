@@ -1,4 +1,5 @@
 import express from 'express';
+import compression from 'compression';
 const server = express();
 const router = express.Router();
 import cors from 'cors';
@@ -18,4 +19,5 @@ server.enable( 'trust proxy' );
 server.use( cors() );
 // Middleware that transforms the raw string of req.body into json
 //server.use(bodyParser.json());
+server.use( compression() );
 export { server, router };
