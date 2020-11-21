@@ -84,7 +84,7 @@ export default class endPoint extends DynamicRoute {
 	}
 
 	responseSuccess( data ){
-		try {
+	/*	try {
 			const jsonStr  = JSON.stringify(data),
           bData    = Buffer.from(jsonStr, 'utf-8');
 		
@@ -92,7 +92,7 @@ export default class endPoint extends DynamicRoute {
 		console.log("BROTLI RES");
         zlib.brotliCompress(bData, (err, result) => {
             console.log(result);
-			this.res.writeHead(200, {
+			this.res.set(200, {
                 'Content-Type':     'application/json',
                 'Content-Encoding': 'br',
                 'Content-Length':   bData.length
@@ -102,9 +102,9 @@ export default class endPoint extends DynamicRoute {
 		});
 	} catch (error) {
 		console.warn(error);
-	}
+	}*/
 		//this.measureServerResponseTime.stop();
-		//return this.res.status( 200 ).json( data );
+		return this.res.status( 200 ).json( data );
 		
 	}
 }
