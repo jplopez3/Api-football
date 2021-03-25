@@ -18,12 +18,13 @@ server.get('/endPoints', (req, res) => {
 });
 
 //Todo: add template engine to show this info
-server.get( '/info', function ( req, res ) {
-	let text = '';
-	OutscoreServer.endPoints.forEach( ( { stats, url, keys, responseTimes, ttl } ) => {
-		let hits = stats.hits;
-		let misses = stats.misses;
-		text += `<h1>${url}</h1>
+server.get('/info', function (req, res) {
+  let text = '';
+  OutscoreServer.endPoints.forEach(
+    ({ stats, url, keys, responseTimes, ttl }) => {
+      let hits = stats.hits;
+      let misses = stats.misses;
+      text += `<h1>${url}</h1>
     <h3>Calls made to Football API: ${misses}</h3>
     <h3>Number of cache hits: ${hits}</h3>
     <h3>Cached params: ${keys}</h3>
@@ -36,9 +37,10 @@ server.get( '/info', function ( req, res ) {
 	<h3>Average: ${responseTimes.measureAPICallResponseTime.getHistoricAverage()}</h3>
 	<br>
     `;
-	} );
-	res.send( text );
-} );
+    },
+  );
+  res.send(text);
+});
 
 //Todo: remove
 server.get('/env', function (req, res) {

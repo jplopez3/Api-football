@@ -30,6 +30,10 @@ npm run start
 
         MiddleWare:
             - [Cors](https://www.npmjs.com/package/cors)
+            - [compression](https://www.npmjs.com/package/cors)
+            Logging:
+            - [morgan](https://www.npmjs.com/package/morgan)
+            - [winston](https://www.npmjs.com/package/winston)
 
         Http Requests:
             - [Axios](https://github.com/axios/axios)
@@ -37,10 +41,23 @@ npm run start
         Cache:
             - [node-cache](https://www.npmjs.com/package/node-cache)
 
+    -Lint:
+        [ESlint](https://github.com/eslint/eslint)
+        [Prettier](https://github.com/prettier/prettier)
+
 ## File structure
 
 src
-│ app.js # App entry point
+│ index.js # App entry point
 └───config # Environment variables and configuration related stuff
 └───loaders # Split the startup process into modules
-└───services # All the business logic is here
+└───resources # All the business logic is here
+└───utils # reusable code is here
+
+## Run linter
+
+This project uses ESlint and Prettier to check code style.
+
+```
+npm run format
+```
