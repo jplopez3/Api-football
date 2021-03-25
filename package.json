@@ -9,19 +9,31 @@
   "type": "module",
   "scripts": {
     "start": "heroku local",
+    "format": "prettier --ignore-unknown --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "0.20.0",
+    "axios": "0.21.1",
     "compression": "1.7.4",
     "cors": "2.8.5",
     "express": "4.17.1",
-    "node-cache": "5.1.2"
+    "module-alias": "2.2.2",
+    "morgan": "1.10.0",
+    "node-cache": "5.1.2",
+    "winston": "3.3.3"
   },
   "devDependencies": {
-    "eslint": "7.11.0"
+    "eslint": "7.11.0",
+    "prettier": "2.2.1"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@resources": "src/resources",
+    "@src": "src/",
+    "@utils": "build/src/utils",
+    "@configs": "build/configs"
   }
 }
