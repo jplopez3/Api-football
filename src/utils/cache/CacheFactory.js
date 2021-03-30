@@ -1,4 +1,4 @@
-import Cache from './cache.js';
+import Cache from './Cache.js';
 import Logger from '../../loaders/winston.js';
 import { defaultCacheConfig } from '../../config/index.js';
 
