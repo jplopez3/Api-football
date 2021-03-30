@@ -27,7 +27,7 @@ const stream = {
 //Todo: is necessary?
 const skip = () => {
   const env = process.env.NODE_ENV || 'development';
-  return true;//env !== 'development';
+  return false;//env !== 'development';
 };
 
 // Build the morgan middleware
