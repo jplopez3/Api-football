@@ -6,7 +6,7 @@ export default class AbstractRouter {
     this.initialize(path);
   }
   runService(req, res) {
-    Logger.warn('runService Method for ' + this.path + 'does not exist !');
+    Logger.warn('runService Method for ' + this.path + 'does not exist!');
   }
   initialize(path) {
     this.path = path;

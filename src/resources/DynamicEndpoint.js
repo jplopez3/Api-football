@@ -1,13 +1,13 @@
 import AbstractRouter from '../utils/AbstractRouter.js';
-import Cache from '../utils/Cache.js';
+import CacheFactory from '../utils/cache/CacheFactory.js';
 import { apiFootballInstance } from '../loaders/axios.js';
 import Logger from '../loaders/winston.js';
 
 export default class DynamicEndpoint extends AbstractRouter {
-  constructor({ cacheStdTTL, path }) {
+  constructor({ cacheStdTTL = null, path }) {
     super(path);
     this.path = path;
-    this.cache = new Cache(cacheStdTTL);
+    this.cache = CacheFactory.create({ cacheName: this.path, cacheStdTTL });
   }
 
   runService(req, res) {

@@ -1,9 +1,11 @@
 import express from 'express';
 import compression from 'compression';
-import morgan from './morgan.js';
-const server = express();
-const router = express.Router();
 import cors from 'cors';
+import morgan from './morgan.js';
+import outscore from '../resources/outscore/Outscore.js';
+import serverRoutes from '../resources/server/server.routes.js';
+import outscoreRoutes from '../resources/outscore/outscore.endpoints.js';
+const server = express();
 
 //TODO:add to config? files
 /*app.use(`/.netlify/functions/api`, router);
@@ -22,4 +24,11 @@ server.use(morgan);
 // Middleware that transforms the raw string of req.body into json
 //server.use(bodyParser.json());
 server.use(compression());
-export { server, router };
+
+//Register outscore routes in server
+server.use(outscore.router);
+server.use(outscoreRoutes);
+
+server.use(serverRoutes);
+
+export { server };
