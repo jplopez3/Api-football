@@ -3,8 +3,6 @@ import CacheFactory from '../../utils/cache/CacheFactory.js';
 import { Fetcher } from '../../loaders/axios/index.js';
 import Logger from '../../loaders/winston.js';
 
-import { groupByCountry } from '../../resources/fixtures/index.js';
-
 export default class DynamicEndpoint extends AbstractRouter {
   constructor({ cacheStdTTL = null, path }) {
     super(path);
@@ -25,10 +23,7 @@ export default class DynamicEndpoint extends AbstractRouter {
         this.cache.set({ cacheKey, data });
       }
 
-      this.responseSuccess(
-        res,
-        this.groupByCountry ? groupByCountry(data) : data,
-      );
+      this.responseSuccess(res, data,);
     } catch (error) {
       Logger.error('Catch runService %O', error);
       this.errorResponse(res, error);
@@ -51,14 +46,11 @@ export default class DynamicEndpoint extends AbstractRouter {
     if (req.query['clearCache']) {
       this.cache.flushCache();
       return this.responseSuccess({ data: { result: 'CLEAR CACHE SUCCESS' } });
-    }
-    console.log(req.query, !!req.query['groupByCountry']);
+    };
     if (req.query['groupByCountry']) {
       Logger.error('groupByCountry');
       this.groupByCountry = true;
       delete req.query['groupByCountry'];
-
-      console.log(req.query);
     }
 
     const queryParams = {};
