@@ -10,7 +10,7 @@
   "scripts": {
     "start": "heroku local",
     "format": "prettier --ignore-unknown --write .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,8 @@
   },
   "devDependencies": {
     "eslint": "7.11.0",
-    "prettier": "2.2.1"
+    "jest": "27.0.4",
+    "prettier": "2.2.1",
+    "supertest": "6.1.3"
   }
 }

@@ -1,5 +1,5 @@
 import express from 'express';
-import EndPoint from '../DynamicEndpoint.js';
+import EndPoint from '../dynamic_endpoint/DynamicEndpoint.js';
 import Logger from '../../loaders/winston.js';
 import { endPoints, apiPath } from '../../config/outscore.js';
 class Outscore {
