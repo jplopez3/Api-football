@@ -16,12 +16,22 @@ const apiFootballHeadToHeadEndPoint = {
   path: '/fixtures/headtohead',
   cacheStdTTL: '3600',
 };
+const apiFootballPlayers = {
+  path: '/players/topscorers',
+  cacheStdTTL: '3600',
+};
+const apiFootballTeams = {
+  path: '/teams/statistics',
+  cacheStdTTL: '3600',
+};
 
 const endPoints = [
   apiFootballEndPoint,
   apiFootballStatisticsEndPoint,
   apiFootballStandingsEndPoint,
   apiFootballHeadToHeadEndPoint,
+  apiFootballPlayers,
+  apiFootballTeams,
 ];
 
 export { endPoints, apiPath };
