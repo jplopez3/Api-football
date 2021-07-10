@@ -22,6 +22,7 @@ export default class App {
   initApp(apiPath = '/') {
     this.app = express();
     this._router = Router();
+    this.app.use(cors());
     this.app.use(apiPath, this._router);
   }
   initMiddleware() {
@@ -33,7 +34,7 @@ export default class App {
     // The magic package that prevents frontend developers going nuts
     // Alternate description:
     // Enable Cross Origin Resource Sharing to all origins by default
-    this.app.use(cors());
+    
     // Use Morgan middle ware
     this.app.use(morgan);
     // Middleware that transforms the raw string of req.body into json
@@ -50,8 +51,7 @@ export default class App {
       return endPoint;
     });
 
-    this.app.use('/', serverRoutes);
-    this.app.use(cors());
+    this.app.use('/', serverRoutes);   
   }
 
   initErrorHandling() {
