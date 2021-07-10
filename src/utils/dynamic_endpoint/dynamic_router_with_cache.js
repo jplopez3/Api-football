@@ -1,12 +1,12 @@
-import AbstractRouter from '../../utils/AbstractRouter.js';
-import CacheFactory from '../../utils/cache/CacheFactory.js';
+import AbstractRouter from './abstract_router.js';
+import CacheFactory from '../cache/CacheFactory.js';
 import { Fetcher } from '../../loaders/axios/index.js';
+import { groupByCountry } from '../group_by_country/groupByCountry.js'
 import Logger from '../../loaders/winston.js';
 
 export default class DynamicEndpoint extends AbstractRouter {
   constructor({ cacheStdTTL = null, path }) {
     super(path);
-    this.path = path;
     this.cache = CacheFactory.create({ cacheName: this.path, cacheStdTTL });
   }
 
@@ -22,8 +22,8 @@ export default class DynamicEndpoint extends AbstractRouter {
         data = await Fetcher(this.path, queryParams);
         this.cache.set({ cacheKey, data });
       }
-
-      this.responseSuccess(res, data,);
+      
+      this.responseSuccess(res, this.groupByCountry ? groupByCountry(data) : data);
     } catch (error) {
       Logger.error('Catch runService %O', error);
       this.errorResponse(res, error);
@@ -46,11 +46,11 @@ export default class DynamicEndpoint extends AbstractRouter {
     if (req.query['clearCache']) {
       this.cache.flushCache();
       return this.responseSuccess({ data: { result: 'CLEAR CACHE SUCCESS' } });
-    };
-    if (req.query['groupByCountry']) {
-      Logger.error('groupByCountry');
+    }
+    if (req.query['groupBy']) {
+      Logger.warn('groupBy');
       this.groupByCountry = true;
-      delete req.query['groupByCountry'];
+      delete req.query['groupBy'];
     }
 
     const queryParams = {};

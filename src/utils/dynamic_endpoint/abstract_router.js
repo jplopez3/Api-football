@@ -1,5 +1,5 @@
 import express from 'express';
-import Logger from '../loaders/winston.js';
+import Logger from '../../loaders/winston.js';
 export default class AbstractRouter {
   constructor(path) {
     this.router = express.Router();
