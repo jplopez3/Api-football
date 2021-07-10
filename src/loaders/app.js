@@ -29,6 +29,7 @@ export default class App {
     // It shows the real origin IP in the heroku or Cloudwatch logs
     this.app.enable('trust proxy');
 
+    this.app.disable('x-powered-by');
     // The magic package that prevents frontend developers going nuts
     // Alternate description:
     // Enable Cross Origin Resource Sharing to all origins by default
@@ -50,6 +51,7 @@ export default class App {
     });
 
     this.app.use('/', serverRoutes);
+    this.app.use(cors());
   }
 
   initErrorHandling() {
