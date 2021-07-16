@@ -8,7 +8,7 @@ export default class Cache {
     this.registerEvents();
   }
 
-  get(cacheKey) {
+  async get(cacheKey) {
     let data = this.cache.get(cacheKey);
     Logger.info(
       `2 - Get ${cacheKey} from cache. In Cache? ${!(data == undefined)}`,

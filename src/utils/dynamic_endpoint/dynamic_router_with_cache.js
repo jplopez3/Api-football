@@ -1,7 +1,7 @@
 import AbstractRouter from './abstract_router.js';
 import CacheFactory from '../cache/CacheFactory.js';
 import { Fetcher } from '../../loaders/axios/index.js';
-import { groupByCountry } from '../group_by_country/groupByCountry.js'
+import { groupByCountry } from '../group_by_country/groupByCountry.js';
 import Logger from '../../loaders/winston.js';
 
 export default class DynamicEndpoint extends AbstractRouter {
@@ -22,8 +22,11 @@ export default class DynamicEndpoint extends AbstractRouter {
         data = await Fetcher(this.path, queryParams);
         this.cache.set({ cacheKey, data });
       }
-      
-      this.responseSuccess(res, this.groupByCountry ? groupByCountry(data) : data);
+
+      this.responseSuccess(
+        res,
+        this.groupByCountry ? groupByCountry(data) : data,
+      );
     } catch (error) {
       Logger.error('Catch runService %O', error);
       this.errorResponse(res, error);

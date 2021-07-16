@@ -1,6 +1,12 @@
 import { Router } from 'express';
-const router = Router();
+import cacheMiddleware from '../../utils/middlewares/cache.middleware.js';
+import fixturesController from './fixtures.controller.js';
 
-router.get('/fixtures', (req, res) => {});
+const router = Router();
+const path = '/fixtures';
+
+router.use(cacheMiddleware({ cacheName: path }));
+
+router.get(path, fixturesController);
 
 export default router;

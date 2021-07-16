@@ -5,36 +5,31 @@ import cors from 'cors';
 import morgan from './morgan.js';
 import serverRoutes from '../server.routes.js';
 import { DynamicRouterWithCache } from '../utils/dynamic_endpoint/index.js';
+import superFixtures from '../resources/fixtures/fixtures.routes.js';
 import Logger from './winston.js';
 
 export default class App {
   constructor({ apiPath, endPoints, Fetcher, database }) {
     try {
-      this.initApp(apiPath);
+      this.app = express();
       this.initMiddleware();
-      this.initRoutes(endPoints);
+      this.initRoutes(endPoints, apiPath);
       this.initErrorHandling();
     } catch (error) {
       Logger.error('Error Starting Outscore: %O', error);
     }
   }
-
-  initApp(apiPath = '/') {
-    this.app = express();
-    this._router = Router();
-    this.app.use(cors());
-    this.app.use(apiPath, this._router);
-  }
   initMiddleware() {
+    // The magic package that prevents frontend developers going nuts
+    // Alternate description:
+    // Enable Cross Origin Resource Sharing to all origins by default
+    this.app.use(cors());
     // Useful if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
     // It shows the real origin IP in the heroku or Cloudwatch logs
     this.app.enable('trust proxy');
 
     this.app.disable('x-powered-by');
-    // The magic package that prevents frontend developers going nuts
-    // Alternate description:
-    // Enable Cross Origin Resource Sharing to all origins by default
-    
+
     // Use Morgan middle ware
     this.app.use(morgan);
     // Middleware that transforms the raw string of req.body into json
@@ -43,15 +38,18 @@ export default class App {
     /*app.use(`/.netlify/functions/api`, router);
       app.set('view engine', 'html');*/
   }
-  initRoutes(cachedPathList) {
+  initRoutes(cachedPathList, apiPath = '/') {
     Logger.warn('Initializing endpoints in %s');
+    this._router = Router();
+    this.app.use(apiPath, this._router);
+
     this._activeEndPoints = cachedPathList.map((pathConfig) => {
       const endPoint = new DynamicRouterWithCache(pathConfig);
       this._router.use(endPoint.router);
       return endPoint;
     });
-
-    this.app.use('/', serverRoutes);   
+    this._router.use(superFixtures);
+    this.app.use('/', serverRoutes);
   }
 
   initErrorHandling() {

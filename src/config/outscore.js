@@ -1,9 +1,9 @@
 const apiPath = '/api/v3';
 
-const apiFootballEndPoint = {
-  path: '/fixtures',
-  cacheStdTTL: '3600',
-};
+// const apiFootballEndPoint = {
+//   path: '/fixtures',
+//   cacheStdTTL: '3600',
+// };
 const apiFootballStatisticsEndPoint = {
   path: '/fixtures/statistics',
   cacheStdTTL: '3600',
@@ -26,7 +26,7 @@ const apiFootballTeams = {
 };
 
 const endPoints = [
-  apiFootballEndPoint,
+  // apiFootballEndPoint,
   apiFootballStatisticsEndPoint,
   apiFootballStandingsEndPoint,
   apiFootballHeadToHeadEndPoint,
