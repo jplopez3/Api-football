@@ -1,3 +1,553 @@
+export const liveFixtures = [
+  {
+    fixture: {
+      id: 678878,
+      referee: null,
+      timezone: 'UTC',
+      date: '2021-07-12T10:30:00+00:00',
+      timestamp: 1626085800,
+      periods: {
+        first: 1626085800,
+        second: null,
+      },
+      venue: {
+        id: 1901,
+        name: 'Ansan Wa Stadium',
+        city: 'Ansan',
+      },
+      status: {
+        long: 'Halftime',
+        short: 'HT',
+        elapsed: 45,
+      },
+    },
+    league: {
+      id: 293,
+      name: 'K-League Challenge',
+      country: 'South-Korea',
+      logo: 'https://media.api-sports.io/football/leagues/293.png',
+      flag: 'https://media.api-sports.io/flags/kr.svg',
+      season: 2021,
+      round: 'Regular Season - 20',
+    },
+    teams: {
+      home: {
+        id: 2758,
+        name: 'Ansan Greeners',
+        logo: 'https://media.api-sports.io/football/teams/2758.png',
+        winner: true,
+      },
+      away: {
+        id: 2751,
+        name: 'Gyeongnam FC',
+        logo: 'https://media.api-sports.io/football/teams/2751.png',
+        winner: false,
+      },
+    },
+    goals: {
+      home: 1,
+      away: 0,
+    },
+    score: {
+      halftime: {
+        home: 1,
+        away: 0,
+      },
+      fulltime: {
+        home: null,
+        away: null,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 678879,
+      referee: null,
+      timezone: 'UTC',
+      date: '2021-07-12T10:30:00+00:00',
+      timestamp: 1626085800,
+      periods: {
+        first: 1626085800,
+        second: null,
+      },
+      venue: {
+        id: 2841,
+        name: 'Yishunsin Stadium',
+        city: 'Asan',
+      },
+      status: {
+        long: 'Halftime',
+        short: 'HT',
+        elapsed: 45,
+      },
+    },
+    league: {
+      id: 293,
+      name: 'K-League Challenge',
+      country: 'South-Korea',
+      logo: 'https://media.api-sports.io/football/leagues/293.png',
+      flag: 'https://media.api-sports.io/flags/kr.svg',
+      season: 2021,
+      round: 'Regular Season - 20',
+    },
+    teams: {
+      home: {
+        id: 2753,
+        name: 'Asan Mugunghwa',
+        logo: 'https://media.api-sports.io/football/teams/2753.png',
+        winner: null,
+      },
+      away: {
+        id: 2745,
+        name: 'Bucheon FC 1995',
+        logo: 'https://media.api-sports.io/football/teams/2745.png',
+        winner: null,
+      },
+    },
+    goals: {
+      home: 0,
+      away: 0,
+    },
+    score: {
+      halftime: {
+        home: 0,
+        away: 0,
+      },
+      fulltime: {
+        home: null,
+        away: null,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 690684,
+      referee: 'Leonilson Filho',
+      timezone: 'UTC',
+      date: '2021-07-17T14:00:00+00:00',
+      timestamp: 1626530400,
+      periods: {
+        first: 1626085800,
+        second: null,
+      },
+      venue: {
+        id: 2797,
+        name: 'Estádio Bento da Silva Freitas',
+        city: 'Pelotas, Rio Grande do Sul',
+      },
+      status: {
+        long: 'Halftime',
+        short: 'HT',
+        elapsed: 45,
+      },
+    },
+    league: {
+      id: 72,
+      name: 'Serie B',
+      country: 'Brazil',
+      logo: 'https://media.api-sports.io/football/leagues/72.png',
+      flag: 'https://media.api-sports.io/flags/br.svg',
+      season: 2021,
+      round: 'Regular Season - 12',
+    },
+    teams: {
+      home: {
+        id: 141,
+        name: 'Brasil DE Pelotas',
+        logo: 'https://media.api-sports.io/football/teams/141.png',
+        winner: null,
+      },
+      away: {
+        id: 136,
+        name: 'Vitoria',
+        logo: 'https://media.api-sports.io/football/teams/136.png',
+        winner: null,
+      },
+    },
+    goals: {
+      home: null,
+      away: null,
+    },
+    score: {
+      halftime: {
+        home: null,
+        away: null,
+      },
+      fulltime: {
+        home: null,
+        away: null,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+];
+
+export const finishedFixtures = [
+  {
+    fixture: {
+      id: 700357,
+      referee: null,
+      timezone: 'Europe/London',
+      date: '2021-07-12T10:00:00+01:00',
+      timestamp: 1626080400,
+      periods: {
+        first: 1626080400,
+        second: 1626084000,
+      },
+      venue: {
+        id: null,
+        name: 'Namdong Rugby Stadium',
+        city: 'Incheon',
+      },
+      status: {
+        long: 'Match Finished',
+        short: 'FT',
+        elapsed: 90,
+      },
+    },
+    league: {
+      id: 660,
+      name: 'WK-League',
+      country: 'South-Korea',
+      logo: 'https://media.api-sports.io/football/leagues/660.png',
+      flag: 'https://media.api-sports.io/flags/kr.svg',
+      season: 2021,
+      round: 'Regular Season - 13',
+    },
+    teams: {
+      home: {
+        id: 14377,
+        name: 'Incheon Red Angels',
+        logo: 'https://media.api-sports.io/football/teams/14377.png',
+        winner: true,
+      },
+      away: {
+        id: 14376,
+        name: 'Hwacheon KSPO',
+        logo: 'https://media.api-sports.io/football/teams/14376.png',
+        winner: false,
+      },
+    },
+    goals: {
+      home: 2,
+      away: 0,
+    },
+    score: {
+      halftime: {
+        home: 0,
+        away: 0,
+      },
+      fulltime: {
+        home: 2,
+        away: 0,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 700358,
+      referee: null,
+      timezone: 'Europe/London',
+      date: '2021-07-12T10:00:00+01:00',
+      timestamp: 1626080400,
+      periods: {
+        first: 1626080400,
+        second: 1626084000,
+      },
+      venue: {
+        id: null,
+        name: 'Boeun Synthetic',
+        city: 'Boeun',
+      },
+      status: {
+        long: 'Match Finished',
+        short: 'FT',
+        elapsed: 90,
+      },
+    },
+    league: {
+      id: 660,
+      name: 'WK-League',
+      country: 'South-Korea',
+      logo: 'https://media.api-sports.io/football/leagues/660.png',
+      flag: 'https://media.api-sports.io/flags/kr.svg',
+      season: 2021,
+      round: 'Regular Season - 13',
+    },
+    teams: {
+      home: {
+        id: 14372,
+        name: 'Boeun Sangmu',
+        logo: 'https://media.api-sports.io/football/teams/14372.png',
+        winner: false,
+      },
+      away: {
+        id: 14375,
+        name: 'Gyeongju',
+        logo: 'https://media.api-sports.io/football/teams/14375.png',
+        winner: true,
+      },
+    },
+    goals: {
+      home: 0,
+      away: 6,
+    },
+    score: {
+      halftime: {
+        home: 0,
+        away: 2,
+      },
+      fulltime: {
+        home: 0,
+        away: 6,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 700359,
+      referee: null,
+      timezone: 'Europe/London',
+      date: '2021-07-12T10:00:00+01:00',
+      timestamp: 1626080400,
+      periods: {
+        first: 1626080400,
+        second: 1626084000,
+      },
+      venue: {
+        id: null,
+        name: 'Mokdong Stadium',
+        city: 'Seoul',
+      },
+      status: {
+        long: 'Match Finished',
+        short: 'FT',
+        elapsed: 90,
+      },
+    },
+    league: {
+      id: 660,
+      name: 'WK-League',
+      country: 'South-Korea',
+      logo: 'https://media.api-sports.io/football/leagues/660.png',
+      flag: 'https://media.api-sports.io/flags/kr.svg',
+      season: 2021,
+      round: 'Regular Season - 13',
+    },
+    teams: {
+      home: {
+        id: 14378,
+        name: 'Seoul',
+        logo: 'https://media.api-sports.io/football/teams/14378.png',
+        winner: true,
+      },
+      away: {
+        id: 14374,
+        name: 'Gumi Sportstoto',
+        logo: 'https://media.api-sports.io/football/teams/14374.png',
+        winner: false,
+      },
+    },
+    goals: {
+      home: 4,
+      away: 1,
+    },
+    score: {
+      halftime: {
+        home: 2,
+        away: 1,
+      },
+      fulltime: {
+        home: 4,
+        away: 1,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 700360,
+      referee: null,
+      timezone: 'Europe/London',
+      date: '2021-07-12T10:00:00+01:00',
+      timestamp: 1626080400,
+      periods: {
+        first: 1626080400,
+        second: 1626084000,
+      },
+      venue: {
+        id: null,
+        name: 'Suwon Civil Stadium Auxiliary',
+        city: 'Suwon',
+      },
+      status: {
+        long: 'Match Finished',
+        short: 'FT',
+        elapsed: 90,
+      },
+    },
+    league: {
+      id: 660,
+      name: 'WK-League',
+      country: 'South-Korea',
+      logo: 'https://media.api-sports.io/football/leagues/660.png',
+      flag: 'https://media.api-sports.io/flags/kr.svg',
+      season: 2021,
+      round: 'Regular Season - 13',
+    },
+    teams: {
+      home: {
+        id: 14379,
+        name: 'Suwon FMC',
+        logo: 'https://media.api-sports.io/football/teams/14379.png',
+        winner: true,
+      },
+      away: {
+        id: 14373,
+        name: 'Changnyeong',
+        logo: 'https://media.api-sports.io/football/teams/14373.png',
+        winner: false,
+      },
+    },
+    goals: {
+      home: 2,
+      away: 1,
+    },
+    score: {
+      halftime: {
+        home: 1,
+        away: 1,
+      },
+      fulltime: {
+        home: 2,
+        away: 1,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 689021,
+      referee: null,
+      timezone: 'UTC',
+      date: '2021-07-17T20:00:00+00:00',
+      timestamp: 1626552000,
+      periods: {
+        first: null,
+        second: null,
+      },
+      venue: {
+        id: null,
+        name: 'Estádio Cícero Pompeu de Toledo',
+        city: 'São Paulo, São Paulo',
+      },
+      status: {
+        long: 'Not Started',
+        short: 'NS',
+        elapsed: null,
+      },
+    },
+    league: {
+      id: 71,
+      name: 'Serie A',
+      country: 'Brazil',
+      logo: 'https://media.api-sports.io/football/leagues/71.png',
+      flag: 'https://media.api-sports.io/flags/br.svg',
+      season: 2021,
+      round: 'Regular Season - 12',
+    },
+    teams: {
+      home: {
+        id: 126,
+        name: 'Sao Paulo',
+        logo: 'https://media.api-sports.io/football/teams/126.png',
+        winner: null,
+      },
+      away: {
+        id: 154,
+        name: 'Fortaleza EC',
+        logo: 'https://media.api-sports.io/football/teams/154.png',
+        winner: null,
+      },
+    },
+    goals: {
+      home: null,
+      away: null,
+    },
+    score: {
+      halftime: {
+        home: null,
+        away: null,
+      },
+      fulltime: {
+        home: null,
+        away: null,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+];
+
 export const singleFixtureResponse = {
   get: 'fixtures',
   parameters: {
@@ -9,556 +559,6 @@ export const singleFixtureResponse = {
     current: 1,
     total: 1,
   },
-  response: [
-    {
-      fixture: {
-        id: 629572,
-        referee: null,
-        timezone: 'UTC',
-        date: '2021-06-20T09:30:00+00:00',
-        timestamp: 1624181400,
-        periods: {
-          first: null,
-          second: null,
-        },
-        venue: {
-          id: 3994,
-          name: 'Estadio Nuevo Municipal Las Gaunas',
-          city: 'Logroño',
-        },
-        status: {
-          long: 'Match Postponed',
-          short: 'PST',
-          elapsed: null,
-        },
-      },
-      league: {
-        id: 142,
-        name: 'Primera Division Women',
-        country: 'Spain',
-        logo: 'https://media.api-sports.io/football/leagues/142.png',
-        flag: 'https://media.api-sports.io/flags/es.svg',
-        season: 2020,
-        round: 'Regular Season - 33',
-      },
-      teams: {
-        home: {
-          id: 1923,
-          name: 'Edf Logrono W',
-          logo: 'https://media.api-sports.io/football/teams/1923.png',
-          winner: false,
-        },
-        away: {
-          id: 1910,
-          name: 'Atletico Madrid W',
-          logo: 'https://media.api-sports.io/football/teams/1910.png',
-          winner: true,
-        },
-      },
-      goals: {
-        home: 0,
-        away: 2,
-      },
-      score: {
-        halftime: {
-          home: 0,
-          away: 2,
-        },
-        fulltime: {
-          home: null,
-          away: null,
-        },
-        extratime: {
-          home: null,
-          away: null,
-        },
-        penalty: {
-          home: null,
-          away: null,
-        },
-      },
-      events: [
-        {
-          time: {
-            elapsed: 10,
-            extra: null,
-          },
-          team: {
-            id: 1910,
-            name: 'Atletico Madrid W',
-            logo: 'https://media.api-sports.io/football/teams/1910.png',
-          },
-          player: {
-            id: null,
-            name: 'D. Castellanos',
-          },
-          assist: {
-            id: null,
-            name: null,
-          },
-          type: 'Goal',
-          detail: 'Normal Goal',
-          comments: null,
-        },
-        {
-          time: {
-            elapsed: 20,
-            extra: null,
-          },
-          team: {
-            id: 1923,
-            name: 'Edf Logrono W',
-            logo: 'https://media.api-sports.io/football/teams/1923.png',
-          },
-          player: {
-            id: null,
-            name: 'A. Velazquez Jurico',
-          },
-          assist: {
-            id: null,
-            name: null,
-          },
-          type: 'Card',
-          detail: 'Yellow Card',
-          comments: null,
-        },
-        {
-          time: {
-            elapsed: 21,
-            extra: null,
-          },
-          team: {
-            id: 1910,
-            name: 'Atletico Madrid W',
-            logo: 'https://media.api-sports.io/football/teams/1910.png',
-          },
-          player: {
-            id: 144863,
-            name: 'L. Santos',
-          },
-          assist: {
-            id: null,
-            name: null,
-          },
-          type: 'Goal',
-          detail: 'Penalty',
-          comments: null,
-        },
-      ],
-    },
-    {
-      fixture: {
-        id: 629574,
-        referee: null,
-        timezone: 'UTC',
-        date: '2021-06-20T10:00:00+00:00',
-        timestamp: 1624183200,
-        periods: {
-          first: null,
-          second: null,
-        },
-        venue: {
-          id: null,
-          name: 'Ciudad Deportiva del Viejo Vivero',
-          city: 'Badajoz',
-        },
-        status: {
-          long: 'First Half',
-          short: '1H',
-          elapsed: 10,
-        },
-      },
-      league: {
-        id: 142,
-        name: 'Primera Division Women',
-        country: 'Spain',
-        logo: 'https://media.api-sports.io/football/leagues/142.png',
-        flag: 'https://media.api-sports.io/flags/es.svg',
-        season: 2020,
-        round: 'Regular Season - 33',
-      },
-      teams: {
-        home: {
-          id: 15223,
-          name: 'Santa Teresa',
-          logo: 'https://media.api-sports.io/football/teams/15223.png',
-          winner: false,
-        },
-        away: {
-          id: 15224,
-          name: 'Real Madrid W',
-          logo: 'https://media.api-sports.io/football/teams/15224.png',
-          winner: true,
-        },
-      },
-      goals: {
-        home: 0,
-        away: 2,
-      },
-      score: {
-        halftime: {
-          home: 0,
-          away: 2,
-        },
-        fulltime: {
-          home: null,
-          away: null,
-        },
-        extratime: {
-          home: null,
-          away: null,
-        },
-        penalty: {
-          home: null,
-          away: null,
-        },
-      },
-      events: [
-        {
-          time: {
-            elapsed: 3,
-            extra: null,
-          },
-          team: {
-            id: 15224,
-            name: 'Real Madrid W',
-            logo: 'https://media.api-sports.io/football/teams/15224.png',
-          },
-          player: {
-            id: null,
-            name: 'M. Cardona',
-          },
-          assist: {
-            id: null,
-            name: null,
-          },
-          type: 'Goal',
-          detail: 'Normal Goal',
-          comments: null,
-        },
-        {
-          time: {
-            elapsed: 6,
-            extra: null,
-          },
-          team: {
-            id: 15224,
-            name: 'Real Madrid W',
-            logo: 'https://media.api-sports.io/football/teams/15224.png',
-          },
-          player: {
-            id: null,
-            name: 'L. Navarro',
-          },
-          assist: {
-            id: null,
-            name: null,
-          },
-          type: 'Goal',
-          detail: 'Normal Goal',
-          comments: null,
-        },
-      ],
-    },
-    {
-      fixture: {
-        id: 662299,
-        referee: null,
-        timezone: 'UTC',
-        date: '2021-06-20T10:00:00+00:00',
-        timestamp: 1624183200,
-        periods: {
-          first: 1624183200,
-          second: null,
-        },
-        venue: {
-          id: 4900,
-          name: 'Umeå Energi Arena SOL',
-          city: 'Umeå',
-        },
-        status: {
-          long: 'First Half',
-          short: '1H',
-          elapsed: 14,
-        },
-      },
-      league: {
-        id: 736,
-        name: 'Elitettan',
-        country: 'Sweden',
-        logo: 'https://media.api-sports.io/football/leagues/736.png',
-        flag: 'https://media.api-sports.io/flags/se.svg',
-        season: 2021,
-        round: 'Regular Season - 10',
-      },
-      teams: {
-        home: {
-          id: 11081,
-          name: 'Umeå',
-          logo: 'https://media.api-sports.io/football/teams/11081.png',
-          winner: null,
-        },
-        away: {
-          id: 16006,
-          name: 'Kalmar W',
-          logo: 'https://media.api-sports.io/football/teams/16006.png',
-          winner: null,
-        },
-      },
-      goals: {
-        home: 0,
-        away: 0,
-      },
-      score: {
-        halftime: {
-          home: 0,
-          away: 0,
-        },
-        fulltime: {
-          home: null,
-          away: null,
-        },
-        extratime: {
-          home: null,
-          away: null,
-        },
-        penalty: {
-          home: null,
-          away: null,
-        },
-      },
-      events: [],
-    },
-    {
-      fixture: {
-        id: 677759,
-        referee: 'Takuto Okabe, Japan',
-        timezone: 'UTC',
-        date: '2021-06-20T10:00:00+00:00',
-        timestamp: 1624183200,
-        periods: {
-          first: 1624183200,
-          second: null,
-        },
-        venue: {
-          id: 980,
-          name: 'Saitama Stadium 2002',
-          city: 'Saitama',
-        },
-        status: {
-          long: 'First Half',
-          short: '1H',
-          elapsed: 10,
-        },
-      },
-      league: {
-        id: 98,
-        name: 'J. League Div.1',
-        country: 'Japan',
-        logo: 'https://media.api-sports.io/football/leagues/98.png',
-        flag: 'https://media.api-sports.io/flags/jp.svg',
-        season: 2021,
-        round: 'Regular Season - 18',
-      },
-      teams: {
-        home: {
-          id: 287,
-          name: 'Urawa',
-          logo: 'https://media.api-sports.io/football/teams/287.png',
-          winner: true,
-        },
-        away: {
-          id: 284,
-          name: 'Shonan Bellmare',
-          logo: 'https://media.api-sports.io/football/teams/284.png',
-          winner: false,
-        },
-      },
-      goals: {
-        home: 1,
-        away: 0,
-      },
-      score: {
-        halftime: {
-          home: 1,
-          away: 0,
-        },
-        fulltime: {
-          home: null,
-          away: null,
-        },
-        extratime: {
-          home: null,
-          away: null,
-        },
-        penalty: {
-          home: null,
-          away: null,
-        },
-      },
-      events: [
-        {
-          time: {
-            elapsed: 9,
-            extra: null,
-          },
-          team: {
-            id: 287,
-            name: 'Urawa',
-            logo: 'https://media.api-sports.io/football/teams/287.png',
-          },
-          player: {
-            id: 15653,
-            name: 'K. Junker',
-          },
-          assist: {
-            id: null,
-            name: null,
-          },
-          type: 'Goal',
-          detail: 'Normal Goal',
-          comments: null,
-        },
-      ],
-    },
-    {
-      fixture: {
-        id: 678529,
-        referee: null,
-        timezone: 'UTC',
-        date: '2021-06-20T10:00:00+00:00',
-        timestamp: 1624183200,
-        periods: {
-          first: 1624183200,
-          second: null,
-        },
-        venue: {
-          id: 2774,
-          name: 'Shoda Shoyu Stadium',
-          city: 'Maebashi',
-        },
-        status: {
-          long: 'First Half',
-          short: '1H',
-          elapsed: 11,
-        },
-      },
-      league: {
-        id: 99,
-        name: 'J. League Div.2',
-        country: 'Japan',
-        logo: 'https://media.api-sports.io/football/leagues/99.png',
-        flag: 'https://media.api-sports.io/flags/jp.svg',
-        season: 2021,
-        round: 'Regular Season - 19',
-      },
-      teams: {
-        home: {
-          id: 756,
-          name: 'Thespakusatsu Gunma',
-          logo: 'https://media.api-sports.io/football/teams/756.png',
-          winner: null,
-        },
-        away: {
-          id: 303,
-          name: 'Machida Zelvia',
-          logo: 'https://media.api-sports.io/football/teams/303.png',
-          winner: null,
-        },
-      },
-      goals: {
-        home: 0,
-        away: 0,
-      },
-      score: {
-        halftime: {
-          home: 0,
-          away: 0,
-        },
-        fulltime: {
-          home: null,
-          away: null,
-        },
-        extratime: {
-          home: null,
-          away: null,
-        },
-        penalty: {
-          home: null,
-          away: null,
-        },
-      },
-      events: [],
-    },
-    {
-      fixture: {
-        id: 678530,
-        referee: null,
-        timezone: 'UTC',
-        date: '2021-06-20T10:00:00+00:00',
-        timestamp: 1624183200,
-        periods: {
-          first: 1624183200,
-          second: null,
-        },
-        venue: {
-          id: 2775,
-          name: 'Mikuni World Stadium',
-          city: 'Kitakyushu',
-        },
-        status: {
-          long: 'First Half',
-          short: '1H',
-          elapsed: 11,
-        },
-      },
-      league: {
-        id: 99,
-        name: 'J. League Div.2',
-        country: 'Japan',
-        logo: 'https://media.api-sports.io/football/leagues/99.png',
-        flag: 'https://media.api-sports.io/flags/jp.svg',
-        season: 2021,
-        round: 'Regular Season - 19',
-      },
-      teams: {
-        home: {
-          id: 805,
-          name: 'Kitakyushu',
-          logo: 'https://media.api-sports.io/football/teams/805.png',
-          winner: null,
-        },
-        away: {
-          id: 318,
-          name: 'Ehime FC',
-          logo: 'https://media.api-sports.io/football/teams/318.png',
-          winner: null,
-        },
-      },
-      goals: {
-        home: 0,
-        away: 0,
-      },
-      score: {
-        halftime: {
-          home: 0,
-          away: 0,
-        },
-        fulltime: {
-          home: null,
-          away: null,
-        },
-        extratime: {
-          home: null,
-          away: null,
-        },
-        penalty: {
-          home: null,
-          away: null,
-        },
-      },
-      events: [],
-    },
-  ],
+  response: [...liveFixtures, ...finishedFixtures],
   cacheDate: 1624184119147,
 };
