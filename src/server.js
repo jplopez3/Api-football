@@ -1,8 +1,8 @@
 import App from './loaders/app.js';
 import Logger from './loaders/winston.js';
-import { endPoints, apiPath } from './config/outscore.js';
+import { apiPath } from './config/outscore.js';
 const PORT = process.env.PORT || 5000;
-const outscoreApp = new App({ apiPath, endPoints }).app;
+const outscoreApp = new App({ apiPath }).app;
 export default () => {
   try {
     outscoreApp.listen(PORT, () => {

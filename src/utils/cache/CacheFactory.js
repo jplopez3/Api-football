@@ -7,22 +7,26 @@ class CacheFactory {
     this.caches = {};
   }
 
-  create({ cacheName, cacheStdTTL }, cacheConfig = defaultCacheConfig()) {
-    if (!cacheName) throw 'Invalid cache name' + cacheName;
-
+  create({ pathToCache, cacheStdTTL }) {
+    if (!pathToCache) throw 'Invalid path to cache name: ' + pathToCache;
+    const cacheConfig = defaultCacheConfig();
     if (cacheStdTTL) cacheConfig.cacheStdTTL = cacheStdTTL;
 
-    Logger.info('CacheFactory: created cache - %s', cacheName);
+    Logger.info(
+      'CacheFactory: created cache - %s - %s',
+      pathToCache,
+      cacheConfig.cacheStdTTL,
+    );
     Logger.debug('Cache config: %O', cacheConfig);
 
-    return (this.caches[cacheName] = new Cache(defaultCacheConfig));
+    return (this.caches[pathToCache] = new Cache(pathToCache, cacheConfig));
   }
 
-  get(cacheName) {
-    if (!cacheName || this.caches[cacheName] === undefined)
+  get(pathToCache) {
+    if (!pathToCache || this.caches[pathToCache] === undefined)
       throw 'Invalid cache name';
 
-    return this.caches[cacheName];
+    return this.caches[pathToCache];
   }
 
   getAll() {

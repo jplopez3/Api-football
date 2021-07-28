@@ -2,9 +2,10 @@ import NodeCache from 'node-cache';
 import { defaultCacheConfig } from '../../config/index.js';
 import Logger from '../../loaders/winston.js';
 export default class Cache {
-  constructor(cacheStdTTL = null) {
+  constructor(pathToCache, cacheStdTTL) {
     if (cacheStdTTL) defaultCacheConfig.stdTTL = cacheStdTTL;
-    this.cache = new NodeCache(defaultCacheConfig);
+    this.cache = new NodeCache(cacheStdTTL);
+    this.pathToCache = pathToCache;
     this.registerEvents();
   }
 

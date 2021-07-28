@@ -1,18 +1,11 @@
-import request from 'supertest';
-import app from '../../../loaders/app.js';
-import { groupByCountry } from '../groupByCountry.js';
+import groupByCountry from '../groupByCountry.js';
 import { expectedResponse } from '../mocks/expectedResponse.js';
-import {
-  liveFixtures,
-  finishedFixtures,
-  singleFixtureResponse,
-} from '../mocks/fixturesResponse.js';
+import { singleFixtureResponse } from '../mocks/fixturesResponse.js';
 
 const expectedCountries = Object.keys(expectedResponse);
 
 describe('groupByCountry Tests', () => {
-  const result = groupByCountry(singleFixtureResponse);
-
+  const result = groupByCountry(singleFixtureResponse.response);
   test('groupByCountry result should return the correct number of countries', () => {
     expect(Object.keys(result).length).toBe(expectedCountries.length);
     expectedCountries.forEach((country) =>
