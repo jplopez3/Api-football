@@ -10,7 +10,8 @@
   "scripts": {
     "start": "heroku local",
     "format": "prettier --ignore-unknown --write .",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "jest",
+    "init": "jest --init"
   },
   "keywords": [],
   "author": "",
