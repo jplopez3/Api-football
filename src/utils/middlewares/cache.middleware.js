@@ -6,11 +6,7 @@ export default function ({ pathToCache, cacheStdTTL }) {
   const cache = CacheFactory.create({ pathToCache, cacheStdTTL });
   return async function (req, res, next) {
     Logger.info('0 - Request Start: %s', req.originalUrl);
-    const { cacheKey, queryParams, apiFootballURL } = processRequest(
-      req,
-      cache,
-    );
-    Logger.info('Request: %O', cacheKey);
+    const { cacheKey, queryParams, apiFootballURL } = processRequest(req, cache,);
 
     try {
       let data = await cache.get(cacheKey);
@@ -21,6 +17,8 @@ export default function ({ pathToCache, cacheStdTTL }) {
       }
 
       res.locals.cachedData = data;
+      res.locals.cacheKey = cacheKey;
+
       next();
     } catch (error) {
       Logger.error('Catch runService %O', error);
@@ -35,10 +33,6 @@ const processRequest = (req, cache) => {
     cache.flushCache();
     //Todo: cache flush response
     //return this.responseSuccess({ data: { result: 'CLEAR CACHE SUCCESS' } });
-  }
-  if (req.query['groupBy']) {
-    Logger.warn('groupBy');
-    delete req.query['groupBy'];
   }
 
   const queryParams = {};

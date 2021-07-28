@@ -32,13 +32,13 @@ export default class App {
     //this.app.set('view engine', 'html');
     // this.app.use(express.static(path.join(__dirname, 'public')))
 
-    this.app.enable('verbose errors');
+    // this.app.enable('verbose errors');
 
     // disable them in production
     // use $ NODE_ENV=production node examples/error-pages
-    if (this.app.settings.env === 'production') {
-      this.app.disable('verbose errors');
-    }
+    // if (this.app.settings.env === 'production') {
+    //   this.app.disable('verbose errors');
+    // }
 
     // The magic package that prevents frontend developers going nuts
     // Alternate description:

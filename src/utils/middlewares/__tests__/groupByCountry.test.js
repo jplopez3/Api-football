@@ -9,7 +9,8 @@ jest.mock('../../group_by_country/groupByCountry.js', () => gbcmock);
 describe('When', () => {
   test('No cachedData should move to next middleware', () => {
     const next = jest.fn();
-    groupByCountryMiddleware({}, {}, next);
+    const groupByCountryMD = groupByCountryMiddleware();
+    groupByCountryMD({}, {}, next);
 
     expect(next).toHaveBeenCalledTimes(1);
     expect(gbcmock).toHaveBeenCalledTimes(0);

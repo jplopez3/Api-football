@@ -10,10 +10,8 @@ const fixturesCacheMiddleware = cacheMiddleware({
   pathToCache: basePath,
   cacheStdTTL: 10000,
 });
-
 router.use(fixturesCacheMiddleware);
-
-router.get('/', groupByCountryMiddleware, fixturesController);
+router.get('/', groupByCountryMiddleware(['live','date']), fixturesController);
 router.get('/statistics', fixturesController);
 router.get('/headtohead', fixturesController);
 
