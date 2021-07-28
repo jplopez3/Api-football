@@ -7,7 +7,7 @@ export default function (queryStringsToGroup = null) {
       return next();
     }
   
-    res.locals.cachedData.response = groupByCountry(
+    res.locals.cachedData = groupByCountry(
       res.locals.cachedData.response,
     );
   
