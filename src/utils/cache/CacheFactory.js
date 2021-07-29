@@ -9,13 +9,15 @@ class CacheFactory {
 
   create({ pathToCache, cacheStdTTL }) {
     if (!pathToCache) throw 'Invalid path to cache name: ' + pathToCache;
+
     const cacheConfig = defaultCacheConfig();
-    if (cacheStdTTL) cacheConfig.cacheStdTTL = cacheStdTTL;
+
+    if (cacheStdTTL) cacheConfig.stdTTL = cacheStdTTL;
 
     Logger.info(
       'CacheFactory: created cache - %s - %s',
       pathToCache,
-      cacheConfig.cacheStdTTL,
+      cacheConfig.stdTTL,
     );
     Logger.debug('Cache config: %O', cacheConfig);
 

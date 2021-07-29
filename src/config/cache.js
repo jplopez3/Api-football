@@ -1,6 +1,6 @@
 const defaultCacheConfig = () => ({
-  stdTTL: 15,
-  checkperiod: 20,
+  stdTTL: 60,
+  checkperiod: 60,
   deleteOnExpire: true,
   maxKeys: 100,
 });

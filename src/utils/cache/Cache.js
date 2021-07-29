@@ -3,7 +3,7 @@ import { defaultCacheConfig } from '../../config/index.js';
 import Logger from '../../loaders/winston.js';
 export default class Cache {
   constructor(pathToCache, cacheStdTTL) {
-    if (cacheStdTTL) defaultCacheConfig.stdTTL = cacheStdTTL;
+    this.cacheConfig = cacheStdTTL ? cacheStdTTL : defaultCacheConfig;
     this.cache = new NodeCache(cacheStdTTL);
     this.pathToCache = pathToCache;
     this.registerEvents();
@@ -22,9 +22,9 @@ export default class Cache {
     Logger.info(
       '5 - Save data in cache: key: %s, TTL: %s',
       cacheKey,
-      this.cacheStdTTL,
+      this.cacheConfig.stdTTL,
     );
-    this.cache.set(cacheKey, data, this.cacheStdTTL);
+    this.cache.set(cacheKey, data, this.cacheConfig.stdTTL);
   }
 
   flushCache() {
