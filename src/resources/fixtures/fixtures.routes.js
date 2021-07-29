@@ -18,8 +18,11 @@ const headToHeadCacheMiddleware = cacheMiddleware({
   pathToCache: `${basePath}/headtohead`,
 });
 
-
-router.get('/', [fixturesCacheMiddleware, groupByCountryMiddleware(['live','date'])], fixturesController);
+router.get(
+  '/',
+  [fixturesCacheMiddleware, groupByCountryMiddleware(['live', 'date'])],
+  fixturesController,
+);
 router.get('/statistics', statisticsCacheMiddleware, cachedDataController);
 router.get('/headtohead', headToHeadCacheMiddleware, cachedDataController);
 

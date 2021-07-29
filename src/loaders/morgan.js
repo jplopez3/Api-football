@@ -30,7 +30,7 @@ const skip = () => {
   return false; //env !== 'development';
 };
 //logs on request instead of response
-const immediate = true; 
+const immediate = false;
 // Build the morgan middleware
 const morganMiddleware = morgan(
   // Define message format string (this is the default one).

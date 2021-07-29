@@ -6,14 +6,16 @@ export default function ({ pathToCache, cacheStdTTL }) {
   const cache = CacheFactory.create({ pathToCache, cacheStdTTL });
   return async function (req, res, next) {
     Logger.info('0 - Request Start: %s', req.originalUrl);
-    const { cacheKey, queryParams, apiFootballURL } = processRequest(req, cache,);
+    const { cacheKey, queryParams, apiFootballURL } = processRequest(
+      req,
+      cache
+    );
 
     try {
       let data = await cache.get(cacheKey);
 
       if (!data) {
         data = await Fetcher(apiFootballURL, queryParams);
-        //
         cache.set({ cacheKey, data });
       }
 
@@ -36,11 +38,9 @@ const processRequest = (req, cache) => {
     //return this.responseSuccess({ data: { result: 'CLEAR CACHE SUCCESS' } });
   }
 
-  const queryParams = {};
-  const cacheKey = `${req.method}${cache.pathToCache}${req.url}`; // here cache key will be: req.method + req.url + req.user
+  const queryParams = req.query ? req.query : {};
+  const cacheKey = `${cache.pathToCache}${req.url}`; // here cache key will be: req.method + req.url + req.user
   const apiFootballURL = `${cache.pathToCache}`;
-
-  queryParams['params'] = req.query ? req.query : {};
 
   return {
     queryParams,
