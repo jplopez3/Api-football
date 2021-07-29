@@ -29,7 +29,8 @@ const skip = () => {
   const env = process.env.NODE_ENV || 'development';
   return false; //env !== 'development';
 };
-
+//logs on request instead of response
+const immediate = true; 
 // Build the morgan middleware
 const morganMiddleware = morgan(
   // Define message format string (this is the default one).
@@ -39,7 +40,7 @@ const morganMiddleware = morgan(
   getLogType(),
   // Options: in this case, I overwrote the stream and the skip logic.
   // See the methods above.
-  { stream, skip },
+  { stream, skip, immediate },
 );
 
 export default morganMiddleware;

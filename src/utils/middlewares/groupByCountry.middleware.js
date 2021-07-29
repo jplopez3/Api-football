@@ -3,7 +3,7 @@ import groupByCountry from '../group_by_country/groupByCountry.js';
 export default function (queryStringsToGroup = null) {
 
   return (req, res, next) => {
-    if(hasAlreadyCachedData(res) || !isQueryStringToGroup(req, queryStringsToGroup)){
+    if(!hasAlreadyCachedData(res) || !isQueryStringToGroup(req, queryStringsToGroup)){
       return next();
     }
   
@@ -16,7 +16,7 @@ export default function (queryStringsToGroup = null) {
 }
  
 export const hasAlreadyCachedData = (res) => {
- return !res.locals?.cachedData || !res.locals?.cachedData?.response;
+ return res.locals?.cachedData || res.locals?.cachedData?.response;
 }
 
 export const isQueryStringToGroup = (req, queryStringsToGroup) => {

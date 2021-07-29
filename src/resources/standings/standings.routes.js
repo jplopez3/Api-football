@@ -7,7 +7,6 @@ const router = Router();
 const basePath = '/standings';
 const standingsCacheMiddleware = cacheMiddleware({
   pathToCache: basePath,
-  cacheStdTTL: 10000,
 });
 
 router.use(standingsCacheMiddleware);

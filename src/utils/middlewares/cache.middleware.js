@@ -13,6 +13,7 @@ export default function ({ pathToCache, cacheStdTTL }) {
 
       if (!data) {
         data = await Fetcher(apiFootballURL, queryParams);
+        //
         cache.set({ cacheKey, data });
       }
 
@@ -37,7 +38,7 @@ const processRequest = (req, cache) => {
 
   const queryParams = {};
   const cacheKey = `${req.method}${cache.pathToCache}${req.url}`; // here cache key will be: req.method + req.url + req.user
-  const apiFootballURL = `${cache.pathToCache}${req.url}`;
+  const apiFootballURL = `${cache.pathToCache}`;
 
   queryParams['params'] = req.query ? req.query : {};
 
