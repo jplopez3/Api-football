@@ -8,7 +8,7 @@ export default function ({ pathToCache, cacheStdTTL }) {
     Logger.info('0 - Request Start: %s', req.originalUrl);
     const { cacheKey, queryParams, apiFootballURL } = processRequest(
       req,
-      cache
+      cache,
     );
 
     try {

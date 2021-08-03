@@ -10,6 +10,7 @@ import {
   standings,
   teams,
   betshelper,
+  injuries,
 } from '../resources/index.js';
 import Logger from './winston.js';
 import { apiPath } from '../config/outscore.js';
@@ -65,6 +66,7 @@ export default class App {
     this.ApiV3Router.use('/admin', outscore);
     this.ApiV3Router.use('/teams', teams);
     this.ApiV3Router.use('/betshelper', betshelper);
+    this.ApiV3Router.use('/injuries', injuries);
     this.initErrorHandling(this.ApiV3Router);
     this.app.use(apiPath, this.ApiV3Router);
   }

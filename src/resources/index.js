@@ -4,5 +4,6 @@ import outscore from './outscore/outscore.routes.js';
 import standings from './standings/standings.routes.js';
 import teams from './teams/teams.routes.js';
 import betshelper from './betshelper/betshelper.routes.js';
+import injuries from './injuries/injuries.routes.js';
 
-export { fixtures, players, outscore, standings, teams, betshelper };
+export { fixtures, players, outscore, standings, teams, betshelper, injuries };
