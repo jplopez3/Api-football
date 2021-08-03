@@ -1,9 +1,7 @@
 import cacheFactory from '../../utils/cache/CacheFactory.js';
 import Logger from '../../loaders/winston.js';
-import {BetsHelper, Response, getData} from './betshelper.model.js';
+import { BetsHelper, Response, getData } from './betshelper.model.js';
 
-const fixturesCache = cacheFactory.get('/fixtures');
-const headToHeadCache = cacheFactory.get('/fixtures/headtohead');
 export default async (req, res) => {
   const result = isValidRequest(req);
   if (result.length > 0) {
@@ -11,29 +9,29 @@ export default async (req, res) => {
     res.json({ error: ` Missing required fields: [${result.toString()}]` });
     return;
   }
-  const betsHelper = new BetsHelper(req.query.home, req.query.away);
 
   try {
-    const homeData = await getData(
-      fixturesCache,
-      betsHelper.fixturesQueryString(req.query.home),
-      betsHelper.fixturesHome,
-    );
-    const awayData = await getData(
-      fixturesCache,
-      betsHelper.fixturesQueryString(req.query.away),
-      betsHelper.fixturesAway,
-    );
-    const h2hData = await getData(
-      headToHeadCache,
-      betsHelper.h2hQueryString,
-      betsHelper.h2h,
-    );
+    const { home, away } = req.query;
+    const last = 3;
+    const betsHelper = new BetsHelper(last);
 
-    const response = new Response({ homeData, awayData, h2hData });
+    let homeFixtures = await betsHelper.getFixturesByTeam(home);
+    let awayFixtures = await betsHelper.getFixturesByTeam(away);
+    let h2hFixtures = await betsHelper.getH2H({ home, away });
+
+    const homeFixturesIds = betsHelper.getFixturesID(homeFixtures);
+    const awayFixturesIds = betsHelper.getFixturesID(awayFixtures);
+    const h2hFixturesIds = betsHelper.getFixturesID(h2hFixtures);
+
+    homeFixtures = await betsHelper.getFixturesByIdList(homeFixturesIds);
+    awayFixtures = await betsHelper.getFixturesByIdList(awayFixturesIds);
+    h2hFixtures = await betsHelper.getFixturesByIdList(h2hFixturesIds);
+    
+    Logger.warn('homeFixtures %O', homeFixtures)
+    const response = new Response({ homeFixtures });
 
     res.status(200);
-    res.json(response.final);
+    res.json(response.get());
   } catch (error) {
     Logger.error('Betshelper.controller.js  %O', error);
   }
