@@ -28,7 +28,7 @@ export default async (req, res) => {
     h2hFixtures = await betsHelper.getFixturesByIdList(h2hFixturesIds);
     
     Logger.warn('homeFixtures %O', homeFixtures)
-    const response = new Response({ homeFixtures });
+    const response = new Response({ homeFixtures, awayFixtures, h2hFixtures });
 
     res.status(200);
     res.json(response.get());
