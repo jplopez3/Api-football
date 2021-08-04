@@ -33,7 +33,10 @@ export default class App {
     //this.app.set('view engine', 'html');
     // this.app.use(express.static(path.join(__dirname, 'public')))
 
-    // this.app.enable('verbose errors');
+     // Use Morgan middle ware
+     this.app.use(morgan);
+     
+     this.app.enable('verbose errors');
 
     // disable them in production
     // use $ NODE_ENV=production node examples/error-pages
@@ -49,9 +52,6 @@ export default class App {
     // It shows the real origin IP in the heroku or Cloudwatch logs
     this.app.enable('trust proxy');
     this.app.disable('x-powered-by');
-
-    // Use Morgan middle ware
-    this.app.use(morgan);
     // Middleware that transforms the raw string of req.body into json
     //server.use(bodyParser.json());
     this.app.use(compression());
@@ -72,9 +72,10 @@ export default class App {
   }
 
   initErrorHandling(route) {
+    //Todo: move logic to middlewares
     // Error handlers
     route.use(function (req, res, next) {
-      Logger.warn('Resource not found %O', req.path);
+      Logger.warn('Resource not found %s', req.path);
       res.status(404);
       res.json({ error: 'Resource not found' });
     });
@@ -83,10 +84,11 @@ export default class App {
       // we may use properties of the error object
       // here and next(err) appropriately, or if
       // we possibly recovered from the error, simply next().
-      Logger.error('initErrorHandling', err);
+      //Todo: show only football api errors
+      Logger.error('ErrorHandling Middleware  %o', err);
       res.status(err.status || 500);
-      res.json({ error: 'Something failed!' });
-      // res.render('500', { error: 'Something failed!' });
+      // res.json({ error: 'Something failed!' });
+      res.json({ error: err });
     });
     Logger.info('initializing error handling');
   }

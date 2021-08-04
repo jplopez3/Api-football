@@ -12,6 +12,6 @@ export default async function Fetcher(url, queryParams) {
     return response.data;
   } catch (error) {
     Logger.error('3 - Fetch from Api Catch %O', error);
-    throw new Error(error);
+    throw error;
   }
 }
