@@ -25,8 +25,8 @@ export default async (req, res, next) => {
 
     const response = createResponse({
       homeFixtures,
-      awayFixturesIds,
-      h2hFixturesIds,
+      awayFixtures,
+      h2hFixtures,
     });
     res.status(200);
     res.json(response);
