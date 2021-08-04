@@ -33,10 +33,10 @@ export default class App {
     //this.app.set('view engine', 'html');
     // this.app.use(express.static(path.join(__dirname, 'public')))
 
-     // Use Morgan middle ware
-     this.app.use(morgan);
-     
-     this.app.enable('verbose errors');
+    // Use Morgan middle ware
+    this.app.use(morgan);
+
+    this.app.enable('verbose errors');
 
     // disable them in production
     // use $ NODE_ENV=production node examples/error-pages

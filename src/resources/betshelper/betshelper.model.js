@@ -5,12 +5,8 @@ import Logger from '../../loaders/winston.js';
 const fixturesCache = cacheFactory.get('/fixtures');
 const headToHeadCache = cacheFactory.get('/fixtures/headtohead');
 
-// get fixtures by team and h2h
-// get response fixtures ID
-// get fixtures by id
-// create response
 class BetsHelper {
-  constructor(last = 1) {
+  constructor(last = 3) {
     this.last = last;
   }
   async getFixturesByTeam(TeamId) {
@@ -21,7 +17,7 @@ class BetsHelper {
 
     const fixturesData = await getData(
       fixturesCache,
-      `?team=${TeamId}&last=${this.last}`,
+      `?team=${TeamId}&last=${this.last}&status=FT`,
       fixturesParams,
     );
 
@@ -34,7 +30,6 @@ class BetsHelper {
 
     return getData(fixturesCache, `?id=${fixtureId}`, fixturesParams);
   }
-
   async getH2H({ home, away }) {
     const queryString = `?h2h=${home}-${away}&last=${this.last}`;
     const h2hParams = {
@@ -44,7 +39,6 @@ class BetsHelper {
     const h2hData = await getData(headToHeadCache, queryString, h2hParams);
     return h2hData;
   }
-
   getFixturesID(fixturesResponse) {
     const fixturesIDList = [];
     fixturesResponse.response.forEach((match) =>
@@ -52,7 +46,6 @@ class BetsHelper {
     );
     return fixturesIDList;
   }
-
   async getFixturesByIdList(fixturesIdList) {
     const promises = fixturesIdList.map(
       async (id) =>
@@ -69,6 +62,7 @@ class BetsHelper {
   }
 }
 
+//Todo: this code is duplicated in cache middleware
 const getData = async (cache, queryString, queryParams) => {
   const cacheKey = `${cache.pathToCache}${queryString}`;
   let data = await cache.get(cacheKey);

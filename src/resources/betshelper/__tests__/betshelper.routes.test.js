@@ -8,7 +8,6 @@ describe('betshelper tests', () => {
       .get('/api/v3/betshelper?home=30&away=41')
       .set('Accept', 'application/json');
 
-    console.log(response.statusCode);
     expect(response.statusCode).toBe(200);
   });
 });
