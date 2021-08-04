@@ -5,23 +5,6 @@ import Logger from '../../loaders/winston.js';
 const fixturesCache = cacheFactory.get('/fixtures');
 const headToHeadCache = cacheFactory.get('/fixtures/headtohead');
 
-class Response {
-  constructor({ homeFixtures, awayFixtures, h2hFixtures}) {
-    const home = homeFixtures;
-    const away = awayFixtures;
-    const h2h = h2hFixtures;
-
-    this.response = {
-      home,
-      away,
-      h2h,
-    };
-  }
-
-  get() {
-    return this.response;
-  }
-}
 // get fixtures by team and h2h
 // get response fixtures ID
 // get fixtures by id
@@ -49,7 +32,7 @@ class BetsHelper {
       id: fixtureId,
     };
 
-    return await getData(fixturesCache, `?id=${fixtureId}`, fixturesParams);
+    return getData(fixturesCache, `?id=${fixtureId}`, fixturesParams);
   }
 
   async getH2H({ home, away }) {
@@ -80,8 +63,7 @@ class BetsHelper {
     );
 
     return await Promise.all(promises).then((result) => {
-      const resultResponses = result.map(({response}) => response[0]);
-      Logger.warn('Promise result %O', result)
+      const resultResponses = result.map(({ response }) => response[0]);
       return resultResponses;
     });
   }
@@ -98,4 +80,4 @@ const getData = async (cache, queryString, queryParams) => {
   return data;
 };
 
-export { BetsHelper, Response, getData };
+export { BetsHelper, getData };
