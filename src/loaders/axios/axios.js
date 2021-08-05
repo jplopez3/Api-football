@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiFootballAxios } from '../../config/index.js';
+import { rapidApiFootballAxios, apiFootballAxios } from '../../config/index.js';
 import {
   onInterceptResponseSuccess,
   onInterceptResponseErrors,
@@ -8,7 +8,7 @@ import {
 } from './index.js';
 
 const apiFootballInstance = axios.create({
-  ...apiFootballAxios,
+  ...rapidApiFootballAxios,
   method: 'GET',
 });
 

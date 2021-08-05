@@ -7,4 +7,13 @@ const apiFootballAxios = {
     useQueryString: true,
   },
 };
-export { apiFootballAxios };
+
+const rapidApiFootballAxios = {
+  baseURL: 'https://api-football-v1.p.rapidapi.com/v3/',
+  headers: {
+    'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
+    'x-rapidapi-key':  process.env.API_FOOTBALL_KEY,
+    useQueryString: true,
+  },
+};
+export { apiFootballAxios, rapidApiFootballAxios };
