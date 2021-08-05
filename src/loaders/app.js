@@ -90,7 +90,7 @@ export default class App {
         err,
       );
       res.status(500);
-      if (err?.type === 'Football API') {
+      if (err?.type === 'rapidApi') {
         res.json({ error: err });
       } else {
         res.json({ error: 'Something failed!' });

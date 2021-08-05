@@ -36,5 +36,6 @@ export function onInterceptResponseErrors(error) {
     // anything else
     Logger.error('Unknown error: %O', error.request);
   }
-  return Promise.reject(error);
+  const {status, statusText, type = 'rapidApi'} = error.response;
+  return Promise.reject({status, statusText, type});
 }
