@@ -13,15 +13,14 @@ class BetsHelper {
     const fixturesParams = {
       last: this.last,
       team: TeamId,
+      status: 'FT',
     };
 
-    const fixturesData = await getData(
+    return getData(
       fixturesCache,
       `?team=${TeamId}&last=${this.last}&status=FT`,
       fixturesParams,
     );
-
-    return fixturesData;
   }
   async getFixturesById(fixtureId) {
     const fixturesParams = {
@@ -36,29 +35,35 @@ class BetsHelper {
       h2h: `${home}-${away}`,
       last: this.last,
     };
-    const h2hData = await getData(headToHeadCache, queryString, h2hParams);
-    return h2hData;
+
+    return getData(headToHeadCache, queryString, h2hParams);
   }
-  getFixturesID(fixturesResponse) {
-    const fixturesIDList = [];
-    fixturesResponse.response.forEach((match) =>
-      fixturesIDList.push(match.fixture.id),
-    );
-    return fixturesIDList;
-  }
-  async getFixturesByIdList(fixturesIdList) {
-    const promises = fixturesIdList.map(
-      async (id) =>
-        new Promise(async (resolve, reject) => {
-          let result = await this.getFixturesById(id);
-          resolve(result);
-        }),
+  getFixturesID = (fixturesResponse) =>
+    fixturesResponse.response.reduce((fixturesIDList, match) => {
+      fixturesIDList.push(match.fixture.id);
+      return fixturesIDList;
+    }, []);
+  getFixturesByIdList(fixturesIdList) {
+    const promises = fixturesIdList.map((id) =>
+      new Promise((resolve, reject) => {
+        this.getFixturesById(id)
+          .then((result) => resolve(result))
+          .catch((err) => {
+            reject(err);
+          });
+      }).catch((err) => {
+        throw err;
+      }),
     );
 
-    return await Promise.all(promises).then((result) => {
-      const resultResponses = result.map(({ response }) => response[0]);
-      return resultResponses;
-    });
+    return Promise.all(promises)
+      .then((result) => {
+        const resultResponses = result.map(({ response }) => response[0]);
+        return resultResponses;
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 }
 

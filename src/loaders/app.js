@@ -40,9 +40,9 @@ export default class App {
 
     // disable them in production
     // use $ NODE_ENV=production node examples/error-pages
-    // if (this.app.settings.env === 'production') {
-    //   this.app.disable('verbose errors');
-    // }
+    if (this.app.settings.env === 'production') {
+      this.app.disable('verbose errors');
+    }
 
     // The magic package that prevents frontend developers going nuts
     // Alternate description:
@@ -84,11 +84,17 @@ export default class App {
       // we may use properties of the error object
       // here and next(err) appropriately, or if
       // we possibly recovered from the error, simply next().
-      //Todo: show only football api errors
-      Logger.error('ErrorHandling Middleware  %o', err);
-      res.status(err.status || 500);
-      // res.json({ error: 'Something failed!' });
-      res.json({ error: err });
+      Logger.error(
+        'ErrorHandling Middleware Status: %s - Error: %o',
+        err.status,
+        err,
+      );
+      res.status(500);
+      if (err?.type === 'Football API') {
+        res.json({ error: err });
+      } else {
+        res.json({ error: 'Something failed!' });
+      }
     });
     Logger.info('initializing error handling');
   }

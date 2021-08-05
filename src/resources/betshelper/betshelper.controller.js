@@ -10,7 +10,7 @@ export default async (req, res, next) => {
     let { homeFixtures, awayFixtures, h2hFixtures } = await asyncCall([
       betsHelper.getFixturesByTeam(home),
       betsHelper.getFixturesByTeam(away),
-      betsHelper.getH2H({ home, away })
+      betsHelper.getH2H({ home, away }),
     ]);
 
     const homeFixturesIds = betsHelper.getFixturesID(homeFixtures);
@@ -20,7 +20,7 @@ export default async (req, res, next) => {
     ({ homeFixtures, awayFixtures, h2hFixtures } = await asyncCall([
       betsHelper.getFixturesByIdList(homeFixturesIds),
       betsHelper.getFixturesByIdList(awayFixturesIds),
-      betsHelper.getFixturesByIdList(h2hFixturesIds)
+      betsHelper.getFixturesByIdList(h2hFixturesIds),
     ]));
 
     const response = createResponse({
@@ -28,6 +28,7 @@ export default async (req, res, next) => {
       awayFixtures,
       h2hFixtures,
     });
+
     res.status(200);
     res.json(response);
   } catch (error) {
@@ -42,7 +43,7 @@ const asyncCall = (asyncCallIterable) => {
       return {
         homeFixtures: data[0],
         awayFixtures: data[1],
-        h2hFixtures: data[0]
+        h2hFixtures: data[0],
       };
     })
     .catch((err) => {
@@ -52,7 +53,6 @@ const asyncCall = (asyncCallIterable) => {
 };
 
 const createResponse = ({ homeFixtures, awayFixtures, h2hFixtures }) => {
-  console.log('Resposnse', { homeFixtures, awayFixtures, h2hFixtures });
   return {
     home: homeFixtures,
     away: awayFixtures,
