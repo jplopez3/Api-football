@@ -23,6 +23,5 @@ export const isQueryStringToGroup = (req, queryStringsToGroup) => {
   const result = Object.keys(req.query).some((key) =>
     queryStringsToGroup.includes(key),
   );
-  console.log(result, queryStringsToGroup, Object.keys(req.query));
   return result;
 };

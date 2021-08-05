@@ -43,7 +43,7 @@ const asyncCall = (asyncCallIterable) => {
       return {
         homeFixtures: data[0],
         awayFixtures: data[1],
-        h2hFixtures: data[0],
+        h2hFixtures: data[2],
       };
     })
     .catch((err) => {
