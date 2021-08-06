@@ -10,6 +10,8 @@
   "scripts": {
     "start": "heroku local",
     "format": "prettier --ignore-unknown --write .",
+    "eslint": "eslint src",
+    "eslint:fix": "eslint src --fix",
     "test": "jest",
     "init": "jest --init"
   },
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "eslint": "7.11.0",
+    "eslint-plugin-jest": "24.4.0",
     "jest": "27.0.4",
     "prettier": "2.2.1",
     "supertest": "6.1.3"
