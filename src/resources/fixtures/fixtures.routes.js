@@ -8,20 +8,20 @@ import cachedDataController from '../../utils/shared/controllers/cachedData.cont
 const router = Router();
 const basePath = '/fixtures';
 const fixturesCacheMiddleware = cacheMiddleware({
-  pathToCache: `${basePath}`,
-  cacheStdTTL: 10000,
+	pathToCache: `${basePath}`,
+	cacheStdTTL: 10000,
 });
 const statisticsCacheMiddleware = cacheMiddleware({
-  pathToCache: `${basePath}/statistics`,
+	pathToCache: `${basePath}/statistics`,
 });
 const headToHeadCacheMiddleware = cacheMiddleware({
-  pathToCache: `${basePath}/headtohead`,
+	pathToCache: `${basePath}/headtohead`,
 });
 
 router.get(
-  '/',
-  [fixturesCacheMiddleware, groupByCountryMiddleware(['live', 'date'])],
-  fixturesController,
+	'/',
+	[fixturesCacheMiddleware, groupByCountryMiddleware(['live', 'date'])],
+	fixturesController
 );
 router.get('/statistics', statisticsCacheMiddleware, cachedDataController);
 router.get('/headtohead', headToHeadCacheMiddleware, cachedDataController);

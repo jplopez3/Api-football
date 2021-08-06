@@ -2,39 +2,40 @@ import NodeCache from 'node-cache';
 import { defaultCacheConfig } from '../../config/index.js';
 import Logger from '../../loaders/winston.js';
 export default class Cache {
-  constructor(pathToCache, cacheStdTTL) {
-    this.cacheConfig = cacheStdTTL ? cacheStdTTL : defaultCacheConfig;
-    this.cache = new NodeCache(cacheStdTTL);
-    this.pathToCache = pathToCache;
-    this.registerEvents();
-  }
+	constructor(pathToCache, cacheStdTTL) {
+		this.cacheConfig = cacheStdTTL ? cacheStdTTL : defaultCacheConfig;
+		this.cache = new NodeCache(cacheStdTTL);
+		this.pathToCache = pathToCache;
+		this.registerEvents();
+	}
 
-  async get(cacheKey) {
-    let data = this.cache.get(cacheKey);
-    Logger.info(
-      `2 - Get ${cacheKey} from cache. In Cache? ${!(data == undefined)}`,
-    );
+	async get(cacheKey) {
+		let data = this.cache.get(cacheKey);
+		Logger.info(
+			`2 - Get ${cacheKey} from cache. In Cache? ${!(data == undefined)}`
+		);
 
-    return data;
-  }
+		return data;
+	}
 
-  set({ cacheKey, data }) {
-    Logger.info(
-      '5 - Save data in cache: key: %s, TTL: %s',
-      cacheKey,
-      this.cacheConfig.stdTTL,
-    );
-    this.cache.set(cacheKey, data, this.cacheConfig.stdTTL);
-  }
+	set({ cacheKey, data, ttl }) {
+		Logger.info(
+			'5 - Save data in cache: key: %s, TTL: %s',
+			cacheKey,
+			this.cacheConfig.stdTTL
+		);
+		ttl =  ttl ? ttl : this.cacheConfig.stdTTL;
+		this.cache.set(cacheKey, data, ttl);
+	}
 
-  flushCache() {
-    this.cache.flushAll();
-    Logger.warn('5 - CLEAR CACHE SUCCESS');
-  }
+	flushCache() {
+		this.cache.flushAll();
+		Logger.warn('5 - CLEAR CACHE SUCCESS');
+	}
 
-  registerEvents() {
-    this.cache.on('expired', (key, value) => {
-      Logger.debug('5 - %s - %s expired', key, value);
-    });
-  }
+	registerEvents() {
+		this.cache.on('expired', (key, value) => {
+			Logger.debug('5 - %s - %s expired', key, value);
+		});
+	}
 }

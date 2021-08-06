@@ -6,8 +6,8 @@ import cachedDataController from '../../utils/shared/controllers/cachedData.cont
 const router = Router();
 const basePath = '/injuries';
 const topScorersCacheMiddleware = cacheMiddleware({
-  pathToCache: `${basePath}`,
-  cacheStdTTL: 10000,
+	pathToCache: `${basePath}`,
+	cacheStdTTL: 10000,
 });
 
 router.use(topScorersCacheMiddleware);

@@ -15,34 +15,34 @@ import cacheFactory from '../../../utils/cache/CacheFactory.js';
 // Future request:
 // add DB so we can store games where users already visited.
 const res = {
-  status: jest.fn(),
-  json: jest.fn(),
-  locals: {
-    cachedData: [],
-  },
+	status: jest.fn(),
+	json: jest.fn(),
+	locals: {
+		cachedData: [],
+	},
 };
 const req = {
-  query: {
-    home: 30,
-    away: 41,
-  },
+	query: {
+		home: 30,
+		away: 41,
+	},
 };
 describe('betsHelperController tests', () => {
-  test('should return a 200 code in /api/v3/betshelper', async () => {
-    const response = betsHelperController(req, res);
+	test('should return a 200 code in /api/v3/betshelper', async () => {
+		const response = betsHelperController(req, res);
 
-    expect(res.status).toHaveBeenCalledTimes(1);
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledTimes(1);
-  });
-  test('If missing query params should return error code 400 with json', async () => {
-    const req = {
-      query: {},
-    };
-    const response = betsHelperController(req, res);
+		expect(res.status).toHaveBeenCalledTimes(1);
+		expect(res.status).toHaveBeenCalledWith(200);
+		expect(res.json).toHaveBeenCalledTimes(1);
+	});
+	test('If missing query params should return error code 400 with json', async () => {
+		const req = {
+			query: {},
+		};
+		const response = betsHelperController(req, res);
 
-    expect(res.status).toHaveBeenCalledTimes(1);
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledTimes(1);
-  });
+		expect(res.status).toHaveBeenCalledTimes(1);
+		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.json).toHaveBeenCalledTimes(1);
+	});
 });

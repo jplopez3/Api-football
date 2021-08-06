@@ -7,25 +7,25 @@ jest.mock('../../group_by_country/groupByCountry.js', () => gbcmock);
 
 //groupByCountry.mockImplementation(() => console.log('yolo'));
 describe('When', () => {
-  test('No cachedData should move to next middleware', () => {
-    const next = jest.fn();
-    const groupByCountryMD = groupByCountryMiddleware();
-    groupByCountryMD({}, {}, next);
+	test('No cachedData should move to next middleware', () => {
+		const next = jest.fn();
+		const groupByCountryMD = groupByCountryMiddleware();
+		groupByCountryMD({}, {}, next);
 
-    expect(next).toHaveBeenCalledTimes(1);
-    expect(gbcmock).toHaveBeenCalledTimes(0);
-  });
-  test('With cachedData should move call groupByCountry and go to next middleware', () => {
-    const res = {
-      locals: {
-        cachedData: {},
-      },
-    };
-    const req = {};
-    const next = jest.fn();
+		expect(next).toHaveBeenCalledTimes(1);
+		expect(gbcmock).toHaveBeenCalledTimes(0);
+	});
+	test('With cachedData should move call groupByCountry and go to next middleware', () => {
+		const res = {
+			locals: {
+				cachedData: {},
+			},
+		};
+		const req = {};
+		const next = jest.fn();
 
-    groupByCountryMiddleware(req, res, next);
-    expect(next).toHaveBeenCalledTimes(1);
-    //expect(gbcmock).toHaveBeenCalledTimes(1);
-  });
+		groupByCountryMiddleware(req, res, next);
+		expect(next).toHaveBeenCalledTimes(1);
+		//expect(gbcmock).toHaveBeenCalledTimes(1);
+	});
 });

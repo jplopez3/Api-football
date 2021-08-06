@@ -3,37 +3,37 @@ import Logger from '../../loaders/winston.js';
 import { defaultCacheConfig } from '../../config/index.js';
 
 class CacheFactory {
-  constructor() {
-    this.caches = {};
-  }
+	constructor() {
+		this.caches = {};
+	}
 
-  create({ pathToCache, cacheStdTTL }) {
-    if (!pathToCache) throw 'Invalid path to cache name: ' + pathToCache;
+	create({ pathToCache, cacheStdTTL }) {
+		if (!pathToCache) throw 'Invalid path to cache name: ' + pathToCache;
 
-    const cacheConfig = defaultCacheConfig();
+		const cacheConfig = defaultCacheConfig();
 
-    if (cacheStdTTL) cacheConfig.stdTTL = cacheStdTTL;
+		if (cacheStdTTL) cacheConfig.stdTTL = cacheStdTTL;
 
-    Logger.info(
-      'CacheFactory: created cache - %s - %s',
-      pathToCache,
-      cacheConfig.stdTTL,
-    );
-    Logger.debug('Cache config: %O', cacheConfig);
+		Logger.info(
+			'CacheFactory: created cache - %s - %s',
+			pathToCache,
+			cacheConfig.stdTTL
+		);
+		Logger.debug('Cache config: %O', cacheConfig);
 
-    return (this.caches[pathToCache] = new Cache(pathToCache, cacheConfig));
-  }
+		return (this.caches[pathToCache] = new Cache(pathToCache, cacheConfig));
+	}
 
-  get(pathToCache) {
-    if (!pathToCache || this.caches[pathToCache] === undefined)
-      throw 'Invalid cache name';
+	get(pathToCache) {
+		if (!pathToCache || this.caches[pathToCache] === undefined)
+			throw 'Invalid cache name';
 
-    return this.caches[pathToCache];
-  }
+		return this.caches[pathToCache];
+	}
 
-  getAll() {
-    return Object.keys(this.caches);
-  }
+	getAll() {
+		return Object.keys(this.caches);
+	}
 }
 
 export default new CacheFactory();

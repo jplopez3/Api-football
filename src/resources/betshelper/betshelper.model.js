@@ -19,7 +19,7 @@ class BetsHelper {
     return getData(
       fixturesCache,
       `?team=${TeamId}&last=${this.last}&status=FT`,
-      fixturesParams,
+      fixturesParams
     );
   }
   async getFixturesById(fixtureId) {
@@ -53,7 +53,7 @@ class BetsHelper {
           });
       }).catch((err) => {
         throw err;
-      }),
+      })
     );
 
     return Promise.all(promises)

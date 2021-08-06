@@ -1,19 +1,19 @@
 import {
-  onInterceptRequestSuccess,
-  onInterceptRequestErrors,
+	onInterceptRequestSuccess,
+	onInterceptRequestErrors,
 } from './request.interceptor.js';
 import {
-  onInterceptResponseSuccess,
-  onInterceptResponseErrors,
+	onInterceptResponseSuccess,
+	onInterceptResponseErrors,
 } from './response.interceptor.js';
 import { apiFootballInstance } from './axios.js';
 import Fetcher from './fetcher.js';
 
 export {
-  onInterceptRequestSuccess,
-  onInterceptRequestErrors,
-  onInterceptResponseSuccess,
-  onInterceptResponseErrors,
-  apiFootballInstance,
-  Fetcher,
+	onInterceptRequestSuccess,
+	onInterceptRequestErrors,
+	onInterceptResponseSuccess,
+	onInterceptResponseErrors,
+	apiFootballInstance,
+	Fetcher,
 };
