@@ -9,7 +9,7 @@ const router = Router();
 const basePath = '/fixtures';
 const fixturesCacheMiddleware = cacheMiddleware({
 	pathToCache: `${basePath}`,
-	cacheStdTTL: 10000,
+	cacheStdTTL: 15,
 });
 const statisticsCacheMiddleware = cacheMiddleware({
 	pathToCache: `${basePath}/statistics`,

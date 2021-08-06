@@ -16,13 +16,7 @@ export default function ({ pathToCache, cacheStdTTL }) {
 
 			if (!data) {
 				data = await Fetcher(apiFootballURL, queryParams);
-
-				//Todo: implement in controller
-				const isliveOrDate = Object.keys(req.query).some((key) =>
-					['live', 'date'].includes(key)
-				);
-				const ttl = isliveOrDate ? 15 : '';
-				cache.set({ cacheKey, data , ttl });
+				cache.set({ cacheKey, data  });
 			}
 
 			res.locals.cachedData = data;

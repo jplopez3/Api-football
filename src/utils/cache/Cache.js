@@ -24,7 +24,7 @@ export default class Cache {
 			cacheKey,
 			this.cacheConfig.stdTTL
 		);
-		ttl =  ttl ? ttl : this.cacheConfig.stdTTL;
+		
 		this.cache.set(cacheKey, data, ttl);
 	}
 
