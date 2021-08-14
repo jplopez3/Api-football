@@ -16,7 +16,7 @@ export default function (queryStringsToGroup = null) {
 }
 
 export const hasAlreadyCachedData = (res) => {
-	return res.locals?.cachedData || res.locals?.cachedData?.response;
+	return res.locals?.cachedData && res.locals?.cachedData?.response;
 };
 
 export const isQueryStringToGroup = (req, queryStringsToGroup) => {
