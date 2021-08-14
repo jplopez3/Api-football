@@ -7,7 +7,7 @@ const logTypes = {
 	dev: 'dev', // :method :url :status :response-time ms - :res[content-length]
 	tiny: 'tiny', //:method :url :status :res[content-length] - :response-time ms
 	other:
-    ':remote-addr :method :url :status :res[content-length] - :response-time ms :total-time[digits]',
+		':remote-addr :method :url :status :res[content-length] - :response-time ms :total-time[digits]',
 };
 
 const getLogType = () => {

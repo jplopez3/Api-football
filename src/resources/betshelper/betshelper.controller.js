@@ -1,10 +1,10 @@
-import { BetsHelper } from './betshelper.model.js';
+import BetsHelper from './betshelper.model.js';
 import Logger from '../../loaders/winston.js';
 
 export default async (req, res, next) => {
 	try {
 		const { home, away } = req.query;
-		const last = 5;
+		const last = 1;
 		const betsHelper = new BetsHelper(last);
 
 		let { homeFixtures, awayFixtures, h2hFixtures } = await asyncCall([
@@ -39,23 +39,32 @@ export default async (req, res, next) => {
 
 const asyncCall = (asyncCallIterable) => {
 	return Promise.all(asyncCallIterable)
-		.then((data) => {
-			return {
-				homeFixtures: data[0],
-				awayFixtures: data[1],
-				h2hFixtures: data[2],
-			};
+		.then((result) => {
+			const [
+				{ data: homeFixtures },
+				{ data: awayFixtures },
+				{ data: h2hFixtures },
+			] = result;
+
+			return { homeFixtures, awayFixtures, h2hFixtures };
 		})
 		.catch((err) => {
-			Logger.error('betshelper.controller.js -> asyncCall() catch: %O', err);
+			Logger.error(
+				'betshelper.controller.js -> asyncCall() catch: %O',
+				err
+			);
 			throw err;
 		});
 };
 
-const createResponse = ({ homeFixtures, awayFixtures, h2hFixtures }) => {
+const createResponse = ({
+	homeFixtures: { response: home },
+	awayFixtures: { response: away },
+	h2hFixtures: { response: h2h },
+}) => {
 	return {
-		home: homeFixtures,
-		away: awayFixtures,
-		h2h: h2hFixtures,
+		home,
+		away,
+		h2h,
 	};
 };

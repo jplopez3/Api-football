@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import path from 'path';
+//import path from 'path';
 import compression from 'compression';
 import cors from 'cors';
 import morgan from './morgan.js';
@@ -69,6 +69,7 @@ export default class App {
 		this.ApiV3Router.use('/injuries', injuries);
 		this.initErrorHandling(this.ApiV3Router);
 		this.app.use(apiPath, this.ApiV3Router);
+		this.initErrorHandling(this.app);
 	}
 
 	initErrorHandling(route) {

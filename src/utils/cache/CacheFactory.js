@@ -26,7 +26,7 @@ class CacheFactory {
 
 	get(pathToCache) {
 		if (!pathToCache || this.caches[pathToCache] === undefined)
-			throw 'Invalid cache name';
+			throw 'Invalid cache name ' + pathToCache;
 
 		return this.caches[pathToCache];
 	}

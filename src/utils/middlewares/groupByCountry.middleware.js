@@ -4,7 +4,7 @@ export default function (queryStringsToGroup = null) {
 	return (req, res, next) => {
 		if (
 			!hasAlreadyCachedData(res) ||
-      !isQueryStringToGroup(req, queryStringsToGroup)
+			!isQueryStringToGroup(req, queryStringsToGroup)
 		) {
 			return next();
 		}

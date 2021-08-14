@@ -18,7 +18,6 @@ export default function (requiredQS = null) {
 
 const isValidRequest = (req, requiredQS) => {
 	const missingParams = requiredQS.filter((field) => {
-		console.log(typeof req.query[field]);
 		return !req.query[field];
 	});
 

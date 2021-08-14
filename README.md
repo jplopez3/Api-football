@@ -2,16 +2,16 @@
 
 ## Prerequisites
 
-- We need node 14.14.0 version, at least, for this project to work.
-- Activate ES modules with "type": "module"
-  - [node.js](https://nodejs.org/en/)
-  - [node.js Documentation](https://nodejs.org/api/packages.html#packages_package_json_and_file_extensions)
+-   We need node 14.14.0 version, at least, for this project to work.
+-   Activate ES modules with "type": "module"
+    -   [node.js](https://nodejs.org/en/)
+    -   [node.js Documentation](https://nodejs.org/api/packages.html#packages_package_json_and_file_extensions)
 
 ## Build
 
 1 - Install heroku CLI
 
-- [Heroku Cli Guide](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+-   [Heroku Cli Guide](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 
 2 - Create .evn file with the API key
 API*FOOTBALL_KEY=\_Insert key here*

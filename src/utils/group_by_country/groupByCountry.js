@@ -11,7 +11,11 @@ export default (response) => {
 			totalLiveGames: 0,
 		};
 
-		const countryLeague = objWrapper(newResponse, league.country, leagueObj);
+		const countryLeague = objWrapper(
+			newResponse,
+			league.country,
+			leagueObj
+		);
 		const leagueList = objWrapper(countryLeague.league, league.name);
 		leagueList.push(match);
 		updateCountryLeagueInfo({ countryLeague, league, fixture });
@@ -30,7 +34,7 @@ const objWrapper = (obj, propertyName, codeToInject) => {
 
 const updateCountryLeagueInfo = ({ countryLeague, league, fixture }) => {
 	countryLeague.totalGames++;
-	const liveStatus = ['1H', '2H', 'HT'];
+	const liveStatus = ['1H', '2H', 'HT', 'ET'];
 	if (liveStatus.includes(fixture.status.short)) {
 		countryLeague.totalLiveGames++;
 	}
@@ -40,6 +44,7 @@ const updateCountryLeagueInfo = ({ countryLeague, league, fixture }) => {
 	}
 };
 
+//Todo: can clean code
 const sort = (objToSort) => {
 	return Object.keys(objToSort)
 		.sort()

@@ -1,50 +1,46 @@
 import CacheFactory from '../cache/CacheFactory.js';
-import { Fetcher } from '../../loaders/axios/index.js';
+import {
+	getUpdatedDataFromCache,
+	saveDataInCache,
+} from '../../repositories/footballApi.cache.js';
 import Logger from '../../loaders/winston.js';
 
 export default function ({ pathToCache, cacheStdTTL }) {
 	const cache = CacheFactory.create({ pathToCache, cacheStdTTL });
-	return async function (req, res, next) {
-		Logger.info('0 - Request Start: %s', req.originalUrl);
-		const { cacheKey, queryParams, apiFootballURL } = processRequest(
-			req,
-			cache
-		);
 
+	const getFromCache = async (req, res, next) => {
 		try {
-			let data = await cache.get(cacheKey);
-
-			if (!data) {
-				data = await Fetcher(apiFootballURL, queryParams);
-				cache.set({ cacheKey, data  });
-			}
-
+			const queryParams = req.query ? req.query : {};
+			const { data, cacheKey } = await getUpdatedDataFromCache(
+				cache,
+				queryParams
+			);
 			res.locals.cachedData = data;
 			res.locals.cacheKey = cacheKey;
-
 			next();
 		} catch (error) {
 			Logger.error('Catch runService %O', error);
 			next(error);
 		}
 	};
+	const saveInCache = (req, res, next) => {
+		if (hasDataToCache(res)) {
+			const queryParams = req.query ? req.query : {};
+			saveDataInCache(
+				cache,
+				queryParams,
+				res.locals.cachedData,
+				cacheStdTTL
+			);
+			next();
+		} else {
+			next('No data to cache');
+		}
+	};
+
+	return { getFromCache, saveInCache };
 }
 
-const processRequest = (req, cache) => {
-	Logger.info('1 - Process Request:', req.query);
-	if (req.query['clearCache']) {
-		cache.flushCache();
-		//Todo: cache flush response
-		//return this.responseSuccess({ data: { result: 'CLEAR CACHE SUCCESS' } });
-	}
-
-	const queryParams = req.query ? req.query : {};
-	const cacheKey = `${cache.pathToCache}${req.url}`; // here cache key will be: req.method + req.url + req.user
-	const apiFootballURL = `${cache.pathToCache}`;
-
-	return {
-		queryParams,
-		cacheKey,
-		apiFootballURL,
-	};
+export const hasDataToCache = (res) => {
+	return res.locals?.cachedData || res.locals?.cachedData?.response;
 };

@@ -5,12 +5,12 @@ import cachedDataController from '../../utils/shared/controllers/cachedData.cont
 // /injuries
 const router = Router();
 const basePath = '/injuries';
-const topScorersCacheMiddleware = cacheMiddleware({
+const { getFromCache, saveInCache } = cacheMiddleware({
 	pathToCache: `${basePath}`,
 	cacheStdTTL: 10000,
 });
 
-router.use(topScorersCacheMiddleware);
+router.use([getFromCache, saveInCache]);
 router.get('/', cachedDataController);
 
 export default router;

@@ -28,7 +28,8 @@ export const expectedResponse = {
 						id: 293,
 						name: 'K-League Challenge',
 						country: 'South-Korea',
-						logo: 'https://media.api-sports.io/football/leagues/293.png',
+						logo:
+							'https://media.api-sports.io/football/leagues/293.png',
 						flag: 'https://media.api-sports.io/flags/kr.svg',
 						season: 2021,
 						round: 'Regular Season - 20',
@@ -37,13 +38,15 @@ export const expectedResponse = {
 						home: {
 							id: 2758,
 							name: 'Ansan Greeners',
-							logo: 'https://media.api-sports.io/football/teams/2758.png',
+							logo:
+								'https://media.api-sports.io/football/teams/2758.png',
 							winner: true,
 						},
 						away: {
 							id: 2751,
 							name: 'Gyeongnam FC',
-							logo: 'https://media.api-sports.io/football/teams/2751.png',
+							logo:
+								'https://media.api-sports.io/football/teams/2751.png',
 							winner: false,
 						},
 					},
@@ -96,7 +99,8 @@ export const expectedResponse = {
 						id: 293,
 						name: 'K-League Challenge',
 						country: 'South-Korea',
-						logo: 'https://media.api-sports.io/football/leagues/293.png',
+						logo:
+							'https://media.api-sports.io/football/leagues/293.png',
 						flag: 'https://media.api-sports.io/flags/kr.svg',
 						season: 2021,
 						round: 'Regular Season - 20',
@@ -105,13 +109,15 @@ export const expectedResponse = {
 						home: {
 							id: 2753,
 							name: 'Asan Mugunghwa',
-							logo: 'https://media.api-sports.io/football/teams/2753.png',
+							logo:
+								'https://media.api-sports.io/football/teams/2753.png',
 							winner: null,
 						},
 						away: {
 							id: 2745,
 							name: 'Bucheon FC 1995',
-							logo: 'https://media.api-sports.io/football/teams/2745.png',
+							logo:
+								'https://media.api-sports.io/football/teams/2745.png',
 							winner: null,
 						},
 					},
@@ -166,7 +172,8 @@ export const expectedResponse = {
 						id: 660,
 						name: 'WK-League',
 						country: 'South-Korea',
-						logo: 'https://media.api-sports.io/football/leagues/660.png',
+						logo:
+							'https://media.api-sports.io/football/leagues/660.png',
 						flag: 'https://media.api-sports.io/flags/kr.svg',
 						season: 2021,
 						round: 'Regular Season - 13',
@@ -175,13 +182,15 @@ export const expectedResponse = {
 						home: {
 							id: 14377,
 							name: 'Incheon Red Angels',
-							logo: 'https://media.api-sports.io/football/teams/14377.png',
+							logo:
+								'https://media.api-sports.io/football/teams/14377.png',
 							winner: true,
 						},
 						away: {
 							id: 14376,
 							name: 'Hwacheon KSPO',
-							logo: 'https://media.api-sports.io/football/teams/14376.png',
+							logo:
+								'https://media.api-sports.io/football/teams/14376.png',
 							winner: false,
 						},
 					},
@@ -234,7 +243,8 @@ export const expectedResponse = {
 						id: 660,
 						name: 'WK-League',
 						country: 'South-Korea',
-						logo: 'https://media.api-sports.io/football/leagues/660.png',
+						logo:
+							'https://media.api-sports.io/football/leagues/660.png',
 						flag: 'https://media.api-sports.io/flags/kr.svg',
 						season: 2021,
 						round: 'Regular Season - 13',
@@ -243,13 +253,15 @@ export const expectedResponse = {
 						home: {
 							id: 14372,
 							name: 'Boeun Sangmu',
-							logo: 'https://media.api-sports.io/football/teams/14372.png',
+							logo:
+								'https://media.api-sports.io/football/teams/14372.png',
 							winner: false,
 						},
 						away: {
 							id: 14375,
 							name: 'Gyeongju',
-							logo: 'https://media.api-sports.io/football/teams/14375.png',
+							logo:
+								'https://media.api-sports.io/football/teams/14375.png',
 							winner: true,
 						},
 					},
@@ -302,7 +314,8 @@ export const expectedResponse = {
 						id: 660,
 						name: 'WK-League',
 						country: 'South-Korea',
-						logo: 'https://media.api-sports.io/football/leagues/660.png',
+						logo:
+							'https://media.api-sports.io/football/leagues/660.png',
 						flag: 'https://media.api-sports.io/flags/kr.svg',
 						season: 2021,
 						round: 'Regular Season - 13',
@@ -311,13 +324,15 @@ export const expectedResponse = {
 						home: {
 							id: 14378,
 							name: 'Seoul',
-							logo: 'https://media.api-sports.io/football/teams/14378.png',
+							logo:
+								'https://media.api-sports.io/football/teams/14378.png',
 							winner: true,
 						},
 						away: {
 							id: 14374,
 							name: 'Gumi Sportstoto',
-							logo: 'https://media.api-sports.io/football/teams/14374.png',
+							logo:
+								'https://media.api-sports.io/football/teams/14374.png',
 							winner: false,
 						},
 					},
@@ -370,7 +385,8 @@ export const expectedResponse = {
 						id: 660,
 						name: 'WK-League',
 						country: 'South-Korea',
-						logo: 'https://media.api-sports.io/football/leagues/660.png',
+						logo:
+							'https://media.api-sports.io/football/leagues/660.png',
 						flag: 'https://media.api-sports.io/flags/kr.svg',
 						season: 2021,
 						round: 'Regular Season - 13',
@@ -379,13 +395,15 @@ export const expectedResponse = {
 						home: {
 							id: 14379,
 							name: 'Suwon FMC',
-							logo: 'https://media.api-sports.io/football/teams/14379.png',
+							logo:
+								'https://media.api-sports.io/football/teams/14379.png',
 							winner: true,
 						},
 						away: {
 							id: 14373,
 							name: 'Changnyeong',
-							logo: 'https://media.api-sports.io/football/teams/14373.png',
+							logo:
+								'https://media.api-sports.io/football/teams/14373.png',
 							winner: false,
 						},
 					},
@@ -447,7 +465,8 @@ export const expectedResponse = {
 						id: 71,
 						name: 'Serie A',
 						country: 'Brazil',
-						logo: 'https://media.api-sports.io/football/leagues/71.png',
+						logo:
+							'https://media.api-sports.io/football/leagues/71.png',
 						flag: 'https://media.api-sports.io/flags/br.svg',
 						season: 2021,
 						round: 'Regular Season - 12',
@@ -456,13 +475,15 @@ export const expectedResponse = {
 						home: {
 							id: 126,
 							name: 'Sao Paulo',
-							logo: 'https://media.api-sports.io/football/teams/126.png',
+							logo:
+								'https://media.api-sports.io/football/teams/126.png',
 							winner: null,
 						},
 						away: {
 							id: 154,
 							name: 'Fortaleza EC',
-							logo: 'https://media.api-sports.io/football/teams/154.png',
+							logo:
+								'https://media.api-sports.io/football/teams/154.png',
 							winner: null,
 						},
 					},
@@ -517,7 +538,8 @@ export const expectedResponse = {
 						id: 72,
 						name: 'Serie B',
 						country: 'Brazil',
-						logo: 'https://media.api-sports.io/football/leagues/72.png',
+						logo:
+							'https://media.api-sports.io/football/leagues/72.png',
 						flag: 'https://media.api-sports.io/flags/br.svg',
 						season: 2021,
 						round: 'Regular Season - 12',
@@ -526,13 +548,15 @@ export const expectedResponse = {
 						home: {
 							id: 141,
 							name: 'Brasil DE Pelotas',
-							logo: 'https://media.api-sports.io/football/teams/141.png',
+							logo:
+								'https://media.api-sports.io/football/teams/141.png',
 							winner: null,
 						},
 						away: {
 							id: 136,
 							name: 'Vitoria',
-							logo: 'https://media.api-sports.io/football/teams/136.png',
+							logo:
+								'https://media.api-sports.io/football/teams/136.png',
 							winner: null,
 						},
 					},

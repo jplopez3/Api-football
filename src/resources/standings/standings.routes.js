@@ -5,11 +5,11 @@ import cachedDataController from '../../utils/shared/controllers/cachedData.cont
 // /standings
 const router = Router();
 const basePath = '/standings';
-const standingsCacheMiddleware = cacheMiddleware({
+const { getFromCache, saveInCache } = cacheMiddleware({
 	pathToCache: basePath,
 });
 
-router.use(standingsCacheMiddleware);
+router.use([getFromCache, saveInCache]);
 
 router.get('/', cachedDataController);
 

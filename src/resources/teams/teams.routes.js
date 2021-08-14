@@ -4,12 +4,12 @@ import cachedDataController from '../../utils/shared/controllers/cachedData.cont
 // /teams
 const basePath = '/teams';
 const router = Router();
-const teamsCacheMiddleware = cacheMiddleware({
+const { getFromCache, saveInCache } = cacheMiddleware({
 	pathToCache: `${basePath}/statistics`,
 	cacheStdTTL: 10000,
 });
 
-router.use(teamsCacheMiddleware);
+router.use([getFromCache, saveInCache]);
 
 router.get('/statistics', cachedDataController);
 

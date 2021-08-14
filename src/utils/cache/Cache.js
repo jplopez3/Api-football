@@ -1,6 +1,8 @@
 import NodeCache from 'node-cache';
+import querystring from 'querystring';
 import { defaultCacheConfig } from '../../config/index.js';
 import Logger from '../../loaders/winston.js';
+
 export default class Cache {
 	constructor(pathToCache, cacheStdTTL) {
 		this.cacheConfig = cacheStdTTL ? cacheStdTTL : defaultCacheConfig;
@@ -24,7 +26,7 @@ export default class Cache {
 			cacheKey,
 			this.cacheConfig.stdTTL
 		);
-		
+
 		this.cache.set(cacheKey, data, ttl);
 	}
 
@@ -33,6 +35,10 @@ export default class Cache {
 		Logger.warn('5 - CLEAR CACHE SUCCESS');
 	}
 
+	getCacheKey(params) {
+		const qs = querystring.stringify(params);
+		return `${this.pathToCache}/${qs}`;
+	}
 	registerEvents() {
 		this.cache.on('expired', (key, value) => {
 			Logger.debug('5 - %s - %s expired', key, value);
