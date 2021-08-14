@@ -4,7 +4,7 @@ import Logger from '../../loaders/winston.js';
 export default async (req, res, next) => {
 	try {
 		const { home, away } = req.query;
-		const last = 1;
+		const last = 5;
 		const betsHelper = new BetsHelper(last);
 
 		let { homeFixtures, awayFixtures, h2hFixtures } = await asyncCall([
