@@ -42,7 +42,12 @@ class BetsHelper {
 	getFixturesByIdList(fixturesIdList) {
 		const promises = fixturesIdList.map((id) => this.getFixturesById(id));
 
-		return Promise.all(promises).then(([res]) => res);
+		return Promise.all(promises).then((result) =>
+			result.map((res) => {
+				const [response] = res.data.response;
+				return response;
+			})
+		);
 	}
 }
 

@@ -13,7 +13,7 @@ import {
 	injuries,
 } from '../resources/index.js';
 import Logger from './winston.js';
-import { apiPath } from '../config/outscore.js';
+import { apiPath } from '../config/constants.js';
 
 // const __dirname = path.resolve( path.dirname( '' ) ) + '/src/';
 

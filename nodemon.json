@@ -1,22 +1,15 @@
 {
-  "restartable": "rs",
-  "verbose": true,
-  "runOnChangeOnly": false,
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules",
-    "logs",
-    "coverage"
-  ],
-  "execMap": {
-    "js": "node"
-  },
-  "watch": [
-    "src/**/*.js"
-  ],
-  "env": {
-    "LOG_LEVEL":"info",
-    "PORT": "5000",
-    "API_FOOTBALL_KEY":"Fs0xSpI2vDmshY0GzHLyCd3KwsgAp1zOaypjsnNDIGSjHDp9CL"
-  }
+	"restartable": "rs",
+	"verbose": true,
+	"runOnChangeOnly": false,
+	"ignore": [".git", "node_modules/**/node_modules", "logs", "coverage"],
+	"execMap": {
+		"js": "node"
+	},
+	"watch": ["src/**/*.js"],
+	"env": {
+		"LOG_LEVEL": "info",
+		"PORT": "5000",
+		"API_FOOTBALL_KEY": "Fs0xSpI2vDmshY0GzHLyCd3KwsgAp1zOaypjsnNDIGSjHDp9CL"
+	}
 }

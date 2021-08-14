@@ -11,7 +11,15 @@ export default async (req, res, next) => {
 			betsHelper.getFixturesByTeam(home),
 			betsHelper.getFixturesByTeam(away),
 			betsHelper.getH2H({ home, away }),
-		]);
+		]).then((result) => {
+			const [
+				{ data: homeFixtures },
+				{ data: awayFixtures },
+				{ data: h2hFixtures },
+			] = result;
+
+			return { homeFixtures, awayFixtures, h2hFixtures };
+		});
 
 		const homeFixturesIds = betsHelper.getFixturesID(homeFixtures);
 		const awayFixturesIds = betsHelper.getFixturesID(awayFixtures);
@@ -21,7 +29,9 @@ export default async (req, res, next) => {
 			betsHelper.getFixturesByIdList(homeFixturesIds),
 			betsHelper.getFixturesByIdList(awayFixturesIds),
 			betsHelper.getFixturesByIdList(h2hFixturesIds),
-		]));
+		]).then(([homeFixtures, awayFixtures, h2hFixtures]) => {
+			return { homeFixtures, awayFixtures, h2hFixtures };
+		}));
 
 		const response = createResponse({
 			homeFixtures,
@@ -40,13 +50,7 @@ export default async (req, res, next) => {
 const asyncCall = (asyncCallIterable) => {
 	return Promise.all(asyncCallIterable)
 		.then((result) => {
-			const [
-				{ data: homeFixtures },
-				{ data: awayFixtures },
-				{ data: h2hFixtures },
-			] = result;
-
-			return { homeFixtures, awayFixtures, h2hFixtures };
+			return result;
 		})
 		.catch((err) => {
 			Logger.error(
@@ -57,14 +61,10 @@ const asyncCall = (asyncCallIterable) => {
 		});
 };
 
-const createResponse = ({
-	homeFixtures: { response: home },
-	awayFixtures: { response: away },
-	h2hFixtures: { response: h2h },
-}) => {
+const createResponse = ({ homeFixtures, awayFixtures, h2hFixtures }) => {
 	return {
-		home,
-		away,
-		h2h,
+		home: homeFixtures,
+		away: awayFixtures,
+		h2h: h2hFixtures,
 	};
 };
