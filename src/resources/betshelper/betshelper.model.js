@@ -4,14 +4,14 @@ import { getUpdatedDataFromCache } from '../../repositories/footballApi.cache.js
 const fixturesCache = cacheFactory.get('/fixtures');
 const headToHeadCache = cacheFactory.get('/fixtures/headtohead');
 
-class BetsHelper {
+export default class BetsHelper {
 	constructor(last = 5) {
 		this.last = last;
 	}
-	getFixturesByTeam(TeamId) {
+	getFixturesByTeam(teamId) {
 		const fixturesParams = {
 			last: this.last,
-			team: TeamId,
+			team: teamId,
 			status: 'FT',
 		};
 
@@ -42,13 +42,11 @@ class BetsHelper {
 	getFixturesByIdList(fixturesIdList) {
 		const promises = fixturesIdList.map((id) => this.getFixturesById(id));
 
-		return Promise.all(promises).then((result) =>
-			result.map((res) => {
-				const [response] = res.data.response;
+		return Promise.all(promises).then((results) =>
+			results.map((result) => {
+				const [response] = result.data.response;
 				return response;
 			})
 		);
 	}
 }
-
-export default BetsHelper;
