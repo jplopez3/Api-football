@@ -1,10 +1,9 @@
-import { apiFootballInstance } from '../../loaders/axios/axios.js';
-import Logger from '../winston.js';
+import { apiFootballInstance } from '../loaders/axios/axios.js';
+import Logger from '../loaders/winston.js';
 
-export default async function Fetcher(url, queryParams) {
+export default async (url, queryParams) => {
 	try {
-		const params = {};
-		params['params'] = queryParams;
+		const params = { params: queryParams };
 		Logger.info(
 			'3 - Fetch from Api URL: %s - queryParams: %O',
 			url,
@@ -25,4 +24,4 @@ export default async function Fetcher(url, queryParams) {
 			error,
 		};
 	}
-}
+};

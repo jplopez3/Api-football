@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { rapidApiFootballAxios, apiFootballAxios } from '../../config/index.js';
+import { rapidApiFootballAxios } from '../../config/index.js';
 import {
 	onInterceptResponseSuccess,
 	onInterceptResponseErrors,

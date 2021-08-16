@@ -1,4 +1,4 @@
-import { Fetcher } from '../loaders/axios/index.js';
+import Fetcher from '../utils/fetcher.js';
 import Logger from '../loaders/winston.js';
 
 const getUpdatedDataFromCache = async (cache, queryString) => {
@@ -17,7 +17,8 @@ const getUpdatedDataFromCache = async (cache, queryString) => {
 			cacheKey,
 		};
 	} catch (error) {
-		Logger.error('Catch runService %O', error);
+		Logger.error('Catch getUpdatedDataFromCache %O', error);
+		throw error;
 	}
 };
 
