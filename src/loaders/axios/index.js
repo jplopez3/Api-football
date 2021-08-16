@@ -7,7 +7,6 @@ import {
 	onInterceptResponseErrors,
 } from './response.interceptor.js';
 import { apiFootballInstance } from './axios.js';
-import Fetcher from './fetcher.js';
 
 export {
 	onInterceptRequestSuccess,
@@ -15,5 +14,4 @@ export {
 	onInterceptResponseSuccess,
 	onInterceptResponseErrors,
 	apiFootballInstance,
-	Fetcher,
 };
