@@ -1,7 +1,7 @@
 import { Router } from 'express';
+import cacheFactory from './../../utils/cache/CacheFactory.js';
 const router = Router();
 
-router.get('/endPoints', (req, res) => {});
 
 //Todo: add template engine to show this info
 router.get('/info', function (req, res) {
@@ -34,5 +34,13 @@ router.get('/info', function (req, res) {
 	// });
 	res.send(text);
 });
+const ayy = {
+	data: 'dezz nutz'
+};
 
+router.get('/', function (req, res) {
+	const a = cacheFactory;
+
+	res.render('home', cacheFactory);
+});
 export default router;
