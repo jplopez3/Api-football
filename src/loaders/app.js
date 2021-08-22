@@ -1,5 +1,4 @@
 import express, { Router } from 'express';
-import exphbs from 'express-handlebars';
 import path from 'path';
 import compression from 'compression';
 import cors from 'cors';
