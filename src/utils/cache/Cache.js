@@ -20,11 +20,11 @@ export default class Cache {
 		return data;
 	}
 
-	set({ cacheKey, data, ttl }) {
+	set({ cacheKey, data, ttl = this.cacheConfig.stdTTL }) {
 		Logger.info(
 			'5 - Save data in cache: key: %s, TTL: %s',
 			cacheKey,
-			this.cacheConfig.stdTTL
+			ttl
 		);
 
 		this.cache.set(cacheKey, data, ttl);

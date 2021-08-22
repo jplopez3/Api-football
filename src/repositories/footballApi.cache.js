@@ -4,17 +4,21 @@ import Logger from '../loaders/winston.js';
 const getUpdatedDataFromCache = async (cache, queryString) => {
 	const cacheKey = cache.getCacheKey(queryString);
 	const apiFootballURL = cache.pathToCache;
+	let expired = false;
 
 	try {
 		let data = await cache.get(cacheKey);
 
 		if (!data) {
+			expired = true;
 			data = await Fetcher(apiFootballURL, queryString);
+			
 		}
 
 		return {
 			data,
 			cacheKey,
+			expired,
 		};
 	} catch (error) {
 		Logger.error('Catch getUpdatedDataFromCache %O', error);

@@ -1,3 +1,5 @@
+import { isLiveGame } from '../utilFunctions.js';
+
 export default (response) => {
 	const newResponse = {};
 	const matches = new Map();
@@ -6,6 +8,7 @@ export default (response) => {
 		const { league, fixture } = match;
 		const leagueObj = {
 			league: [],
+			country: null,
 			image: '',
 			totalGames: 0,
 			totalLiveGames: 0,
@@ -34,13 +37,14 @@ const objWrapper = (obj, propertyName, codeToInject) => {
 
 const updateCountryLeagueInfo = ({ countryLeague, league, fixture }) => {
 	countryLeague.totalGames++;
-	const liveStatus = ['1H', '2H', 'HT', 'ET'];
-	if (liveStatus.includes(fixture.status.short)) {
+	
+	if (isLiveGame(fixture)){
 		countryLeague.totalLiveGames++;
 	}
-
-	if (!countryLeague.image) {
+	
+	if (!countryLeague.image || !countryLeague.country) {
 		countryLeague.image = league.flag;
+		countryLeague.country = league.country;
 	}
 };
 

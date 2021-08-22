@@ -11,12 +11,13 @@ export default function ({ pathToCache, cacheStdTTL }) {
 	const getFromCache = async (req, res, next) => {
 		try {
 			const queryParams = req.query ? req.query : {};
-			const { data, cacheKey } = await getUpdatedDataFromCache(
+			const { data, cacheKey, expired } = await getUpdatedDataFromCache(
 				cache,
 				queryParams
 			);
 			res.locals.cachedData = data;
 			res.locals.cacheKey = cacheKey;
+			res.locals.expired = expired;
 			next();
 		} catch (error) {
 			Logger.error('Catch runService %O', error);
@@ -32,15 +33,14 @@ export default function ({ pathToCache, cacheStdTTL }) {
 				res.locals.cachedData,
 				cacheStdTTL
 			);
-			next();
-		} else {
-			next('No data to cache');
-		}
+			
+		} 
+		next();
 	};
 
 	return { getFromCache, saveInCache };
 }
 
 export const hasDataToCache = (res) => {
-	return res.locals?.cachedData || res.locals?.cachedData?.response;
+	return res.locals?.cachedData && res.locals?.cachedData?.response && res.locals.expired;
 };
