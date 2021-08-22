@@ -36,9 +36,8 @@ export default class App {
 	}
 	initMiddleware() {
 		// View engine config
+		this.app.set('view engine', 'ejs');
 		this.app.set('views', path.join(__dirname, 'views'));
-		this.app.engine('handlebars', exphbs());
-		this.app.set('view engine', 'handlebars');
 		this.app.use(express.static(path.join(__dirname, 'public/')));
 
 		// Use Morgan logger middle ware
