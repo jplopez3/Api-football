@@ -1,7 +1,7 @@
 import Fetcher from '../utils/fetcher.js';
 import Logger from '../loaders/winston.js';
 
-const getUpdatedDataFromCache = async (cache, queryString) => {
+const getUpdatedDataFromCache = async (cache, queryString, saveInCache = false) => {
 	const cacheKey = cache.getCacheKey(queryString);
 	const apiFootballURL = cache.pathToCache;
 	let expired = false;
@@ -12,7 +12,9 @@ const getUpdatedDataFromCache = async (cache, queryString) => {
 		if (!data) {
 			expired = true;
 			data = await Fetcher(apiFootballURL, queryString);
-			
+			if(saveInCache){
+				saveDataInCache(cache, queryString, data);
+			}
 		}
 
 		return {

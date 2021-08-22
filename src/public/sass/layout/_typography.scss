@@ -1,0 +1,13 @@
+ $numbers: (
+    "headline1":48px,
+    "headline2":34px,
+    "headline3":28px,
+    "paragraph1":18px,
+    "paragraph2":14px,
+ );
+
+@each $number, $i in $numbers {
+    .#{$number} {
+        font-size: $i
+    }
+}

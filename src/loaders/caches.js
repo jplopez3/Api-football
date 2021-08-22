@@ -2,7 +2,7 @@ import { cacheMiddleware } from '../utils/middlewares/index.js';
 
 const fixturesCacheMiddleware = cacheMiddleware({
 	pathToCache: '/fixtures',
-	cacheStdTTL: 15,
+	cacheStdTTL: 60,
 });
 
 const statisticsCacheMiddleware = cacheMiddleware({

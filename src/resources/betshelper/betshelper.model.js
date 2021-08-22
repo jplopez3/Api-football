@@ -15,14 +15,14 @@ export default class BetsHelper {
 			status: 'FT',
 		};
 
-		return getUpdatedDataFromCache(fixturesCache, fixturesParams);
+		return getUpdatedDataFromCache(fixturesCache, fixturesParams, true);
 	}
 	getFixturesById(fixtureId) {
 		const fixturesParams = {
 			id: fixtureId,
 		};
 
-		return getUpdatedDataFromCache(fixturesCache, fixturesParams);
+		return getUpdatedDataFromCache(fixturesCache, fixturesParams, true);
 	}
 	getH2H({ home, away }) {
 		const h2hParams = {
@@ -31,7 +31,7 @@ export default class BetsHelper {
 			status: 'FT',
 		};
 
-		return getUpdatedDataFromCache(headToHeadCache, h2hParams);
+		return getUpdatedDataFromCache(headToHeadCache, h2hParams, true);
 	}
 	getFixturesID(fixturesResponse) {
 		return fixturesResponse.response.reduce((fixturesIDList, match) => {

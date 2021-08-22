@@ -1,0 +1,74 @@
+  
+<%- include('./header') -%>
+<% Object.keys(cacheFactory.caches).forEach(function(path) { %>
+  <% const cache =  cacheFactory.caches[path].cache%> 
+  <% const stats =  cache.getStats();%> 
+  <% const keys =  cache.keys();%> 
+  <article class="collapsible">
+    <header class="collapsible-header">
+      
+      <p class="headline4"><span class="material-icons success">done </span> <span class="headline3">  <%- path %> </span></p>
+      
+      <i class="material-icons">
+        expand_more
+      </i>
+    </header>
+    <div class="collapsible-data">
+      <p><strong>Hits:</strong> <span> <%- stats.hits; %> </span></p>
+      <p><strong>Misses:</strong> <span><%- stats.misses; %> </span></p>
+      <p><strong>Keys:</strong> <span> <%- stats.keys; %> </span></p>
+      <p><strong>kSize:</strong> <span> <%- stats.ksize; %> </span></p>
+      <p><strong>vSize:</strong> <span> <%- stats.vsize; %> </span></p>
+    </div>
+    <ul class="content">
+      <% keys.forEach(key => {  %> 
+        <li>
+          <article>
+            <strong><%- key %> </strong>
+            <span>Time to Live: <%- secondsUntilDate(new Date(cache.getTtl( key ))) %></span>
+        </article>
+       </li>
+      <% }) %> 
+  
+
+    </ul>
+  </article>
+  <% }); %>
+
+<%- include('./footer') -%>
+
+<%
+function dateFormatter(date){ 
+
+
+const format24Hour = ({ dd, mm, yyyy, HH, MM, SS }) => {
+  console.log(`${mm}/${dd}/${yyyy} ${HH}:${MM}:${SS}`);
+};
+
+
+  return {
+    format24Hour,
+  }
+}; 
+
+function formatData(date) { return date > 9 ? date : `0${date}`; }
+
+function printTimeLeft({HH, MM, SS}) {
+    return `Hours: ${HH} Min:${MM} Secs:${SS}`
+}
+function secondsUntilDate (date) {
+    const now = new Date();
+    const result = new Date(date - now);
+    const format = {
+        dd: formatData(result.getDate()),
+        mm: formatData(result.getMonth() + 1),
+        yyyy: result.getFullYear(),
+        HH: formatData(result.getHours() -1),
+        MM: formatData(result.getMinutes()),
+        SS: formatData(result.getSeconds()),
+    };
+
+    console.error(result.getMinutes(), "ayyyy");
+    return printTimeLeft(format);
+};
+%> 

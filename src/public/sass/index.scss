@@ -1,0 +1,13 @@
+@use './base/reset';
+@use './base/base';
+@use './base/colors';
+@use './layout/spacing';
+@use './layout/typography';
+@use './components/collapsible';
+
+
+$base-color: #c6538c;
+
+.alert { 
+  border: 1px solid $base-color;
+}

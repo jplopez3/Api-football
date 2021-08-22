@@ -1,0 +1,35 @@
+@use '../base/colors' as *; 
+
+.collapsible{
+    max-width: 1024px;
+    margin: 15px auto;
+    padding: 15px;
+    cursor: pointer;
+    background: $primary-dark;
+    color: white;
+
+    &-data{
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        color: white;
+        background-color:  $primary-light;
+        grid-template-rows: 2em 2em;
+        align-items: center;
+    }
+
+    &-header{
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+    }
+}
+.content{
+    article{
+        padding: 20px;
+        background-color: $secondary-dark;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+    }
+}

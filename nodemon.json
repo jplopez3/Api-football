@@ -10,6 +10,6 @@
 	"env": {
 		"LOG_LEVEL": "info",
 		"PORT": "5000",
-		"API_FOOTBALL_KEY": "Fs0xSpI2vDmshY0GzHLyCd3KwsgAp1zOaypjsnNDIGSjHDp9CL"
+		"API_FOOTBALL_KEY": ""
 	}
 }

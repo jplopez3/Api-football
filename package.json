@@ -10,6 +10,7 @@
 	"scripts": {
 		"start": "heroku local",
 		"dev": "nodemon node -r dotenv/config src/index.js",
+		"sass": "sass --watch src/public/sass/index.scss src/public/css/app.css",
 		"format": "prettier --ignore-unknown --write .",
 		"eslint": "eslint src",
 		"eslint:fix": "eslint src --fix",
@@ -25,7 +26,6 @@
 		"cors": "2.8.5",
 		"ejs": "3.1.6",
 		"express": "4.17.1",
-		"express-handlebars": "5.3.3",
 		"morgan": "1.10.0",
 		"node-cache": "5.1.2",
 		"winston": "3.3.3"

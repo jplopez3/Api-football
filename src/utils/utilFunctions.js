@@ -18,7 +18,7 @@ const isTodayDate = (date, timeZone = 'UTC') => {
 const secondsUntilDate = (date) => {
 	const now = new Date();
 
-	return Math.round((date - now) / 10000);
+	return Math.round((date - now) / 1000);
 };
 
 export { isLiveGame, isTodayDate, secondsUntilDate };
