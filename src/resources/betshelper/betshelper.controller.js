@@ -29,7 +29,11 @@ export default async (req, res, next) => {
 			betsHelper.getFixturesByIdList(homeFixturesIds),
 			betsHelper.getFixturesByIdList(awayFixturesIds),
 			betsHelper.getFixturesByIdList(h2hFixturesIds),
-		]).then(([homeFixtures, awayFixtures, h2hFixtures]) => ({ homeFixtures, awayFixtures, h2hFixtures })));
+		]).then(([homeFixtures, awayFixtures, h2hFixtures]) => ({
+			homeFixtures,
+			awayFixtures,
+			h2hFixtures,
+		})));
 
 		const response = createResponse({
 			homeFixtures,
@@ -46,14 +50,10 @@ export default async (req, res, next) => {
 };
 
 const asyncCall = (asyncCallIterable) => {
-	return Promise.all(asyncCallIterable)
-		.catch((err) => {
-			Logger.error(
-				'betshelper.controller.js -> asyncCall() catch: %O',
-				err
-			);
-			throw err;
-		});
+	return Promise.all(asyncCallIterable).catch((err) => {
+		Logger.error('betshelper.controller.js -> asyncCall() catch: %O', err);
+		throw err;
+	});
 };
 
 const createResponse = ({ homeFixtures, awayFixtures, h2hFixtures }) => {

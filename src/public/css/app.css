@@ -1,89 +1,101 @@
 html {
-  box-sizing: border-box;
-  font-size: 16px;
+	box-sizing: border-box;
+	font-size: 16px;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
 }
 
-ol, ul {
-  list-style: none;
+ol,
+ul {
+	list-style: none;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 .success {
-  color: #00C851;
+	color: #00c851;
 }
 
 body {
-  font: 100% "Roboto", sans-serif;
-  color: #fafafa;
+	font: 100% 'Roboto', sans-serif;
+	color: #fafafa;
 }
 
 .headline1 {
-  font-size: 48px;
+	font-size: 48px;
 }
 
 .headline2 {
-  font-size: 34px;
+	font-size: 34px;
 }
 
 .headline3 {
-  font-size: 28px;
+	font-size: 28px;
 }
 
 .paragraph1 {
-  font-size: 18px;
+	font-size: 18px;
 }
 
 .paragraph2 {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 .collapsible {
-  max-width: 1024px;
-  margin: 15px auto;
-  padding: 15px;
-  cursor: pointer;
-  background: #002984;
-  color: white;
+	max-width: 1024px;
+	margin: 15px auto;
+	padding: 15px;
+	cursor: pointer;
+	background: #002984;
+	color: white;
 }
 .collapsible-data {
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  color: white;
-  background-color: #757de8;
-  grid-template-rows: 2em 2em;
-  align-items: center;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	color: white;
+	background-color: #757de8;
+	grid-template-rows: 2em 2em;
+	align-items: center;
 }
 .collapsible-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 0;
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 0;
 }
 
 .content article {
-  padding: 20px;
-  background-color: #c49000;
-  color: white;
-  display: flex;
-  justify-content: space-between;
+	padding: 20px;
+	background-color: #c49000;
+	color: white;
+	display: flex;
+	justify-content: space-between;
 }
 
 .alert {
-  border: 1px solid #c6538c;
+	border: 1px solid #c6538c;
 }
 
 /*# sourceMappingURL=app.css.map */

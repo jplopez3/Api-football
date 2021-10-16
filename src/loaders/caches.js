@@ -16,5 +16,5 @@ const headToHeadCacheMiddleware = cacheMiddleware({
 export {
 	fixturesCacheMiddleware,
 	statisticsCacheMiddleware,
-	headToHeadCacheMiddleware
+	headToHeadCacheMiddleware,
 };

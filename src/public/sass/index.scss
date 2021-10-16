@@ -5,9 +5,8 @@
 @use './layout/typography';
 @use './components/collapsible';
 
-
 $base-color: #c6538c;
 
-.alert { 
-  border: 1px solid $base-color;
+.alert {
+	border: 1px solid $base-color;
 }

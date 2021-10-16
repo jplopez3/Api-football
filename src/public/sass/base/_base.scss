@@ -1,7 +1,7 @@
-@use '../base/colors' as *; 
+@use '../base/colors' as *;
 $fonts: 'Roboto', sans-serif;
 
 body {
-  font: 100% $fonts;
-  color: $neutral;
+	font: 100% $fonts;
+	color: $neutral;
 }

@@ -1,4 +1,3 @@
-
 import Logger from '../../../loaders/winston.js';
 // eslint-disable-next-line no-unused-vars
 export default (req, res, next) => {
