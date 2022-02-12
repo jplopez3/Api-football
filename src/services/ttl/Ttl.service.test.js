@@ -1,22 +1,9 @@
 import ttlservice from './ttl.service.js';
+import TtlStrategy from './ttlStrategy.js';
+
 
 const strategyPath = 'my/path';
-const ttlStrategy = (date) => {
-	const myDate = new Date(date);
-
-	const getInSeconds = (() => {
-		return 1000;
-	});
-
-	const getDBExpireDate = (() => {
-		return myDate;
-	});
-
-	return {
-		getInSeconds,
-		getDBExpireDate
-	};
-};
+const ttlStrategy =  new TtlStrategy();
 describe('Time to live service Tests', () => {
 	let myStrategy;
 	beforeEach(() => {
@@ -26,14 +13,14 @@ describe('Time to live service Tests', () => {
 	test('It should set correctly the strategy', () => {
 		myStrategy = ttlservice.getStrategy(strategyPath);
 		expect(ttlservice.ttlStrategies.size).toBe(1);
-		expect(myStrategy).toEqual(expect.any(Function)); 
+		expect(myStrategy).toEqual(expect.any(TtlStrategy));
 	});
 
 	test('It should return a strategy', () => {
 		myStrategy = ttlservice.getStrategy(strategyPath);
-		expect(myStrategy()).toMatchObject({
+		expect(myStrategy).toMatchObject({
 			getInSeconds: expect.any(Function),
 			getDBExpireDate: expect.any(Function),
-		}); 
+		});
 	});
 });

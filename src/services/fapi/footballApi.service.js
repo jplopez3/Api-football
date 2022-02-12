@@ -1,24 +1,21 @@
 class FootballApiService {
-	constructor(FootballApiRepository, Cache) {
+	constructor(FootballApiRepository, Cache, ttlService) {
 		this.fetcher = FootballApiRepository;
 		this.cache = Cache;
+		this.ttlService = ttlService;
 	}
 
-	getFromCache(queryParams) {
-		return this.cache.get(queryParams);
-	}
 	async fetchFromApi(params) {
 		return await this.fetcher(this.cache.pathToCache, params);
 	}
 
-	async get(params) {
-		let data = this.getFromCache(params);
+	async get(params, baseUrl) {
+		let data = this.cache.get(params);
 
 		if (!data) {
 			data = await this.fetchFromApi(params);
 
-			//todo: get ttl from ttl service
-			const ttl = 123;
+			const ttl = this.ttlService.getStrategy(baseUrl).getInSeconds();
 			this.cache.set({ params, data, ttl });
 		}
 

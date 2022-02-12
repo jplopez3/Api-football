@@ -1,18 +1,22 @@
 import FootballApiService from './footballApi.service.js';
 import { jest } from '@jest/globals';
 import CacheRepository from '../../repositories/Cache.repository.js';
+import ttlService from '../ttl/Ttl.service.js';
+import TtlStrategy from '../ttl/ttlStrategy.js';
 
-const queryParams = { id: 123 };
 const cachePath = '/fixtures';
-const cache = new CacheRepository(cachePath);
+const queryParams = { id: 123 };
 const emptyCache = null;
 const cachedData = 'Data from cache';
 const mockApiResponse = 'Response from API';
+
+const cache = new CacheRepository(cachePath);
+const ttlStrategy = new TtlStrategy();
+ttlService.registerStrategy(cachePath, ttlStrategy);
 let cacheGetSpy = jest.spyOn(cache, 'get');
 let cacheSetSpy = jest.spyOn(cache, 'set');
 let fetcherSpy = jest.fn();
-
-const footballApiService = new FootballApiService(fetcherSpy, cache);
+const footballApiService = new FootballApiService(fetcherSpy, cache, ttlService);
 
 describe('FootballApiService tests', () => {
 	beforeEach(() => {
@@ -26,7 +30,7 @@ describe('FootballApiService tests', () => {
 			fetcherSpy.mockImplementation(() => mockApiResponse);
 			cacheGetSpy.mockImplementation(() => emptyCache);
 
-			return (result = await footballApiService.get(queryParams));
+			return (result = await footballApiService.get(queryParams, cachePath));
 		});
 		test('should get data from API', async () => {
 			expect(cacheGetSpy).toHaveBeenCalledWith(queryParams);
@@ -41,7 +45,7 @@ describe('FootballApiService tests', () => {
 			expect(cacheSetSpy).toHaveBeenCalledWith({
 				params: queryParams,
 				data: mockApiResponse,
-				ttl: 123,
+				ttl: ttlStrategy.getInSeconds(),
 			});
 			expect(cacheSetSpy).toHaveBeenCalledTimes(1);
 			expect(fetcherSpy).toHaveBeenCalledTimes(1);

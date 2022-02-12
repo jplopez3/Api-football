@@ -3,7 +3,7 @@ import Logger from '../../loaders/winston.js';
 class TtlService {
 	constructor() {
 		Logger.debug('ttl.service.js Initializing TtlService');
-		 this.ttlStrategies = new Map();
+		this.ttlStrategies = new Map();
 	}
 
 	registerStrategy(name, strategy) {
