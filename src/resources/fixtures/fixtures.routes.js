@@ -1,38 +1,32 @@
 import { Router } from 'express';
-import { groupByCountry } from '../../utils/middlewares/index.js';
-import {
-	fixturesCacheMiddleware,
-	statisticsCacheMiddleware,
-	headToHeadCacheMiddleware
-} from '../../loaders/caches.js';
+import ttlService from '../../services/ttl/Ttl.service.js';
+import routesConfig from '../../config/routes/fixtures.js';
 import fixturesController from './fixtures.controller.js';
 import cachedDataController from '../../utils/shared/controllers/cachedData.controller.js';
+import { cacheMiddleware } from '../../utils/middlewares/index.js';
 
 // /fixtures
-const router = Router();
+routesConfig.forEach((config) => {
+	ttlService.registerStrategy(config);
+});
 
+const [
+	fixturesCacheConfig,
+	statisticsCacheConfig,
+	headToHeadCacheConfig,
+] = routesConfig;
+
+const router = Router();
+router.get(fixturesCacheConfig.route, fixturesController);
 router.get(
-	'/',
-	[
-		fixturesCacheMiddleware.getFromCache,
-		groupByCountry(['live', 'date'])
-	],
-	fixturesController
-);
-router.get(
-	'/statistics',
-	[
-		statisticsCacheMiddleware.getFromCache,
-		statisticsCacheMiddleware.saveInCache,
-	],
+	statisticsCacheConfig.route,
+	[cacheMiddleware(statisticsCacheConfig)],
 	cachedDataController
 );
+
 router.get(
-	'/headtohead',
-	[
-		headToHeadCacheMiddleware.getFromCache,
-		statisticsCacheMiddleware.saveInCache,
-	],
+	headToHeadCacheConfig.route,
+	[cacheMiddleware(headToHeadCacheConfig)],
 	cachedDataController
 );
 

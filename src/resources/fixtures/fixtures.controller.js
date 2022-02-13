@@ -1,70 +1,43 @@
-import cacheFactory from '../../utils/cache/CacheFactory.js';
-import { saveDataInCache } from '../../repositories/footballApi.cache.js';
-import {
-	isLiveGame,
-	isTodayDate,
-	secondsUntilDate,
-} from '../../utils/utilFunctions.js';
+import Logger from '../../loaders/winston.js';
+import FixturesService from '../../services/fixtures/Fixtures.service.js';
 
-const fixturesCache = cacheFactory.get('/fixtures');
-
-export default (req, res) => {
-	const queryParams = req.query ? req.query : {};
-	const fixturesData = res.locals.cachedData;
-	const dataExpired = res.locals.expired;
-
-	if (dataExpired) {
-		let ttl = getCacheTtl(fixturesData, queryParams);
-		saveDataInCache(fixturesCache, queryParams, fixturesData, ttl);
+const baseUrl = '/fixtures';
+const fixturesService = new FixturesService(baseUrl);
+export default async (req, res, next) => {
+	try {
+		const queryParams = req.query ? req.query : {};
+		const data =
+			res.locals.cachedData || (await getFromFixtureService(queryParams));
+		res.status(200).json(data);
+	} catch (error) {
+		Logger.error('Fixtures.controller.js  %O', error);
+		next(error);
 	}
-
-	res.status(200).json(res.locals.cachedData);
 };
-const getCacheTtl = (fixturesData, queryParams) => {
-	const fixtureType = getRequestFixtureType(queryParams);
-	let ttl;
+
+const getFromFixtureService = async (params) => {
+	const fixtureType = getRequestFixtureType(params);
+
+	let data;
 
 	switch (fixtureType) {
 		case 'live':
-			ttl = 15;
+			data = await fixturesService.getFixturesByTeam(params);
 			break;
 		case 'id':
-			ttl = getFixtureByIdCacheTTL(fixturesData);
+			data = await fixturesService.getFixturesById(params);
 			break;
 		case 'date':
-			ttl = getFixtureByDateCacheTTL(queryParams, fixturesData);
+			data = await fixturesService.getFixturesByDate(params);
 			break;
 		default:
-			ttl = null;
+			data = await fixturesService.getFixture(params);
 			break;
 	}
-
-	return ttl;
+	return data;
 };
-
 const getRequestFixtureType = (query) => {
-	const reqTypes = ['live', 'id', 'date'];
+	const reqTypes = ['id', 'date', 'team'];
 	const queries = Object.keys(query);
 	return queries.find((query) => reqTypes.includes(query));
 };
-
-const getFixtureByIdCacheTTL = ({ response }) => {
-	const { fixture } = response[0];
-	return isLiveGame(fixture) ? 15 : secondsUntilDate(new Date(fixture.date));
-};
-
-const getFixtureByDateCacheTTL = ({ date }) => {
-	const nextDay = new Date();
-	nextDay.setDate(nextDay.getDate()+1);
-	nextDay.setHours(0);
-	nextDay.setMinutes(0);
-	return isTodayDate(date) ? 15 : secondsUntilDate(nextDay);
-};
-
-//h2h
-//Jogos no futuro que
-//cache 1 dia
-// jogos live
-// Cache invalida quando termina o jogo
-
-// /ttl =  ttl ? ttl : this.cacheConfig.stdTTL;
