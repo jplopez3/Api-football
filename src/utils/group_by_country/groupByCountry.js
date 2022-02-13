@@ -37,11 +37,11 @@ const objWrapper = (obj, propertyName, codeToInject) => {
 
 const updateCountryLeagueInfo = ({ countryLeague, league, fixture }) => {
 	countryLeague.totalGames++;
-	
-	if (isLiveGame(fixture)){
+
+	if (isLiveGame(fixture)) {
 		countryLeague.totalLiveGames++;
 	}
-	
+
 	if (!countryLeague.image || !countryLeague.country) {
 		countryLeague.image = league.flag;
 		countryLeague.country = league.country;

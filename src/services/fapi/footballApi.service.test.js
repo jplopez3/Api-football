@@ -16,7 +16,11 @@ ttlService.registerStrategy(cachePath, ttlStrategy);
 let cacheGetSpy = jest.spyOn(cache, 'get');
 let cacheSetSpy = jest.spyOn(cache, 'set');
 let fetcherSpy = jest.fn();
-const footballApiService = new FootballApiService(fetcherSpy, cache, ttlService);
+const footballApiService = new FootballApiService(
+	fetcherSpy,
+	cache,
+	ttlService
+);
 
 describe('FootballApiService tests', () => {
 	beforeEach(() => {
@@ -30,7 +34,10 @@ describe('FootballApiService tests', () => {
 			fetcherSpy.mockImplementation(() => mockApiResponse);
 			cacheGetSpy.mockImplementation(() => emptyCache);
 
-			return (result = await footballApiService.get(queryParams, cachePath));
+			return (result = await footballApiService.get(
+				queryParams,
+				cachePath
+			));
 		});
 		test('should get data from API', async () => {
 			expect(cacheGetSpy).toHaveBeenCalledWith(queryParams);
