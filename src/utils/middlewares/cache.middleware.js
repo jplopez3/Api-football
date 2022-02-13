@@ -1,46 +1,21 @@
-import CacheFactory from '../cache/CacheFactory.js';
-import {
-	getUpdatedDataFromCache,
-	saveDataInCache,
-} from '../../repositories/footballApi.cache.js';
+import FootballApiService from '../../services/fapi/footballApi.service.js';
 import Logger from '../../loaders/winston.js';
 
-export default function ({ pathToCache, cacheStdTTL }) {
-	const cache = CacheFactory.create({ pathToCache, cacheStdTTL });
+export default function ({ pathToCache }) {
+	//todo: move to loader
+	const fapi = new FootballApiService(pathToCache);
 
-	const getFromCache = async (req, res, next) => {
+	const cacheMiddleWare = async (req, res, next) => {
+		const query = req.query ? req.query : {};
 		try {
-			const queryParams = req.query ? req.query : {};
-			const { data, cacheKey, expired } = await getUpdatedDataFromCache(
-				cache,
-				queryParams
-			);
+			const data = await fapi.get(query, pathToCache);
 			res.locals.cachedData = data;
-			res.locals.cacheKey = cacheKey;
-			res.locals.expired = expired;
 			next();
 		} catch (error) {
-			Logger.error('Catch runService %O', error);
+			Logger.error('Catch getFromCache middleware %O', error);
 			next(error);
 		}
 	};
-	const saveInCache = (req, res, next) => {
-		if (hasDataToCache(res)) {
-			const queryParams = req.query ? req.query : {};
-			saveDataInCache(
-				cache,
-				queryParams,
-				res.locals.cachedData,
-				cacheStdTTL
-			);
-			
-		} 
-		next();
-	};
 
-	return { getFromCache, saveInCache };
+	return cacheMiddleWare;
 }
-
-export const hasDataToCache = (res) => {
-	return res.locals?.cachedData && res.locals?.cachedData?.response && res.locals.expired;
-};

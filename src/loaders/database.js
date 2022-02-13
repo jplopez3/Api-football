@@ -7,7 +7,7 @@ import {
 } from '../config/database.js';
 import logger from './winston.js';
 
-export default class Database {
+class Database {
 	constructor() {
 		this.dbName = DB_NAME;
 	}
@@ -58,3 +58,5 @@ export default class Database {
 		}
 	}
 }
+
+export default new Database();

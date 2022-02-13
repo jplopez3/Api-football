@@ -1,15 +1,12 @@
 class TtlStrategy {
-	ttlStrategy() {
-
-	}
+	constructor() {}
 	getInSeconds() {
-        return 15;
-	};
+		return 60;
+	}
 
 	getDBExpireDate() {
 		throw new Error('Not defined in ttlStrategy');
-	};
-
+	}
 }
 
 export default TtlStrategy;

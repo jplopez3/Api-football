@@ -1,1 +1,3 @@
-export default (req, res) => res.send(res.locals.cachedData);
+export default async (req, res) => {
+	res.status(200).json(res.locals.cachedData);
+};

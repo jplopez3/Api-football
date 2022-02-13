@@ -1,17 +1,15 @@
-import fixtureByIdTTL from '../../resources/fixtures/ttl/fixtureByIdTTL.js';
-import Head2headTTL from '../../resources/fixtures/ttl/head2headTTL.js';
-import LiveFixturesTTL from '../../resources/fixtures/ttl/liveFixtures.js';
+import  { FixturesByDateTTL, Head2headTTL } from '../../resources/fixtures/ttl/index.js';
+
 
 const basePath = '/fixtures';
 const fixturesCacheConfig = {
 	route: '/',
 	pathToCache: basePath,
-	ttlStrategy: new fixtureByIdTTL(),
 };
 const statisticsCacheConfig = {
 	route: '/statistics',
 	pathToCache: `${basePath}/statistics`,
-	ttlStrategy: new LiveFixturesTTL(),
+	ttlStrategy: new FixturesByDateTTL(),
 };
 const headToHeadCacheConfig = {
 	route: '/headtohead',

@@ -1,9 +1,8 @@
 import ttlservice from './ttl.service.js';
 import TtlStrategy from './ttlStrategy.js';
 
-
 const strategyPath = 'my/path';
-const ttlStrategy =  new TtlStrategy();
+const ttlStrategy = new TtlStrategy();
 describe('Time to live service Tests', () => {
 	let myStrategy;
 	beforeEach(() => {

@@ -8,7 +8,7 @@ import {
 import TtlStrategy from '../../../services/ttl/ttlStrategy.js';
 
 class FixturesByDateTTL extends TtlStrategy {
-	getInSeconds(date) {
+	getInSeconds({ params: { date } }) {
 		if (isTodayDate(date)) {
 			return getTodayFixturesTTL(date);
 		} else if (isDateInPast(date)) {
@@ -41,7 +41,7 @@ const getFutureFixturesTTL = () => {
 		return tomorrow;
 	};
 
-	return { inSeconds, getDate };
+	return inSeconds();
 };
 
 const getPastFixturesTTL = () => {
