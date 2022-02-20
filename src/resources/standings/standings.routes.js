@@ -10,14 +10,15 @@ const basePath = '/standings';
 const routeConfig = {
 	route: '/',
 	pathToCache: basePath,
-	ttlStrategy: new TtlStrategy(10000)
+	ttlStrategy: new TtlStrategy(10000),
 };
 
 ttlService.registerStrategy(routeConfig);
 
-
-router.get(routeConfig.route, [cacheMiddleware(routeConfig)], cachedDataController);
-
+router.get(
+	routeConfig.route,
+	[cacheMiddleware(routeConfig)],
+	cachedDataController
+);
 
 export default router;
-

@@ -9,7 +9,7 @@ const LAST = 5;
 export default (() => {
 	const get = async ({ home, away }) => {
 		Logger.info('BetsHelper.Service.js -> Home: %s - Away: %s', home, away);
-		
+
 		let { homeFixtures, awayFixtures, h2hFixtures } = await asyncCall([
 			fixturesService.get(getFixturesByTeamParams(home)),
 			fixturesService.get(getFixturesByTeamParams(away)),

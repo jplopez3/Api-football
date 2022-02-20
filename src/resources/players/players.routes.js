@@ -10,13 +10,15 @@ const basePath = '/players';
 const routeConfig = {
 	route: '/topscorers',
 	pathToCache: `${basePath}/topscorers`,
-	ttlStrategy: new TtlStrategy(10000)
+	ttlStrategy: new TtlStrategy(10000),
 };
 
 ttlService.registerStrategy(routeConfig);
 
-
-router.get(routeConfig.route, [cacheMiddleware(routeConfig)], cachedDataController);
-
+router.get(
+	routeConfig.route,
+	[cacheMiddleware(routeConfig)],
+	cachedDataController
+);
 
 export default router;

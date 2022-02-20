@@ -1,6 +1,6 @@
 import FootballApiService from './footballApi.service.js';
 import { jest } from '@jest/globals';
-import CacheRepository from '../../repositories/Cache.repository.js';
+import cacheFactory from '../../repositories/cache/cache.factory.js';
 import ttlService from '../ttl/Ttl.service.js';
 import TtlStrategy from '../ttl/ttlStrategy.js';
 

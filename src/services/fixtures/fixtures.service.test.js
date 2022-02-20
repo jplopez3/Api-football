@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 import fapi from '../fapi/footballApi.service.js';
-import CacheRepository from '../../repositories/Cache.repository.js';
+import cacheFactory from '../../repositories/cache/cache.factory.js';
 import mongodb from '../../repositories/Mongo.repository.js';
 import ttlService from '../ttl/Ttl.service.js';
 import TtlStrategy from '../ttl/ttlStrategy.js';

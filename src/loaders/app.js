@@ -17,7 +17,7 @@ import {
 import {
 	notFoundError,
 	serverError,
-} from '../utils/middlewares/errors/index.js';
+} from './errors/index.js';
 import Logger from './winston.js';
 import { apiPath } from '../config/constants.js';
 

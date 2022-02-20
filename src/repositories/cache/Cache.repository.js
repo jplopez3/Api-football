@@ -1,7 +1,7 @@
 import NodeCache from 'node-cache';
 import querystring from 'querystring';
-import { defaultCacheConfig } from '../config/index.js';
-import Logger from '../loaders/winston.js';
+import { defaultCacheConfig } from '../../config/index.js';
+import Logger from '../../loaders/winston.js';
 
 export default class Cache {
 	constructor(baseUrl, cacheStdTTL) {

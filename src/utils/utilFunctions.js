@@ -55,10 +55,9 @@ export {
 	isLiveGame,
 };
 
-
 //FixturesUtils
 /** isLive()
  *  isToday()
  *  getStartDate()
- * 
+ *
  */

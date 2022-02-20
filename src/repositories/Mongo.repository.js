@@ -1,13 +1,14 @@
 import { ObjectId } from 'mongodb';
-import db from '../loaders/database.js';
+import Database from '../loaders/database.js';
 
 export default class repository {
 	constructor(collectionName) {
 		this.collectionName = collectionName;
 	}
 	async init() {
-		await db.connect();
-		this.collection = db.getCollection(this.collectionName);
+		this.db = new Database();
+		await this.db.connect();
+		this.collection = this.db.getCollection(this.collectionName);
 	}
 
 	async updateOne(filter, data, expiration = null) {

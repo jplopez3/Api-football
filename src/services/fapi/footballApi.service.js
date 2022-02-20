@@ -1,14 +1,15 @@
-import fetcher from '../../repositories/FootballApi.repository.js';
+import Fetcher from '../../repositories/FootballApi.repository.js';
 import ttlService from '../../services/ttl/Ttl.service.js';
-import CacheRepository from '../../repositories/Cache.repository.js';
+import cacheFactory from '../../repositories/cache/cache.factory.js';
 import Logger from '../../loaders/winston.js';
 
 class FootballApiService {
 	constructor(pathToCache) {
-		this.fetcher = fetcher;
-		this.cache = new CacheRepository(pathToCache);
-		this.ttlService = ttlService;
-		this.instance = this;
+		this.fetcher = new Fetcher(pathToCache);
+		this.cache = cacheFactory.hasCache(pathToCache)
+			? cacheFactory.get(pathToCache)
+			: cacheFactory.create(pathToCache);
+
 		Logger.info(
 			'Initializing FootballApiService for path: %s',
 			pathToCache
@@ -16,11 +17,11 @@ class FootballApiService {
 	}
 
 	async fetchFromApi(params) {
-		return await this.fetcher(this.cache.baseUrl, params);
+		return await this.fetcher.get(params);
 	}
 
 	saveInCache(params, data, ttlStrategyName) {
-		const ttl = this.ttlService
+		const ttl = ttlService
 			.getStrategy(ttlStrategyName)
 			.getInSeconds({ params, data });
 		this.cache.set({ params, data, ttl });

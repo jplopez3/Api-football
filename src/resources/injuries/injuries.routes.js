@@ -9,10 +9,14 @@ const basePath = '/injuries';
 const injuriesRouteConfig = {
 	route: '/',
 	pathToCache: basePath,
-	ttlStrategy: new InjuriesTtl()
+	ttlStrategy: new InjuriesTtl(),
 };
 ttlService.registerStrategy(injuriesRouteConfig);
 const router = Router();
-router.get(injuriesRouteConfig.route, [cacheMiddleware(injuriesRouteConfig)], cachedDataController);
+router.get(
+	injuriesRouteConfig.route,
+	[cacheMiddleware(injuriesRouteConfig)],
+	cachedDataController
+);
 
 export default router;

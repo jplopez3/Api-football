@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { rapidApiFootballAxios } from '../../config/index.js';
 import {
-	onInterceptResponseSuccess,
-	onInterceptResponseErrors,
 	onInterceptRequestSuccess,
 	onInterceptRequestErrors,
-} from './index.js';
+} from './request.interceptor.js';
+import {
+	onInterceptResponseSuccess,
+	onInterceptResponseErrors,
+} from './response.interceptor.js';
 
 const apiFootballInstance = axios.create({
 	...rapidApiFootballAxios,

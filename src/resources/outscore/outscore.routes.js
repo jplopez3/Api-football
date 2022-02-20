@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import cacheFactory from './../../utils/cache/CacheFactory.js';
+import cacheFactory from '../../repositories/cache/cache.factory.js';
 const router = Router();
 
 //Todo: add template engine to show this info

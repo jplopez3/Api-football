@@ -7,4 +7,3 @@ import betshelper from './betshelper/betshelper.routes.js';
 import injuries from './injuries/injuries.routes.js';
 
 export { outscore, fixtures, teams, betshelper, injuries, players, standings };
-
