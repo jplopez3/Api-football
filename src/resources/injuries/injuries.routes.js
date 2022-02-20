@@ -1,16 +1,18 @@
 import { Router } from 'express';
-import cacheMiddleware from '../../utils/middlewares/cache.middleware.js';
+import ttlService from '../../services/ttl/Ttl.service.js';
+import InjuriesTtl from './ttl/injuriesTtl.js';
+import { cacheMiddleware } from '../../utils/middlewares/index.js';
 import cachedDataController from '../../utils/shared/controllers/cachedData.controller.js';
 
 // /injuries
-const router = Router();
 const basePath = '/injuries';
-const { getFromCache, saveInCache } = cacheMiddleware({
-	pathToCache: `${basePath}`,
-	cacheStdTTL: 10000,
-});
-
-router.use([getFromCache, saveInCache]);
-router.get('/', cachedDataController);
+const injuriesRouteConfig = {
+	route: '/',
+	pathToCache: basePath,
+	ttlStrategy: new InjuriesTtl()
+};
+ttlService.registerStrategy(injuriesRouteConfig);
+const router = Router();
+router.get(injuriesRouteConfig.route, [cacheMiddleware(injuriesRouteConfig)], cachedDataController);
 
 export default router;
