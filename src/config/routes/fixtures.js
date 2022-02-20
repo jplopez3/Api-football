@@ -1,5 +1,7 @@
-import  { FixturesByDateTTL, Head2headTTL } from '../../resources/fixtures/ttl/index.js';
-
+import {
+	FixturesByDateTTL,
+	Head2headTTL,
+} from '../../resources/fixtures/ttl/index.js';
 
 const basePath = '/fixtures';
 const fixturesCacheConfig = {
@@ -16,8 +18,4 @@ const headToHeadCacheConfig = {
 	pathToCache: `${basePath}/headtohead`,
 	ttlStrategy: new Head2headTTL(),
 };
-export default [
-	fixturesCacheConfig,
-	statisticsCacheConfig,
-	headToHeadCacheConfig,
-];
+export { fixturesCacheConfig, statisticsCacheConfig, headToHeadCacheConfig };

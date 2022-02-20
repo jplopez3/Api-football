@@ -9,7 +9,11 @@ class FixtureByIdTTL extends TtlStrategy {
 	getInSeconds({ data: { response } }) {
 		const { fixture } = response[0];
 		this.fixtureDate = new Date(fixture.date);
-		return isLiveGame(fixture) ? 15 : secondsUntilDate(this.fixtureDate);
+		return isLiveGame(fixture)
+			? 15
+			: secondsUntilDate(this.fixtureDate) < 0
+			? 0
+			: secondsUntilDate(this.fixtureDate);
 	}
 
 	getDBExpireDate() {

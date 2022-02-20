@@ -9,23 +9,27 @@ import {
 	LiveFixtures,
 } from '../../resources/fixtures/ttl/index.js';
 
-registerTTLStrategies([FixturesByDateTTL, FixtureByIdTTL, Head2headTTL, LiveFixtures]);
+registerTTLStrategies([
+	FixturesByDateTTL,
+	FixtureByIdTTL,
+	Head2headTTL,
+	LiveFixtures,
+]);
 
 class FixturesService {
-	constructor(baseUrl) {
+	constructor(baseUrl = '/fixtures') {
 		this.fixturesTypesToGroup = ['date', 'live'];
 		this.fapi = new FootballApiService(baseUrl);
 		this.initDataBase();
 	}
-	async get(params){
-
+	async get(params) {
 		return await this.getUpdatedDataFromDB(params);
 	}
-	getTtlStrategyName(fixtureType){
+	getTtlStrategyName(fixtureType) {
 		const config = {
-			id:'FixtureByIdTTL',
-			team:'FixturesByTeam',
-			date:'FixturesByDateTTL',
+			id: 'FixtureByIdTTL',
+			team: 'FixturesByTeam',
+			date: 'FixturesByDateTTL',
 			live: 'LiveFixtures',
 		};
 		return config[fixtureType];
@@ -36,19 +40,24 @@ class FixturesService {
 		if (!data) {
 			//check db
 			//fecth from fapi
-			data = await this.fapi.get(params);
+			data = await this.fapi.fetchFromApi(params);
 			const fixtureType = getRequestFixtureType(params);
-			if (this.fixturesTypesToGroup.includes(fixtureType)){
+
+			if (this.fixturesTypesToGroup.includes(fixtureType)) {
 				data = groupByCountry(data);
 			}
-			
+
 			//save in cache
-			this.fapi.saveInCache(params, data, this.getTtlStrategyName(fixtureType));
+			this.fapi.saveInCache(
+				params,
+				data,
+				this.getTtlStrategyName(fixtureType)
+			);
 		}
 
 		return data;
 	}
-	
+
 	async initDataBase() {
 		this.fixturesDataBase = new dataBase('fixtures');
 		await this.fixturesDataBase.init();
@@ -58,7 +67,7 @@ class FixturesService {
 	}
 }
 
-export default FixturesService;
+export default new FixturesService();
 const getRequestFixtureType = (query) => {
 	const reqTypes = ['id', 'date', 'team', 'live'];
 	const queries = Object.keys(query);

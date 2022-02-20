@@ -1,20 +1,23 @@
 import { Router } from 'express';
 import ttlService from '../../services/ttl/Ttl.service.js';
-import routesConfig from '../../config/routes/fixtures.js';
+import {
+	fixturesCacheConfig,
+	statisticsCacheConfig,
+	headToHeadCacheConfig,
+} from '../../config/routes/fixtures.js';
 import fixturesController from './fixtures.controller.js';
 import cachedDataController from '../../utils/shared/controllers/cachedData.controller.js';
 import { cacheMiddleware } from '../../utils/middlewares/index.js';
 
 // /fixtures
-routesConfig.forEach((config) => {
-	ttlService.registerStrategy(config);
-});
-
-const [
+const routesConfig = [
 	fixturesCacheConfig,
 	statisticsCacheConfig,
 	headToHeadCacheConfig,
-] = routesConfig;
+];
+routesConfig.forEach((config) => {
+	ttlService.registerStrategy(config);
+});
 
 const router = Router();
 router.get(fixturesCacheConfig.route, fixturesController);

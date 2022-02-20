@@ -1,8 +1,6 @@
 import Logger from '../../loaders/winston.js';
-import FixturesService from '../../services/fixtures/Fixtures.service.js';
+import fixturesService from '../../services/fixtures/Fixtures.service.js';
 
-const baseUrl = '/fixtures';
-const fixturesService = new FixturesService(baseUrl);
 export default async (req, res, next) => {
 	try {
 		const queryParams = req.query ? req.query : {};

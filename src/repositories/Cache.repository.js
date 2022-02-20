@@ -24,13 +24,8 @@ export default class Cache {
 
 	set({ params, data, ttl = this.cacheConfig.stdTTL }) {
 		const cacheKey = this.getCacheKey(params);
-		Logger.info(
-			'5 - Save data in cache: key: %s, TTL: %s, data: %s',
-			cacheKey,
-			ttl,
-			data
-		);
-
+		Logger.info('5 - Save data in cache: key: %s, TTL: %s', cacheKey, ttl);
+		Logger.debug('5 - data: %s', data);
 		this.cache.set(cacheKey, data, ttl);
 	}
 

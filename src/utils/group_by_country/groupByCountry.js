@@ -1,6 +1,6 @@
 import { isLiveGame } from '../utilFunctions.js';
 
-export default (response) => {
+export default ({ response }) => {
 	const newResponse = {};
 	const matches = new Map();
 

@@ -1,16 +1,20 @@
 import { Router } from 'express';
-import cacheMiddleware from '../../utils/middlewares/cache.middleware.js';
 import cachedDataController from '../../utils/shared/controllers/cachedData.controller.js';
+import { cacheMiddleware } from '../../utils/middlewares/index.js';
+import statisticTTL from '../../resources/teams/ttl/index.js';
+
 // /teams
-const basePath = '/teams';
 const router = Router();
-const { getFromCache, saveInCache } = cacheMiddleware({
-	pathToCache: `${basePath}/statistics`,
-	cacheStdTTL: 10000,
-});
 
-router.use([getFromCache, saveInCache]);
-
-router.get('/statistics', cachedDataController);
+const statisticsCacheConfig = {
+	route: '/statistics',
+	pathToCache: '/teams/statistics',
+	ttlStrategy: new statisticTTL(),
+};
+router.get(
+	statisticsCacheConfig.route,
+	[cacheMiddleware(statisticsCacheConfig)],
+	cachedDataController
+);
 
 export default router;
