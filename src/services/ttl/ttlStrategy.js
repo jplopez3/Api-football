@@ -1,7 +1,9 @@
 class TtlStrategy {
-	constructor() {}
+	constructor(defaultTtl = 60) {
+		this.ttl = defaultTtl;
+	}
 	getInSeconds() {
-		return 60;
+		return this.ttl;
 	}
 
 	getDBExpireDate() {
