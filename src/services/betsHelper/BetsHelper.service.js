@@ -88,7 +88,7 @@ const getFixturesByIdList = (fixturesIdList) => {
 	);
 
 	return Promise.all(promises).then((results) =>
-		results.map(({ response }) => response)
+		results.map(({ response }) => response.pop())
 	);
 };
 
