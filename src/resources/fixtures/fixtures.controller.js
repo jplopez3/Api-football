@@ -8,11 +8,15 @@ export default async (req, res, next) => {
 		const data =
 			res.locals.cachedData || (await fixturesService.get(queryParams));
 		//TODO: move to fixtures helper
-		const away = data.response[0].teams.away.id;
-		const home = data.response[0].teams.home.id;
-		const isBetsHelperInCache = BetsHelperService.isInCache({ home, away });
-		const response = mapResponse(data, isBetsHelperInCache);
+		let isBetsHelperInCache = false;
+		if(data.response){
+			const away = data.response[0].teams.away.id;
+			const home = data.response[0].teams.home.id;
+			isBetsHelperInCache = BetsHelperService.isInCache({ home, away });
+		}
 		
+		const response = mapResponse(data, isBetsHelperInCache);
+
 		res.status(200).json(response);
 	} catch (error) {
 		Logger.error('Fixtures.controller.js  %O', error);
