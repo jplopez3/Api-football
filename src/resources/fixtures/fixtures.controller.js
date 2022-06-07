@@ -9,7 +9,7 @@ export default async (req, res, next) => {
 			res.locals.cachedData || (await fixturesService.get(queryParams));
 		//TODO: move to fixtures helper
 		let isBetsHelperInCache = false;
-		if(data.response){
+		if('id' in req.query){
 			const away = data.response[0].teams.away.id;
 			const home = data.response[0].teams.home.id;
 			isBetsHelperInCache = BetsHelperService.isInCache({ home, away });
