@@ -14,10 +14,7 @@ import {
 	betshelper,
 	injuries,
 } from '../resources/index.js';
-import {
-	notFoundError,
-	serverError,
-} from './errors/index.js';
+import { notFoundError, serverError } from './errors/index.js';
 import Logger from './winston.js';
 import { apiPath } from '../config/constants.js';
 

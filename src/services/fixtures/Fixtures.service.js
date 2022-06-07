@@ -16,10 +16,10 @@ registerTTLStrategies([
 	LiveFixtures,
 ]);
 
-class FixturesService {
+class FixturesService extends FootballApiService {
 	constructor(baseUrl = '/fixtures') {
+		super(baseUrl);
 		this.fixturesTypesToGroup = ['date', 'live'];
-		this.fapi = new FootballApiService(baseUrl);
 		this.initDataBase();
 	}
 	async get(params) {
@@ -36,11 +36,11 @@ class FixturesService {
 	}
 	async getUpdatedDataFromDB(params) {
 		//check cache
-		let data = await this.fapi.cache.get(params);
+		let data = await this.cache.get(params);
 		if (!data) {
 			//check db
 			//fecth from fapi
-			data = await this.fapi.fetchFromApi(params);
+			data = await this.fetchFromApi(params);
 			const fixtureType = getRequestFixtureType(params);
 
 			if (this.fixturesTypesToGroup.includes(fixtureType)) {
@@ -48,7 +48,7 @@ class FixturesService {
 			}
 
 			//save in cache
-			this.fapi.saveInCache(
+			this.saveInCache(
 				params,
 				data,
 				this.getTtlStrategyName(fixtureType)

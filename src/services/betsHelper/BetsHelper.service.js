@@ -20,22 +20,51 @@ export default (() => {
 		const awayFixturesIds = getIdFromFixtures(awayFixtures);
 		const h2hFixturesIds = getIdFromFixtures(h2hFixtures);
 
-		({ homeFixtures, awayFixtures, h2hFixtures } = await asyncCall([
+		return ({ homeFixtures, awayFixtures, h2hFixtures } = await asyncCall([
 			getFixturesByIdList(homeFixturesIds),
 			getFixturesByIdList(awayFixturesIds),
 			getFixturesByIdList(h2hFixturesIds),
 		]));
-
-		const response = createResponse({
-			homeFixtures,
-			awayFixtures,
-			h2hFixtures,
-		});
-
-		return response;
 	};
+
+	const isInCache = ({ home, away }) => {
+		const fixturesCache = fixturesService.cache;
+		const h2hCache = fapi.cache;
+
+		let isCached =
+			fixturesCache.hasCache(getFixturesByTeamParams(home)) &&
+			fixturesCache.hasCache(getFixturesByTeamParams(away)) &&
+			h2hCache.hasCache(getH2HParams({ home, away }));
+
+		if (isCached) {
+			const homeFixturesIds = getIdFromFixtures(
+				fixturesCache.get(getFixturesByTeamParams(home))
+			);
+			const awayFixturesIds = getIdFromFixtures(
+				fixturesCache.get(getFixturesByTeamParams(away))
+			);
+			const h2hFixturesIds = getIdFromFixtures(
+				h2hCache.get(getH2HParams({ home, away }))
+			);
+
+			isCached =
+				homeFixturesIds.every((id) =>
+					fixturesCache.hasCache(getFixturesParams(id))
+				) &&
+				awayFixturesIds.every((id) =>
+					fixturesCache.hasCache(getFixturesParams(id))
+				) &&
+				h2hFixturesIds.every((id) =>
+					fixturesCache.hasCache(getFixturesParams(id))
+				);
+		}
+
+		return isCached;
+	};
+
 	return {
 		get,
+		isInCache,
 	};
 })();
 
@@ -75,7 +104,6 @@ const asyncCall = async (asyncCallIterable) => {
 			h2hFixtures,
 		}));
 };
-
 const getIdFromFixtures = (fixturesResponse) => {
 	return fixturesResponse.response.reduce((fixturesIDList, match) => {
 		fixturesIDList.push(match.fixture.id);
@@ -90,12 +118,4 @@ const getFixturesByIdList = (fixturesIdList) => {
 	return Promise.all(promises).then((results) =>
 		results.map(({ response }) => response.pop())
 	);
-};
-
-const createResponse = ({ homeFixtures, awayFixtures, h2hFixtures }) => {
-	return {
-		home: homeFixtures,
-		away: awayFixtures,
-		h2h: h2hFixtures,
-	};
 };

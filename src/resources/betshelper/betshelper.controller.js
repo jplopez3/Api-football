@@ -6,9 +6,19 @@ export default async (req, res, next) => {
 		const { home, away } = req.query;
 		const result = await betsHelperService.get({ home, away });
 
-		res.status(200).json(result);
+		const response = mapResponse(result);
+
+		res.status(200).json(response);
 	} catch (error) {
 		Logger.error('Betshelper.controller.js  %O', error);
 		next(error);
 	}
+};
+
+const mapResponse = ({ homeFixtures, awayFixtures, h2hFixtures }) => {
+	return {
+		home: homeFixtures,
+		away: awayFixtures,
+		h2h: h2hFixtures,
+	};
 };

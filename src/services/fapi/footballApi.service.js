@@ -37,6 +37,10 @@ class FootballApiService {
 
 		return data;
 	}
+
+	hasCache(params) {
+		return this.cache.hasCache(params);
+	}
 }
 
 export default FootballApiService;

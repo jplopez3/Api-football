@@ -43,4 +43,8 @@ export default class Cache {
 			Logger.debug('5 - %s - %s expired', key, value);
 		});
 	}
+	hasCache(queryParams) {
+		const cacheKey = this.getCacheKey(queryParams);
+		return this.cache.has(cacheKey);
+	}
 }
