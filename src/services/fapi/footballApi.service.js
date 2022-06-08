@@ -26,8 +26,13 @@ class FootballApiService {
 			.getInSeconds({ params, data });
 		this.cache.set({ params, data, ttl });
 	}
+
+	getFromCache(params) {
+		return this.cache.get(params);
+	}
+
 	async get(params) {
-		let data = this.cache.get(params);
+		let data = this.getFromCache(params);
 
 		if (!data) {
 			data = await this.fetchFromApi(params);

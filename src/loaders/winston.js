@@ -1,4 +1,5 @@
 import winston from 'winston';
+import { LOG_TYPE } from '../config/constants.js';
 
 const levels = {
 	error: 0,
@@ -17,9 +18,7 @@ const colors = {
 };
 
 const level = () => {
-	const logLevel = colors.hasOwnProperty(process.env.LOG_LEVEL)
-		? process.env.LOG_LEVEL
-		: 'debug';
+	const logLevel = colors.hasOwnProperty(LOG_TYPE) ? LOG_TYPE : 'debug';
 	return logLevel;
 };
 

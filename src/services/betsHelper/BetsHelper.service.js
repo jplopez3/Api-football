@@ -28,34 +28,31 @@ export default (() => {
 	};
 
 	const isInCache = ({ home, away }) => {
-		const fixturesCache = fixturesService.cache;
-		const h2hCache = fapi.cache;
-
 		let isCached =
-			fixturesCache.hasCache(getFixturesByTeamParams(home)) &&
-			fixturesCache.hasCache(getFixturesByTeamParams(away)) &&
-			h2hCache.hasCache(getH2HParams({ home, away }));
+			fixturesService.hasCache(getFixturesByTeamParams(home)) &&
+			fixturesService.hasCache(getFixturesByTeamParams(away)) &&
+			fapi.hasCache(getH2HParams({ home, away }));
 
 		if (isCached) {
 			const homeFixturesIds = getIdFromFixtures(
-				fixturesCache.get(getFixturesByTeamParams(home))
+				fixturesService.getFromCache(getFixturesByTeamParams(home))
 			);
 			const awayFixturesIds = getIdFromFixtures(
-				fixturesCache.get(getFixturesByTeamParams(away))
+				fixturesService.getFromCache(getFixturesByTeamParams(away))
 			);
 			const h2hFixturesIds = getIdFromFixtures(
-				h2hCache.get(getH2HParams({ home, away }))
+				fapi.getFromCache(getH2HParams({ home, away }))
 			);
 
 			isCached =
 				homeFixturesIds.every((id) =>
-					fixturesCache.hasCache(getFixturesParams(id))
+					fixturesService.hasCache(getFixturesParams(id))
 				) &&
 				awayFixturesIds.every((id) =>
-					fixturesCache.hasCache(getFixturesParams(id))
+					fixturesService.hasCache(getFixturesParams(id))
 				) &&
 				h2hFixturesIds.every((id) =>
-					fixturesCache.hasCache(getFixturesParams(id))
+					fixturesService.hasCache(getFixturesParams(id))
 				);
 		}
 
@@ -81,6 +78,7 @@ const getFixturesParams = (fixtureId) => {
 		id: fixtureId,
 	};
 };
+
 const getH2HParams = ({ home, away }) => {
 	return {
 		h2h: `${home}-${away}`,
@@ -105,7 +103,7 @@ const asyncCall = async (asyncCallIterable) => {
 		}));
 };
 const getIdFromFixtures = (fixturesResponse) => {
-	return fixturesResponse.response.reduce((fixturesIDList, match) => {
+	return fixturesResponse?.response.reduce((fixturesIDList, match) => {
 		fixturesIDList.push(match.fixture.id);
 		return fixturesIDList;
 	}, []);

@@ -9,6 +9,7 @@ import {
 	LiveFixtures,
 } from '../../resources/fixtures/ttl/index.js';
 
+//todo move to ttl service
 registerTTLStrategies([
 	FixturesByDateTTL,
 	FixtureByIdTTL,
@@ -25,6 +26,7 @@ class FixturesService extends FootballApiService {
 	async get(params) {
 		return await this.getUpdatedDataFromDB(params);
 	}
+	//Todo: maybe move to ttl service
 	getTtlStrategyName(fixtureType) {
 		const config = {
 			id: 'FixtureByIdTTL',
@@ -36,7 +38,7 @@ class FixturesService extends FootballApiService {
 	}
 	async getUpdatedDataFromDB(params) {
 		//check cache
-		let data = await this.cache.get(params);
+		let data = await this.getFromCache(params);
 		if (!data) {
 			//check db
 			//fecth from fapi
@@ -68,12 +70,14 @@ class FixturesService extends FootballApiService {
 }
 
 export default new FixturesService();
+
 const getRequestFixtureType = (query) => {
 	const reqTypes = ['id', 'date', 'team', 'live'];
 	const queries = Object.keys(query);
 	return queries.find((query) => reqTypes.includes(query));
 };
 
+//Todo: move to ttl service
 function registerTTLStrategies(ttlStrategies) {
 	ttlStrategies.forEach((TtlStrategy) => {
 		const ttlStrategy = new TtlStrategy();

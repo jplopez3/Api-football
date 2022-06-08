@@ -12,7 +12,7 @@ class Head2headTTL extends TtlStrategy {
 		//cache até ao proximo jogo live - 30min
 		//< 30 minutos cache de 15 segundos
 
-		return 69;
+		return 120;
 	}
 }
 export default Head2headTTL;
