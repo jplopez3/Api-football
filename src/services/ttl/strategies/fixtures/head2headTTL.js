@@ -1,4 +1,4 @@
-import TtlStrategy from '../../../services/ttl/ttlStrategy.js';
+import TtlStrategy from '../../ttlStrategy.js';
 
 class Head2headTTL extends TtlStrategy {
 	//TODO: h2h

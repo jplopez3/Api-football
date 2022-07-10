@@ -20,8 +20,8 @@ class FootballApiService {
 		return await this.fetcher.get(params);
 	}
 
-	saveInCache(params, data, ttlStrategyName) {
-		const ttl = ttlService
+	async saveInCache(params, data, ttlStrategyName) {
+		const ttl = await ttlService
 			.getStrategy(ttlStrategyName)
 			.getInSeconds({ params, data });
 		this.cache.set({ params, data, ttl });

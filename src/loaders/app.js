@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import path from 'path';
 import compression from 'compression';
 import cors from 'cors';
+import { initTtlService } from '../services/ttl/index.js';
 import corsOptions from './cors.js';
 //import bodyParser from 'bodyParser';
 import morgan from './morgan.js';
@@ -26,6 +27,7 @@ export default class App {
 			this.app = express();
 			this.initMiddleware();
 			this.initRoutes(apiPath);
+			initTtlService();
 		} catch (error) {
 			Logger.error('Error Starting Outscore: %O', error);
 		}

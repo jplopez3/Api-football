@@ -1,21 +1,6 @@
 import FootballApiService from '../../services/fapi/footballApi.service.js';
 import dataBase from '../../repositories/Mongo.repository.js';
-import ttlService from '../../services/ttl/Ttl.service.js';
 import groupByCountry from '../../utils/group_by_country/groupByCountry.js';
-import {
-	FixturesByDateTTL,
-	FixtureByIdTTL,
-	Head2headTTL,
-	LiveFixtures,
-} from '../../resources/fixtures/ttl/index.js';
-
-//todo move to ttl service
-registerTTLStrategies([
-	FixturesByDateTTL,
-	FixtureByIdTTL,
-	Head2headTTL,
-	LiveFixtures,
-]);
 
 class FixturesService extends FootballApiService {
 	constructor(baseUrl = '/fixtures') {
@@ -77,14 +62,3 @@ const getRequestFixtureType = (query) => {
 	return queries.find((query) => reqTypes.includes(query));
 };
 
-//Todo: move to ttl service
-function registerTTLStrategies(ttlStrategies) {
-	ttlStrategies.forEach((TtlStrategy) => {
-		const ttlStrategy = new TtlStrategy();
-		const config = {
-			pathToCache: ttlStrategy.constructor.name,
-			ttlStrategy: ttlStrategy,
-		};
-		ttlService.registerStrategy(config);
-	});
-}

@@ -1,19 +1,21 @@
 import {
-	secondsUntilDate,
 	nextDayDate,
-	isDateInFuture,
-	isDateInPast,
-	isTodayDate,
-} from '../../../utils/utilFunctions.js';
-import TtlStrategy from '../../../services/ttl/ttlStrategy.js';
+} from '../../../../utils/utilFunctions.js';
+import { isBefore, isAfter, differenceInSeconds, isToday } from 'date-fns'
+
+import TtlStrategy from '../../ttlStrategy.js';
 
 class FixturesByDateTTL extends TtlStrategy {
+	
 	getInSeconds({ params: { date } }) {
-		if (isTodayDate(date)) {
+		const now = new Date();
+		date = new Date(date);
+
+		if (isToday(date)) {
 			return getTodayFixturesTTL(date);
-		} else if (isDateInPast(date)) {
+		} else if (isBefore(date, now)) {
 			return getPastFixturesTTL(date);
-		} else if (isDateInFuture(date)) {
+		} else if (isAfter(date, now)) {
 			return getFutureFixturesTTL(date);
 		} else {
 			console.error('Uh oh!!');
@@ -34,7 +36,7 @@ const getFutureFixturesTTL = () => {
 	const tomorrow = nextDayDate(today);
 
 	const inSeconds = () => {
-		return secondsUntilDate(tomorrow);
+		return differenceInSeconds(tomorrow, today);
 	};
 
 	const getDate = () => {
