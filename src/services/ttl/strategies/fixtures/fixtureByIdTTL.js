@@ -1,5 +1,5 @@
 import { isBefore, isAfter, differenceInSeconds, isToday } from 'date-fns'
-import { secondsUntilDate, isLiveGame } from '../../../../utils/utilFunctions.js';
+import { hasGameEnded, isLiveGame } from '../../../../utils/utilFunctions.js';
 import fixturesHelper from '../../../../utils/fixturesHelper.js';
 
 import TtlStrategy from '../../ttlStrategy.js';
@@ -17,8 +17,9 @@ class FixtureByIdTTL extends TtlStrategy {
 
 		if(isLiveGame(fixture)){
 			ttl = 15;
-		} else if(isBefore(this.fixtureDate, now)) {
-			ttl = 0
+		} else if(isBefore(this.fixtureDate, now) && hasGameEnded(fixture)) {
+			//TODO: manter cache ate 2 dias ou dia anterior
+			ttl = 0;
 		} else if(isAfter(this.fixtureDate, now)) {
 			ttl = await handleFutureFixture(this.fixtureDate, response[0])
 		}

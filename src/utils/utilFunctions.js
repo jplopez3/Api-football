@@ -2,6 +2,12 @@ const isLiveGame = (fixture) => {
 	const liveStatus = ['1H', 'HT', '2H', 'ET', 'P', 'BT'];
 	return liveStatus.includes(fixture.status.short);
 };
+
+const hasGameEnded = (fixture) => {
+	const FIXTURE_IS_FINISHED_STATUS = ["FT", "AET", "PEN"];
+	return FIXTURE_IS_FINISHED_STATUS.includes(fixture.status.short);
+};
+
 const isTodayDate = (date, timeZone = 'UTC') => {
 	const today = new Date();
 	date = new Date(date);
@@ -46,6 +52,7 @@ const isDateInFuture = (date) => {
 };
 
 export {
+	hasGameEnded,
 	isValidDate,
 	isTodayDate,
 	isDateInFuture,

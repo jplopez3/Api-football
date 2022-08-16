@@ -12,6 +12,7 @@ export default async (req, res, next) => {
 		if ('id' in queryParams) {
 			const { home, away } = fixturesHelper.getTeamIds(data.response);
 			isBetsHelperInCache = BetsHelperService.isInCache({ home, away });
+			//TODO: adicionar standings e o h2h is in cache
 		}
 
 		const response = mapResponse(data, isBetsHelperInCache);

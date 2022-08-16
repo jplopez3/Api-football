@@ -33,11 +33,17 @@ const fixturesHelper = () => {
 		return liveStatus.includes(fixture.status.short);
 	};
 
+	const getNextLiveGame = (fixturesList) => {
+
+		console.log(fixturesList);
+	}
+
 	return {
 		getTeamIds,
 		getLeagueId,
 		hasCoverage,
 		isLiveGame,
+		getNextLiveGame
 	};
 };
 

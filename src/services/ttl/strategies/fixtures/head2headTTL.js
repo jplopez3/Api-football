@@ -1,16 +1,18 @@
 import TtlStrategy from '../../ttlStrategy.js';
 
 class Head2headTTL extends TtlStrategy {
-	//TODO: h2h
-	//Jogos no futuro:
-	//	cache 1 dia
-	//jogos live:
-	// Cache invalida quando termina o jogo
+	
 	getInSeconds() {
-		//Todo:
-		//Se nao houver Jogos
-		//cache até ao proximo jogo live - 30min
-		//< 30 minutos cache de 15 segundos
+		//TODO: h2h, CRIAR TEAMS TTL
+		//jogo e hoje?
+			// Nao começou OU e Live:
+				//cache ate acabar(TF) ttl:0 
+				
+		//Jogos no futuro(sem ser hoje):
+			//	cache 1 dia
+		//Jogo no passado:
+			// cache 1 ou 2 dias
+
 
 		return 120;
 	}
