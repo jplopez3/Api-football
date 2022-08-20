@@ -4,10 +4,15 @@ const isLiveGame = (fixture) => {
 };
 
 const hasGameEnded = (fixture) => {
-	const FIXTURE_IS_FINISHED_STATUS = ["FT", "AET", "PEN"];
+	const FIXTURE_IS_FINISHED_STATUS = ['FT', 'AET', 'PEN'];
 	return FIXTURE_IS_FINISHED_STATUS.includes(fixture.status.short);
 };
 
+const gameNotStarted = (fixture) => {
+	const notStartedStatus = ['NS', 'SUSP', 'INT', 'CANC', 'ABD'];
+	return notStartedStatus.includes(fixture.status.short);
+}
+ 
 const isTodayDate = (date, timeZone = 'UTC') => {
 	const today = new Date();
 	date = new Date(date);
@@ -60,6 +65,7 @@ export {
 	secondsUntilDate,
 	nextDayDate,
 	isLiveGame,
+	gameNotStarted,
 };
 
 //FixturesUtils
