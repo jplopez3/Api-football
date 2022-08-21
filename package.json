@@ -14,7 +14,7 @@
 		"format": "prettier --ignore-unknown --write .",
 		"eslint": "eslint src",
 		"eslint:fix": "eslint src --fix",
-		"test": "jest",
+		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
 		"init": "jest --init"
 	},
 	"keywords": [],
@@ -36,7 +36,7 @@
 		"eslint": "7.11.0",
 		"eslint-config-prettier": "8.3.0",
 		"eslint-plugin-jest": "24.4.0",
-		"jest": "27.0.4",
+		"jest": "^27.0.4",
 		"nodemon": "2.0.12",
 		"prettier": "2.2.1",
 		"supertest": "6.1.3"
