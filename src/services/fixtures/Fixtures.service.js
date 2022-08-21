@@ -61,4 +61,3 @@ const getRequestFixtureType = (query) => {
 	const queries = Object.keys(query);
 	return queries.find((query) => reqTypes.includes(query));
 };
-

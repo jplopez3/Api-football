@@ -1,12 +1,9 @@
-import {
-	nextDayDate,
-} from '../../../../utils/utilFunctions.js';
-import { isBefore, isAfter, differenceInSeconds, isToday } from 'date-fns'
+import { nextDayDate } from '../../../../utils/utilFunctions.js';
+import { isBefore, isAfter, differenceInSeconds, isToday } from 'date-fns';
 
 import TtlStrategy from '../../ttlStrategy.js';
 
 class FixturesByDateTTL extends TtlStrategy {
-	
 	getInSeconds({ params: { date } }) {
 		const now = new Date();
 		date = new Date(date);

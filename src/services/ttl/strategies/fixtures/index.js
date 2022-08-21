@@ -5,8 +5,6 @@ import FixtureByIdTTL from './fixtureByIdTTL.js';
 import Head2headTTL from './head2headTTL.js';
 import LiveFixtures from './liveFixtures.js';
 
-
-
 function registerTTLStrategies(ttlStrategies) {
 	ttlStrategies.forEach((TtlStrategy) => {
 		const ttlStrategy = new TtlStrategy();
@@ -17,17 +15,14 @@ function registerTTLStrategies(ttlStrategies) {
 		ttlService.registerStrategy(config);
 		Logger.warn('registerTTLStrategies %o', config);
 	});
-	
-
 }
-
 
 export default () => {
 	//register the strategies
-registerTTLStrategies([
-	FixturesByDateTTL,
-	FixtureByIdTTL,
-	Head2headTTL,
-	LiveFixtures,
-]);
+	registerTTLStrategies([
+		FixturesByDateTTL,
+		FixtureByIdTTL,
+		Head2headTTL,
+		LiveFixtures,
+	]);
 };

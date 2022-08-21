@@ -11,8 +11,8 @@ const hasGameEnded = (fixture) => {
 const gameNotStarted = (fixture) => {
 	const notStartedStatus = ['NS', 'SUSP', 'INT', 'CANC', 'ABD'];
 	return notStartedStatus.includes(fixture.status.short);
-}
- 
+};
+
 const isTodayDate = (date, timeZone = 'UTC') => {
 	const today = new Date();
 	date = new Date(date);
