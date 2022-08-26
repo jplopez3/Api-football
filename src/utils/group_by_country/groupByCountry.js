@@ -48,7 +48,6 @@ const updateCountryLeagueInfo = ({ countryLeague, league, fixture }) => {
 	}
 };
 
-//Todo: can clean code
 const sort = (objToSort) => {
 	return Object.keys(objToSort)
 		.sort()

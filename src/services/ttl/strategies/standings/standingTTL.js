@@ -1,3 +1,15 @@
-//TODO:
-//Cache ate a proxima hora
-//ex: chamada as 20h45. cache ate as 21h05
+import { addHours, differenceInSeconds, setMinutes } from 'date-fns';
+import TtlStrategy from '../../ttlStrategy.js';
+
+class Standings extends TtlStrategy {
+	getInSeconds() {
+		const dateNow = new Date();
+		const oneHourMore = addHours(dateNow, 1);
+		const expectedTime = setMinutes(oneHourMore, 5);
+		const ttlInseconds = differenceInSeconds(expectedTime, dateNow);
+
+		return ttlInseconds;
+	}
+}
+
+export default Standings;

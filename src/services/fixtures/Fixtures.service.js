@@ -11,7 +11,7 @@ class FixturesService extends FootballApiService {
 	async get(params) {
 		return await this.getUpdatedDataFromDB(params);
 	}
-	//Todo: maybe move to ttl service
+	//TODO: maybe move to ttl service
 	getTtlStrategyName(fixtureType) {
 		const config = {
 			id: 'FixtureByIdTTL',

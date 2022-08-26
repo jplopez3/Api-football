@@ -1,11 +1,5 @@
 import { jest } from '@jest/globals';
-import {
-
-	differenceInSeconds,
-	subMinutes,
-	endOfDay,
-	add
-} from 'date-fns';
+import { differenceInSeconds, subMinutes, endOfDay, add } from 'date-fns';
 
 import FixtureByIdTTL from '../fixtureByIdTTL.js';
 import fixtureFactory from '../../../../../utils/mocks/fixtures_mock.js';
@@ -13,8 +7,6 @@ import fixturesHelper from '../../../../../utils/fixturesHelper.js';
 
 jest.mock('../../../../../utils/fixturesHelper.js', () => jest.fn());
 fixturesHelper.hasCoverage = jest.fn();
-
-
 
 const futureGame = fixtureFactory({
 	date: '2000-01-02T16:00:00+00:00',
@@ -52,10 +44,7 @@ describe('Fixtures by id cache time to live tests', () => {
 		const expectedDate = add(todayDate, {
 			days: 2,
 		});
-		const expectedTtl = differenceInSeconds(
-			expectedDate,
-			todayDate,
-		);
+		const expectedTtl = differenceInSeconds(expectedDate, todayDate);
 		const ttlValue = await fixtureTtlService.getInSeconds(finishedGame);
 		expect(ttlValue).toBe(expectedTtl);
 	});
@@ -73,10 +62,7 @@ describe('Fixtures by id cache time to live tests', () => {
 
 		test('Today games have cache until the begining of the game', async () => {
 			const fixtureDate = new Date('2000-01-01T20:00:00+00:00');
-			const expectedTtl = differenceInSeconds(
-				fixtureDate,
-				todayDate
-			);
+			const expectedTtl = differenceInSeconds(fixtureDate, todayDate);
 
 			const ttlValue = await fixtureTtlService.getInSeconds(todayGame);
 			expect(ttlValue).toBe(expectedTtl);
@@ -86,10 +72,7 @@ describe('Fixtures by id cache time to live tests', () => {
 			const ttlValue = await fixtureTtlService.getInSeconds(futureGame);
 			const endofDay = endOfDay(new Date(todayDate));
 
-			const expectedTtl = differenceInSeconds(
-				endofDay,
-				todayDate
-			);
+			const expectedTtl = differenceInSeconds(endofDay, todayDate);
 			expect(ttlValue).toBe(expectedTtl);
 		});
 	});
