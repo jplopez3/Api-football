@@ -6,7 +6,6 @@ const config = {
 	pathToCache: '/standings',
 	ttlStrategy: ttlStrategy,
 };
-console.log(' ttlStrategy.constructor.name', ttlStrategy.constructor.name);
 ttlService.registerStrategy(config);
 
 export default StandingsTtl;
