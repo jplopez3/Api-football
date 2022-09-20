@@ -61,3 +61,6 @@ This project uses ESlint and Prettier to check code style.
 ```
 npm run format
 ```
+
+depoly
+flyctl deploy
