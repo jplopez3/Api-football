@@ -6,7 +6,7 @@ class FixturesService extends FootballApiService {
 	constructor(baseUrl = '/fixtures') {
 		super(baseUrl);
 		this.fixturesTypesToGroup = ['date', 'live'];
-		this.initDataBase();
+		//this.initDataBase();
 	}
 	async get(params) {
 		return await this.getUpdatedDataFromDB(params);
@@ -22,8 +22,10 @@ class FixturesService extends FootballApiService {
 		return config[fixtureType];
 	}
 	async getUpdatedDataFromDB(params) {
-		const hasGroupByParam = params.hasOwnProperty('groupBy') ? delete params.groupBy : false;
-		
+		const hasGroupByParam = params.hasOwnProperty('groupBy')
+			? delete params.groupBy
+			: false;
+
 		//check cache
 		let data = await this.getFromCache(params);
 		if (!data) {
@@ -32,8 +34,12 @@ class FixturesService extends FootballApiService {
 			data = await this.fetchFromApi(params);
 			const fixtureType = getRequestFixtureType(params);
 
-			if (!hasGroupByParam && this.fixturesTypesToGroup.includes(fixtureType)) {
-				data = groupByCountry(data);
+			if (
+				!hasGroupByParam &&
+				this.fixturesTypesToGroup.includes(fixtureType)
+			) {
+				data.response = groupByCountry(data);
+				data.results = Object.keys(data.response).length;
 			}
 
 			//save in cache
