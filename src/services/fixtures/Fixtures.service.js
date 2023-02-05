@@ -22,9 +22,7 @@ class FixturesService extends FootballApiService {
 		return config[fixtureType];
 	}
 	async getUpdatedDataFromDB(params) {
-		const hasGroupByParam = params.hasOwnProperty('groupBy')
-			? delete params.groupBy
-			: false;
+		const groupBy = parseParams(params);
 
 		//check cache
 		let data = await this.getFromCache(params);
@@ -34,10 +32,7 @@ class FixturesService extends FootballApiService {
 			data = await this.fetchFromApi(params);
 			const fixtureType = getRequestFixtureType(params);
 
-			if (
-				!hasGroupByParam &&
-				this.fixturesTypesToGroup.includes(fixtureType)
-			) {
+			if (groupBy && this.fixturesTypesToGroup.includes(fixtureType)) {
 				data.response = groupByCountry(data);
 				data.results = Object.keys(data.response).length;
 			}
@@ -68,4 +63,8 @@ const getRequestFixtureType = (query) => {
 	const reqTypes = ['id', 'date', 'team', 'live'];
 	const queries = Object.keys(query);
 	return queries.find((query) => reqTypes.includes(query));
+};
+
+const parseParams = ({ groupBy }) => {
+	return groupBy === 'false' ? false : true;
 };
