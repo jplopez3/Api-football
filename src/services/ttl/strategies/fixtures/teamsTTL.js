@@ -8,7 +8,9 @@ import {
 
 class FixturesByTeam extends TtlStrategy {
 	getInSeconds({ data: { response } }) {
-		const { fixture } = response[0];
+		const { fixture } = response.sort(
+			(a, b) => a.fixture.date - b.fixture.date
+		)[0];
 		this.fixtureDate = new Date(fixture.date);
 		const now = new Date();
 
@@ -16,7 +18,7 @@ class FixturesByTeam extends TtlStrategy {
 			isToday(this.fixtureDate) &&
 			(isLiveGame(fixture) || gameNotStarted(fixture))
 		) {
-			return 0;
+			return 15;
 		} else if ((isBefore(this.fixtureDate, now), hasGameEnded(fixture))) {
 			const cacheDate = add(this.fixtureDate, {
 				days: 2,
