@@ -1,14 +1,14 @@
 import { nextDayDate } from '../../../../utils/utilFunctions.js';
 import { isBefore, isAfter, differenceInSeconds, isToday } from 'date-fns';
-
+import { isLiveGame } from '../../../../utils/utilFunctions.js';
 import TtlStrategy from '../../ttlStrategy.js';
 
 class FixturesByDateTTL extends TtlStrategy {
-	getInSeconds({ params: { date } }) {
+	getInSeconds({ params: { date }, data: { response } }) {
+		const hasLiveGame = response.some(({ fixture }) => isLiveGame(fixture));
 		const now = new Date();
 		date = new Date(date);
-
-		if (isToday(date)) {
+		if (isToday(date) || hasLiveGame) {
 			return getTodayFixturesTTL(date);
 		} else if (isBefore(date, now)) {
 			return getPastFixturesTTL(date);
@@ -45,7 +45,7 @@ const getFutureFixturesTTL = () => {
 
 const getPastFixturesTTL = () => {
 	//forever
-	return 0;
+	return 15;
 };
 
 export default FixturesByDateTTL;
