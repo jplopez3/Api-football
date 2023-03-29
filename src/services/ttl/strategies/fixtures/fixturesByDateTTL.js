@@ -1,5 +1,5 @@
 import { nextDayDate } from '../../../../utils/utilFunctions.js';
-import { isBefore, isAfter, differenceInSeconds, isToday } from 'date-fns';
+import { isBefore, isAfter, differenceInSeconds, isToday, add } from 'date-fns';
 import { isLiveGame } from '../../../../utils/utilFunctions.js';
 import TtlStrategy from '../../ttlStrategy.js';
 
@@ -44,8 +44,11 @@ const getFutureFixturesTTL = () => {
 };
 
 const getPastFixturesTTL = () => {
-	//forever
-	return 15;
+	const now = new Date();
+	const expectedDate = add(now, {
+		days: 2,
+	});
+	return differenceInSeconds(expectedDate, now);
 };
 
 export default FixturesByDateTTL;

@@ -23,6 +23,7 @@ class FixturesService extends FootballApiService {
 	}
 	async getUpdatedDataFromDB(params) {
 		const groupBy = parseParams(params);
+		cleanParams(params);
 
 		//check cache
 		let data = await this.getFromCache(params);
@@ -68,3 +69,9 @@ const getRequestFixtureType = (query) => {
 const parseParams = ({ groupBy }) => {
 	return groupBy === 'false' ? false : true;
 };
+
+function cleanParams(params) {
+	if (params.hasOwnProperty('groupBy')) {
+		delete params.groupBy;
+	}
+}

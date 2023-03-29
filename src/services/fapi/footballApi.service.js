@@ -17,7 +17,6 @@ class FootballApiService {
 	}
 
 	async fetchFromApi(params) {
-		cleanParams(params);
 		return await this.fetcher.get(params);
 	}
 
@@ -49,9 +48,4 @@ class FootballApiService {
 	}
 }
 
-function cleanParams(params) {
-	if (params.hasOwnProperty('groupBy')) {
-		delete params.groupBy;
-	}
-}
 export default FootballApiService;
