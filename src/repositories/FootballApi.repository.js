@@ -8,7 +8,8 @@ export default class Fetcher {
 
 	async get(queryParams) {
 		try {
-			const params = { params: queryParams };
+			const params = { params: cleanParams(queryParams) };
+
 			Logger.info(
 				'3 - Fetch from Api URL: %s - queryParams: %O',
 				this.url,
@@ -30,4 +31,12 @@ export default class Fetcher {
 			};
 		}
 	}
+}
+
+function cleanParams(params) {
+	const newObj = { ...params };
+	if (params.hasOwnProperty('groupBy')) {
+		delete newObj.groupBy;
+	}
+	return newObj;
 }

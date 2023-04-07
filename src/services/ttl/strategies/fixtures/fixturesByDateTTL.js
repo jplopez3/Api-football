@@ -5,7 +5,9 @@ import TtlStrategy from '../../ttlStrategy.js';
 
 class FixturesByDateTTL extends TtlStrategy {
 	getInSeconds({ params: { date }, data: { response } }) {
-		const hasLiveGame = response.some(({ fixture }) => isLiveGame(fixture));
+		const hasLiveGame = response?.some(({ fixture }) =>
+			isLiveGame(fixture)
+		);
 		const now = new Date();
 		date = new Date(date);
 		if (isToday(date) || hasLiveGame) {

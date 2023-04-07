@@ -23,7 +23,6 @@ class FixturesService extends FootballApiService {
 	}
 	async getUpdatedDataFromDB(params) {
 		const groupBy = parseParams(params);
-		cleanParams(params);
 
 		//check cache
 		let data = await this.getFromCache(params);
@@ -32,18 +31,17 @@ class FixturesService extends FootballApiService {
 			//fecth from fapi
 			data = await this.fetchFromApi(params);
 			const fixtureType = getRequestFixtureType(params);
+			const ttl = this.getTTL({
+				params,
+				data,
+				ttlStrategyName: this.getTtlStrategyName(fixtureType),
+			});
 
 			if (groupBy && this.fixturesTypesToGroup.includes(fixtureType)) {
 				data.response = groupByCountry(data);
 				data.results = Object.keys(data.response).length;
 			}
-
-			//save in cache
-			this.saveInCache(
-				params,
-				data,
-				this.getTtlStrategyName(fixtureType)
-			);
+			this.cache.set({ params, data, ttl });
 		}
 
 		return data;
@@ -69,9 +67,3 @@ const getRequestFixtureType = (query) => {
 const parseParams = ({ groupBy }) => {
 	return groupBy === 'false' ? false : true;
 };
-
-function cleanParams(params) {
-	if (params.hasOwnProperty('groupBy')) {
-		delete params.groupBy;
-	}
-}
