@@ -35,6 +35,7 @@ class FootballApiService {
 	}
 
 	async get(params) {
+		this.deleteCache(params);
 		let data = this.getFromCache(params);
 
 		if (!data) {
@@ -52,6 +53,13 @@ class FootballApiService {
 
 	hasCache(params) {
 		return this.cache.hasCache(params);
+	}
+
+	deleteCache(params) {
+		if ('deleteCache' in params) {
+			delete params.deleteCache;
+			this.cache.delete(params);
+		}
 	}
 }
 

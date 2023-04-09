@@ -28,7 +28,11 @@ export default class Cache {
 		Logger.debug('5 - data: %s', data);
 		this.cache.set(cacheKey, data, ttl);
 	}
-
+	delete(params) {
+		const cacheKey = this.getCacheKey(params);
+		Logger.warn('5 - Deleted cache key %s', cacheKey);
+		return this.cache.del(cacheKey);
+	}
 	flushCache() {
 		this.cache.flushAll();
 		Logger.warn('5 - CLEAR CACHE SUCCESS');
