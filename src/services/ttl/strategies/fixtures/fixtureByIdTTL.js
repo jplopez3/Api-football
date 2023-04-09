@@ -18,6 +18,9 @@ import TtlStrategy from '../../ttlStrategy.js';
 
 class FixtureByIdTTL extends TtlStrategy {
 	async getInSeconds({ data: { response } }) {
+		if (response.length == 0) {
+			throw new Error('Invalid Response for fixture by id');
+		}
 		const { fixture } = response[0];
 		this.fixtureDate = new Date(fixture.date);
 		let ttl = 0;

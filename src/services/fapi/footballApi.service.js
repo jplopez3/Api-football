@@ -20,9 +20,14 @@ class FootballApiService {
 		return await this.fetcher.get(params);
 	}
 	getTTL({ params, data, ttlStrategyName }) {
-		return ttlService
-			.getStrategy(ttlStrategyName)
-			.getInSeconds({ params, data });
+		try {
+			return ttlService
+				.getStrategy(ttlStrategyName)
+				.getInSeconds({ params, data });
+		} catch (error) {
+			Logger.error('4 - Error getting ttl time %O', error);
+			return 60;
+		}
 	}
 
 	getFromCache(params) {

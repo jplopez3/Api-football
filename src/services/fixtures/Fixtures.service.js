@@ -31,7 +31,7 @@ class FixturesService extends FootballApiService {
 			//fecth from fapi
 			data = await this.fetchFromApi(params);
 			const fixtureType = getRequestFixtureType(params);
-			const ttl = this.getTTL({
+			const ttl = await this.getTTL({
 				params,
 				data,
 				ttlStrategyName: this.getTtlStrategyName(fixtureType),
