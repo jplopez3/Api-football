@@ -14,6 +14,7 @@ import {
 	teams,
 	betshelper,
 	injuries,
+	leagues,
 } from '../resources/index.js';
 import { notFoundError, serverError } from './errors/index.js';
 import Logger from './winston.js';
@@ -72,6 +73,7 @@ export default class App {
 		this.ApiV3Router.use('/teams', teams);
 		this.ApiV3Router.use('/betshelper', betshelper);
 		this.ApiV3Router.use('/injuries', injuries);
+		this.ApiV3Router.use('/leagues', leagues);
 		this.initErrorHandling(this.ApiV3Router);
 		this.app.use(apiPath, this.ApiV3Router);
 		this.app.use('/', outscore);
