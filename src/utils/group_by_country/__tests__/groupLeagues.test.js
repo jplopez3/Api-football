@@ -13,16 +13,6 @@ const expectedResponse = [
 		},
 	},
 	{
-		Spain: {
-			image: '',
-			leagues: [
-				{
-					id: 150,
-				},
-			],
-		},
-	},
-	{
 		Portugal: {
 			image: '',
 			leagues: [
@@ -31,6 +21,16 @@ const expectedResponse = [
 				},
 				{
 					id: 95,
+				},
+			],
+		},
+	},
+	{
+		Spain: {
+			image: '',
+			leagues: [
+				{
+					id: 150,
 				},
 			],
 		},
@@ -78,6 +78,15 @@ describe('groupLeagues tests', () => {
 			expect(resultLeague.leagues.length).toBe(
 				expectedLeague.leagues.length
 			);
+		});
+	});
+	test('expectedResponse Countries should return sorted countries', () => {
+		const result = groupLeagues(leagues_mock);
+
+		result.forEach((league, index) => {
+			const resultLeague = Object.keys(result[index])[0];
+			const expectedLeague = Object.keys(expectedResponse[index])[0];
+			expect(resultLeague).toBe(expectedLeague);
 		});
 	});
 });

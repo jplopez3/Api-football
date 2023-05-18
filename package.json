@@ -8,7 +8,7 @@
 	},
 	"type": "module",
 	"scripts": {
-		"start": "heroku local",
+		"start": "node --experimental-vm-modules src/index.js",
 		"dev": "nodemon node -r dotenv/config src/index.js",
 		"sass": "sass --watch src/public/sass/index.scss src/public/css/app.css",
 		"format": "prettier --ignore-unknown --write .",
